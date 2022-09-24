@@ -18,22 +18,27 @@
 		"@sveltejs/kit": "next",
 		"@typescript-eslint/eslint-plugin": "^5.27.0",
 		"@typescript-eslint/parser": "^5.27.0",
+		"autoprefixer": "^10.4.7",
+		"daisyui": "^2.18.1",
 		"eslint": "^8.16.0",
 		"eslint-config-prettier": "^8.3.0",
 		"eslint-plugin-svelte3": "^4.0.0",
+		"postcss": "^8.4.14",
+		"postcss-load-config": "^4.0.1",
 		"prettier": "^2.6.2",
 		"prettier-plugin-svelte": "^2.7.0",
 		"svelte": "^3.44.0",
 		"svelte-check": "^2.7.1",
 		"svelte-preprocess": "^4.10.7",
+		"tailwindcss": "^3.1.5",
 		"tslib": "^2.3.1",
 		"typescript": "^4.7.4",
-		"vite": "^3.1.0",
-		"postcss": "^8.4.14",
-		"postcss-load-config": "^4.0.1",
-		"autoprefixer": "^10.4.7",
-		"tailwindcss": "^3.1.5",
-		"daisyui": "^2.18.1"
+		"vite": "^3.1.0"
 	},
-	"type": "module"
+	"type": "module",
+	"dependencies": {
+		"svelte-feather-icons": "^4.0.0",
+		"svelte-loading-spinners": "^0.1.7",
+		"tailwind-scrollbar": "^2.0.1"
+	}
 }
