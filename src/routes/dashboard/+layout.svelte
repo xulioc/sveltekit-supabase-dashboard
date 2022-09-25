@@ -1,5 +1,8 @@
 <script lang="ts">
 	// import '../../app.postcss';
+
+	import { PUBLIC_APP_NAME } from '$env/static/public';
+
 	import {
 		HomeIcon,
 		LayoutIcon,
@@ -67,6 +70,19 @@
 					<BarChartIcon />
 				</a>
 			</div>
+
+			<!-- USERS -->
+			<div class="py-2 tooltip tooltip-right" data-tip="Users">
+				<a
+					href="/dashboard/users"
+					role="button"
+					class="btn btn-square gap-2 btn-ghost"
+					class:btn-active={menu === 'users'}
+					on:click={() => (menu = 'users')}
+				>
+					<UsersIcon />
+				</a>
+			</div>
 		</div>
 	</div>
 
@@ -76,7 +92,7 @@
 			<!-- APP TITLE  -->
 			<div class="flex-1">
 				<a href="/dashboard" class="link no-underline text-xl text-accent">
-					SvelteKit Supabase Dahsboard
+					{PUBLIC_APP_NAME}
 				</a>
 			</div>
 
@@ -108,7 +124,7 @@
 					<Jumper size="60" unit="px" duration="500ms" />
 				</div>
 			{:else}
-					<slot />
+				<slot />
 			{/if}
 		</div>
 	</div>
