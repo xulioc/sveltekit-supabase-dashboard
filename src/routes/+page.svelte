@@ -1,5 +1,10 @@
 <script lang="ts">
 	import { PUBLIC_APP_NAME } from '$env/static/public';
+    import SvelteMarkdown from 'svelte-markdown'
+
+    import README from '../../README.md?raw';
+    
+    // console.log(README)
 </script>
 
 <div class="container mx-auto">
@@ -37,6 +42,11 @@
 			</div>
 		</div>
 	</div>
+
+    <div class="prose">
+        <SvelteMarkdown source={README} />
+    </div>
+    
 
 	<footer class="footer items-center p-4 bg-neutral text-neutral-content">
 		<div class="items-center grid-flow-col">

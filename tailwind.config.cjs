@@ -1,3 +1,4 @@
+const tailwind_typography = require('@tailwindcss/typography');
 const daisyui = require('daisyui');
 const tailwind_scrollbar = require('tailwind-scrollbar');
 
@@ -8,8 +9,8 @@ const config = {
 		extend: {}
 	},
 
-	plugins: [tailwind_scrollbar, daisyui],
-
+	plugins: [tailwind_typography, tailwind_scrollbar, daisyui],
+	
 	daisyui: {
 		themes: ["light", "dark", "black", "business" ]},
 };

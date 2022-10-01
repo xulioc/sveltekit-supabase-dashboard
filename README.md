@@ -1,5 +1,8 @@
 # SvelteKit Supabase Dashboard
 
+![alt text](/static/img/dashboard.png)
+
+
 ## Technologies
 - [Svelte](https://svelte.dev/) and [SvelteKit](https://kit.svelte.dev/) as application framework
 - [Supabase](https://supabase.com/) as database and backend
