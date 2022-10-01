@@ -1,6 +1,6 @@
 # SvelteKit Supabase Dashboard
 
-![alt text](/static/img/dashboard.png)
+![alt text](/img/dashboard.png)
 
 
 ## Technologies
