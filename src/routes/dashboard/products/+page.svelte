@@ -1,7 +1,6 @@
 <script>
-	import UserTableSimple from '$lib/components/dashboard/UserTableSimple.svelte';
-	import UserTableAdvanced from '$lib/components/dashboard/UserTableAdvanced.svelte';
-	
+	import ProductTable from '$lib/components/dashboard/ProductTable.svelte';
+
 	/** @type {import('./$types').PageData} */
 	export let data;
 </script>
@@ -22,11 +21,10 @@
 						d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
 					/></svg
 				>
-				<span>User data fetched from https://dummyjson.com/users</span>
+				<span>User data fetched from https://dummyjson.com/products</span>
 			</div>
 		</div>
-
-		<UserTableSimple users={data.users} />
-		<!-- <UserTableAdvanced users={data.users} /> -->
 	</div>
 </div>
+
+<ProductTable products={data.products} />

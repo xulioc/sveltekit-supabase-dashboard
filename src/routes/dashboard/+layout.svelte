@@ -26,7 +26,7 @@
 	<div class="border-2 border-neutral z-50">
 		<div class="flex flex-col p-3">
 			<a class="px-4 pt-2 pb-3" href="/">
-				<SmileIcon class="stroke-accent" />
+				<SmileIcon class="stroke-primary" />
 			</a>
 
 			<!-- HOME -->
@@ -71,6 +71,22 @@
 				</a>
 			</div>
 
+			<!-- PRODUCTS -->
+			<div class="py-2 tooltip tooltip-right" data-tip="Products">
+				<a
+					href="/dashboard/products"
+					role="button"
+					class="btn btn-square gap-2 btn-ghost"
+					class:btn-active={menu === 'products'}
+					on:click={() => (menu = 'products')}
+				>
+					<RadioIcon />
+				</a>
+			</div>
+
+			<!-- TODO: HIDE FOR NORMAL USER  -->
+			<div class="divider" />
+
 			<!-- USERS -->
 			<div class="py-2 tooltip tooltip-right" data-tip="Users">
 				<a
@@ -83,6 +99,19 @@
 					<UsersIcon />
 				</a>
 			</div>
+
+			 <!-- USER  -->
+			<div class="fixed bottom-0 dropdown dropdown-right dropdown-end mb-5">
+				<!-- svelte-ignore a11y-label-has-associated-control -->
+				<label tabindex="0" class="btn btn-circle"><UserIcon /></label>
+				<ul tabindex="0" class="dropdown-content menu p-3 shadow bg-neutral rounded-box w-fit">
+					<li><a href="/dashboard/profile"><SettingsIcon />Settings</a></li>
+					<li>
+						<a href="/dashboard/api/auth/logout"><LogOutIcon />LogOut</a>
+						<!-- <a on:click={() => (document.location = '/api/auth/logout')}><LogOutIcon />LogOut</a> -->
+					</li>
+				</ul>
+			</div>
 		</div>
 	</div>
 
@@ -91,7 +120,7 @@
 		<div class="navbar px-5 border-b-2 border-neutral bg-base-100">
 			<!-- APP TITLE  -->
 			<div class="flex-1">
-				<a href="/dashboard" class="link no-underline text-xl text-accent">
+				<a href="/dashboard" class="link no-underline text-xl font-bold text-primary">
 					{PUBLIC_APP_NAME}
 				</a>
 			</div>
@@ -120,7 +149,7 @@
 		<!-- CONTENT -->
 		<div class="w-full h-full overflow-auto">
 			{#if $navigating}
-				<div class="flex h-1/2 items-center justify-center">
+				<div class="flex h-full items-center justify-center">
 					<Jumper size="60" unit="px" duration="500ms" />
 				</div>
 			{:else}
