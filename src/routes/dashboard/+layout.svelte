@@ -1,6 +1,4 @@
 <script lang="ts">
-	// import '../../app.postcss';
-
 	import { PUBLIC_APP_NAME } from '$env/static/public';
 
 	import {
@@ -17,6 +15,8 @@
 	} from 'svelte-feather-icons';
 	import { Jumper } from 'svelte-loading-spinners';
 	import { navigating } from '$app/stores';
+
+	import { page } from '$app/stores';
 
 	let menu = 'home';
 </script>
@@ -100,14 +100,14 @@
 				</a>
 			</div>
 
-			 <!-- USER  -->
+			<!-- USER  -->
 			<div class="fixed bottom-0 dropdown dropdown-right dropdown-end mb-5">
 				<!-- svelte-ignore a11y-label-has-associated-control -->
 				<label tabindex="0" class="btn btn-circle"><UserIcon /></label>
 				<ul tabindex="0" class="dropdown-content menu p-3 shadow bg-neutral rounded-box w-fit">
 					<li><a href="/dashboard/profile"><SettingsIcon />Settings</a></li>
 					<li>
-						<a href="/dashboard/api/auth/logout"><LogOutIcon />LogOut</a>
+						<a href="/logout"><LogOutIcon />LogOut</a>
 						<!-- <a on:click={() => (document.location = '/api/auth/logout')}><LogOutIcon />LogOut</a> -->
 					</li>
 				</ul>
@@ -124,6 +124,13 @@
 					{PUBLIC_APP_NAME}
 				</a>
 			</div>
+
+			<!-- USER -->
+			{#if $page.data.session.user}
+				<div class="px-5">
+					{$page.data.session.user.email}
+				</div>
+			{/if}
 
 			<div class="flex-none">
 				<div class="dropdown dropdown-end">
