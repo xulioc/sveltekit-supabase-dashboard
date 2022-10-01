@@ -8,7 +8,10 @@ const config = {
 		extend: {}
 	},
 
-	plugins: [tailwind_scrollbar, daisyui]
+	plugins: [tailwind_scrollbar, daisyui],
+
+	daisyui: {
+		themes: ["light", "dark", "black", "business" ]},
 };
 
 module.exports = config;

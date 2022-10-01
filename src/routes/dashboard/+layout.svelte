@@ -19,6 +19,7 @@
 	import { page } from '$app/stores';
 
 	let menu = 'home';
+
 </script>
 
 <section id="body" class="flex flex-row h-screen">
@@ -107,7 +108,10 @@
 				<ul tabindex="0" class="dropdown-content menu p-3 shadow bg-neutral rounded-box w-fit">
 					<li><a href="/dashboard/profile"><SettingsIcon />Settings</a></li>
 					<li>
-						<a href="/logout"><LogOutIcon />LogOut</a>
+						<form action="/logout" method="post" use:enhance={logout}>
+							<button type="submit"><LogOutIcon />Sign Out</button>
+						</form>
+						<!-- <a href="/logout"><LogOutIcon />LogOut</a> -->
 						<!-- <a on:click={() => (document.location = '/api/auth/logout')}><LogOutIcon />LogOut</a> -->
 					</li>
 				</ul>
