@@ -1,5 +1,5 @@
 import '$lib/supabase';
-import { dev } from '$app/environment';
+// import { dev } from '$app/environment';
 import { sequence } from '@sveltejs/kit/hooks';
 import { auth } from '@supabase/auth-helpers-sveltekit/server';
 import { supabaseClient } from '$lib/supabase';

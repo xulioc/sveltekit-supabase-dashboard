@@ -14,9 +14,17 @@
 		RadioIcon
 	} from 'svelte-feather-icons';
 	import { Jumper } from 'svelte-loading-spinners';
-	import { navigating } from '$app/stores';
+	import { page, navigating } from '$app/stores';
 
-	import { page } from '$app/stores';
+	import { applyAction, enhance, type SubmitFunction } from '$app/forms';
+	import { invalidateAll } from '$app/navigation';
+
+	const logout: SubmitFunction = () => {
+		return async ({ result }) => {
+			await invalidateAll();
+			applyAction(result);
+		};
+	};
 
 	let menu = 'home';
 </script>
