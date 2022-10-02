@@ -113,10 +113,13 @@
 				<!-- svelte-ignore a11y-label-has-associated-control -->
 				<label tabindex="0" class="btn btn-circle"><UserIcon /></label>
 				<ul tabindex="0" class="dropdown-content menu p-3 shadow bg-neutral rounded-box w-fit">
-					<li><a href="/dashboard/profile"><SettingsIcon />Settings</a></li>
+					<li>
+						<a href="/dashboard/profile"><SettingsIcon />Settings</a>
+					</li>
 					<li>
 						<form action="/logout" method="post" use:enhance={logout}>
-							<button type="submit"><LogOutIcon />Sign Out</button>
+							<!-- <a type="submit"><LogOutIcon />LogOut</a> -->
+							<button class="w-max" type="submit"><LogOutIcon />Sign Out</button>
 						</form>
 						<!-- <a href="/logout"><LogOutIcon />LogOut</a> -->
 						<!-- <a on:click={() => (document.location = '/api/auth/logout')}><LogOutIcon />LogOut</a> -->
@@ -131,7 +134,7 @@
 		<div class="navbar px-5 border-b-2 border-neutral bg-base-100">
 			<!-- APP TITLE  -->
 			<div class="flex-1">
-				<a href="/dashboard" class="link no-underline text-xl font-bold text-primary">
+				<a href="/dashboard" class="link no-underline text-xl text-primary">
 					{PUBLIC_APP_NAME}
 				</a>
 			</div>
@@ -165,7 +168,7 @@
 		</div>
 
 		<!-- CONTENT -->
-		<div class="w-full h-full overflow-auto">
+		<div class="w-full h-full p-5 overflow-auto">
 			{#if $navigating}
 				<div class="flex h-full items-center justify-center">
 					<Jumper size="60" unit="px" duration="500ms" />
