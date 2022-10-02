@@ -1,6 +1,13 @@
 <script lang="ts">
 	import { PUBLIC_APP_NAME } from '$env/static/public';
+	import SvelteMarkdown from 'svelte-markdown';
+	import README from '../../README.md?raw';
 </script>
+
+<svelte:head>
+	<!-- Place this tag in your head or just before your close body tag. -->
+	<script async defer src="https://buttons.github.io/buttons.js"></script>
+</svelte:head>
 
 <div class="container mx-auto">
 	<div class="navbar bg-neutral">
@@ -13,28 +20,61 @@
 		</div>
 	</div>
 
-	<div class="hero min-h-fit bg-base-200">
+	<div class="hero min-h-fit my-10 bg-base-200">
 		<div class="hero-content text-center">
-			<div class="max-w-md">
+			<div class="max-w-xl my-10">
+				<h1 class="text-5xl font-bold">Welcome to</h1>
+				<div class="container flex h-20 my-10 py-2 justify-center border-red-600">
+					<div class="flex w-1/2 border-red-600">
+						<div class="flex w-1/3 border-red-600">
+							<img alt="svelte" src="svelte.png" />
+						</div>
+						<div class="flex my-2 mx-2 border-red-600">
+							<img alt="svelte" src="sveltekit.svg" />
+						</div>
+					</div>
+					<div class="flex w-1/2 ml-10 border-red-600">
+						<img alt="supabase" src="supabase_white.svg" />
+					</div>
+				</div>
+				<h1 class="text-5xl font-bold">Dashboard!</h1>
 
-				<h1 class="text-5xl font-bold">Welcome!</h1>
-
-                <div class="flex align-middle justify-items-center my-10">
-                    <img src="svelte.png" width="90"> 
-                    <img class="ml-8" src="sveltekit.svg" height="100"> 
-                </div>
-
-                <img src="supabase_white.svg" height="50">
 				<p class="py-6">
 					Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi
 					exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.
 				</p>
-				<a
+				<!-- <a
 					href="https://github.com/xulioc/sveltekit-supabase-dashboard"
 					role="button"
 					class="btn btn-primary">GitHub</a
+				> -->
+
+				<!-- Place this tag where you want the button to render. -->
+				<a
+					class="github-button"
+					href="https://github.com/xulioc/sveltekit-supabase-dashboard"
+					data-color-scheme="no-preference: light; light: light; dark: dark;"
+					data-icon="octicon-star"
+					data-size="large"
+					aria-label="Star xulioc/sveltekit-supabase-dashboard on GitHub">Star</a
+				>
+
+				<!-- Place this tag where you want the button to render. -->
+				<a
+					class="github-button"
+					href="https://github.com/xulioc/sveltekit-supabase-dashboard/subscription"
+					data-color-scheme="no-preference: light; light: light; dark: dark;"
+					data-icon="octicon-eye"
+					data-size="large"
+					aria-label="Watch xulioc/sveltekit-supabase-dashboard on GitHub">Watch</a
 				>
 			</div>
+		</div>
+	</div>
+
+	<div class="mockup-window my-10 pb-10 bg-base-300">
+		<div class="prose mx-auto">
+			<SvelteMarkdown source={README} />
 		</div>
 	</div>
 
@@ -55,7 +95,7 @@
 			<p>Copyright © 2022 - All right reserved</p>
 		</div>
 		<div class="grid-flow-col gap-4 md:place-self-center md:justify-self-end">
-			<a
+			<a href="/"
 				><svg
 					xmlns="http://www.w3.org/2000/svg"
 					width="24"
@@ -67,7 +107,7 @@
 					/></svg
 				>
 			</a>
-			<a
+			<a href="/"
 				><svg
 					xmlns="http://www.w3.org/2000/svg"
 					width="24"
@@ -79,7 +119,7 @@
 					/></svg
 				></a
 			>
-			<a
+			<a href="/"
 				><svg
 					xmlns="http://www.w3.org/2000/svg"
 					width="24"

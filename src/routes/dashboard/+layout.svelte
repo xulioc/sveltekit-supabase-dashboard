@@ -14,11 +14,23 @@
 		RadioIcon
 	} from 'svelte-feather-icons';
 	import { Jumper } from 'svelte-loading-spinners';
-	import { navigating } from '$app/stores';
+	import { page, navigating } from '$app/stores';
 
-	import { page } from '$app/stores';
+	import { applyAction, enhance, type SubmitFunction } from '$app/forms';
+	import { invalidateAll } from '$app/navigation';
+
+	const logout: SubmitFunction = () => {
+		return async ({ result }) => {
+			await invalidateAll();
+			applyAction(result);
+		};
+	};
 
 	let menu = 'home';
+
+	const role = $page.data.session.user.app_metadata.role;
+	const org = $page.data.session.user.app_metadata.org;
+	// console.log(role);
 </script>
 
 <section id="body" class="flex flex-row h-screen">
@@ -84,30 +96,40 @@
 				</a>
 			</div>
 
-			<!-- TODO: HIDE FOR NORMAL USER  -->
-			<div class="divider" />
+			{#if role === 'admin'}
+				<!-- TODO: HIDE FOR NORMAL USER  -->
+				<div class="divider" />
 
-			<!-- USERS -->
-			<div class="py-2 tooltip tooltip-right" data-tip="Users">
-				<a
-					href="/dashboard/users"
-					role="button"
-					class="btn btn-square gap-2 btn-ghost"
-					class:btn-active={menu === 'users'}
-					on:click={() => (menu = 'users')}
-				>
-					<UsersIcon />
-				</a>
-			</div>
+				<!-- USERS -->
+				<div class="py-2 tooltip tooltip-right" data-tip="Users">
+					<a
+						href="/dashboard/users"
+						role="button"
+						class="btn btn-square gap-2 btn-ghost"
+						class:btn-active={menu === 'users'}
+						on:click={() => (menu = 'users')}
+					>
+						<UsersIcon />
+					</a>
+				</div>
+			{/if}
 
 			<!-- USER  -->
 			<div class="fixed bottom-0 dropdown dropdown-right dropdown-end mb-5">
 				<!-- svelte-ignore a11y-label-has-associated-control -->
-				<label tabindex="0" class="btn btn-circle"><UserIcon /></label>
+				<label tabindex="0" class="btn btn-circle">
+					<UserIcon class="{role === 'admin' ? 'stroke-accent' : ''}"/>
+				</label>
 				<ul tabindex="0" class="dropdown-content menu p-3 shadow bg-neutral rounded-box w-fit">
-					<li><a href="/dashboard/profile"><SettingsIcon />Settings</a></li>
 					<li>
-						<a href="/logout"><LogOutIcon />LogOut</a>
+						<a href="/dashboard/profile"><SettingsIcon />Settings</a>
+					</li>
+					<li>
+						<form action="/logout" method="post" use:enhance={logout}>
+							<!-- <a type="submit"><LogOutIcon />LogOut</a> -->
+							<button class="w-max" type="submit"><LogOutIcon />Sign Out</button>
+						</form>
+						<!-- <a href="/logout"><LogOutIcon />LogOut</a> -->
 						<!-- <a on:click={() => (document.location = '/api/auth/logout')}><LogOutIcon />LogOut</a> -->
 					</li>
 				</ul>
@@ -120,7 +142,7 @@
 		<div class="navbar px-5 border-b-2 border-neutral bg-base-100">
 			<!-- APP TITLE  -->
 			<div class="flex-1">
-				<a href="/dashboard" class="link no-underline text-xl font-bold text-primary">
+				<a href="/dashboard" class="link no-underline text-xl text-primary">
 					{PUBLIC_APP_NAME}
 				</a>
 			</div>
@@ -128,7 +150,13 @@
 			<!-- USER -->
 			{#if $page.data.session.user}
 				<div class="px-5">
-					{$page.data.session.user.email}
+					<div class={role === 'admin' ? 'text-accent' : ''}>
+						{$page.data.session.user.email}
+						{#if org}
+						({org})
+						{/if}
+
+					</div>
 				</div>
 			{/if}
 
@@ -154,7 +182,7 @@
 		</div>
 
 		<!-- CONTENT -->
-		<div class="w-full h-full overflow-auto">
+		<div class="w-full h-full p-5 overflow-auto">
 			{#if $navigating}
 				<div class="flex h-full items-center justify-center">
 					<Jumper size="60" unit="px" duration="500ms" />
