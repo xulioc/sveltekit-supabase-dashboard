@@ -19,7 +19,6 @@
 	import { page } from '$app/stores';
 
 	let menu = 'home';
-
 </script>
 
 <section id="body" class="flex flex-row h-screen">

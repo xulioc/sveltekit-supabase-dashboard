@@ -9,7 +9,7 @@ const config: UserConfig = {
 	server: {
 		fs: {
 			allow: [
-				'/README.md'
+				// '/README.md',
 			]
 		}
 	}
