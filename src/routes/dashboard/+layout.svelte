@@ -27,6 +27,10 @@
 	};
 
 	let menu = 'home';
+
+	const role = $page.data.session.user.app_metadata.role;
+	const org = $page.data.session.user.app_metadata.org;
+	// console.log(role);
 </script>
 
 <section id="body" class="flex flex-row h-screen">
@@ -92,26 +96,30 @@
 				</a>
 			</div>
 
-			<!-- TODO: HIDE FOR NORMAL USER  -->
-			<div class="divider" />
+			{#if role === 'admin'}
+				<!-- TODO: HIDE FOR NORMAL USER  -->
+				<div class="divider" />
 
-			<!-- USERS -->
-			<div class="py-2 tooltip tooltip-right" data-tip="Users">
-				<a
-					href="/dashboard/users"
-					role="button"
-					class="btn btn-square gap-2 btn-ghost"
-					class:btn-active={menu === 'users'}
-					on:click={() => (menu = 'users')}
-				>
-					<UsersIcon />
-				</a>
-			</div>
+				<!-- USERS -->
+				<div class="py-2 tooltip tooltip-right" data-tip="Users">
+					<a
+						href="/dashboard/users"
+						role="button"
+						class="btn btn-square gap-2 btn-ghost"
+						class:btn-active={menu === 'users'}
+						on:click={() => (menu = 'users')}
+					>
+						<UsersIcon />
+					</a>
+				</div>
+			{/if}
 
 			<!-- USER  -->
 			<div class="fixed bottom-0 dropdown dropdown-right dropdown-end mb-5">
 				<!-- svelte-ignore a11y-label-has-associated-control -->
-				<label tabindex="0" class="btn btn-circle"><UserIcon /></label>
+				<label tabindex="0" class="btn btn-circle">
+					<UserIcon class="{role === 'admin' ? 'stroke-accent' : ''}"/>
+				</label>
 				<ul tabindex="0" class="dropdown-content menu p-3 shadow bg-neutral rounded-box w-fit">
 					<li>
 						<a href="/dashboard/profile"><SettingsIcon />Settings</a>
@@ -142,7 +150,13 @@
 			<!-- USER -->
 			{#if $page.data.session.user}
 				<div class="px-5">
-					{$page.data.session.user.email}
+					<div class={role === 'admin' ? 'text-accent' : ''}>
+						{$page.data.session.user.email}
+						{#if org}
+						({org})
+						{/if}
+
+					</div>
 				</div>
 			{/if}
 
