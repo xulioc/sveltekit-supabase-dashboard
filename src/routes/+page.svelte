@@ -72,7 +72,7 @@
 		</div>
 	</div>
 
-	<div class="mockup-window my-10 border bg-base-300">
+	<div class="mockup-window my-10 pb-10 bg-base-300">
 		<div class="prose mx-auto">
 			<SvelteMarkdown source={README} />
 		</div>

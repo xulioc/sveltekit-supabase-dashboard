@@ -1,10 +1,21 @@
-// we need to make sure the supabase instance is initialized on the server
 import '$lib/supabase';
 import { dev } from '$app/environment';
+import { sequence } from '@sveltejs/kit/hooks';
 import { auth } from '@supabase/auth-helpers-sveltekit/server';
+import { supabaseClient } from '$lib/supabase';
 
-export const handle = auth();
+// TRACK USER EVENTS
+/** @type {import('@sveltejs/kit').Handle} */
+async function track({ event, resolve }) {
+    // console.log("TRACK")
+    // console.log(event)
 
-// use the sequence helper if you have additional Handle methods
-// import { sequence } from '@sveltejs/kit/hooks';
-// export const handle = sequence(auth(), yourHandler);
+    await supabaseClient.from('tracking').insert([
+        { 'event': event }
+    ])
+
+    const response = await resolve(event);
+    return response;
+}
+
+export const handle = sequence(auth(), track);
