@@ -13,7 +13,7 @@
 		BellIcon,
 		RadioIcon
 	} from 'svelte-feather-icons';
-	import { Jumper } from 'svelte-loading-spinners';
+	import { Jumper, Square } from 'svelte-loading-spinners';
 	import { page, navigating } from '$app/stores';
 
 	import { applyAction, enhance, type SubmitFunction } from '$app/forms';
@@ -185,7 +185,8 @@
 		<div class="w-full h-full p-5 overflow-auto">
 			{#if $navigating}
 				<div class="flex h-full items-center justify-center">
-					<Jumper size="60" unit="px" duration="500ms" />
+					<Jumper size="60" unit="px" duration="1s" />
+					<!-- <Square size="60" unit="px" duration="2s" /> -->
 				</div>
 			{:else}
 				<slot />
