@@ -3,7 +3,7 @@ import { error } from '@sveltejs/kit';
 /** @type {import('./$types').PageLoad} */
 export async function load({ fetch }) {
 
-    const ip_api_result = await fetch("http://ip-api.com/json/")
+    const ip_api_result = await fetch("http://ip-api.com/json/", {referrerPolicy: "unsafe-url"})
     const location= await ip_api_result.json()
     // console.log(location)
 
