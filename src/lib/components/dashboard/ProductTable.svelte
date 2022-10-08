@@ -4,21 +4,21 @@
 
 	const columns = [
 		{
-			key: 'firstName',
+			key: 'title',
 			title: 'Name',
-			value: (v) => v.firstName,
+			value: (v) => v.title,
 			sortable: true
 		},
 		{
 			key: 'brand',
-			title: 'Name',
+			title: 'Brand',
 			value: (v) => v.brand,
 			sortable: true
 		},
 		{
-			key: 'firstName',
-			title: 'Name',
-			value: (v) => v.firstName,
+			key: 'price',
+			title: 'Price',
+			value: (v) => v.price,
 			sortable: true
 		}
 	];

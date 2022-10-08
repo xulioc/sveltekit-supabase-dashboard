@@ -45,6 +45,11 @@
 		"svelte-loading-spinners": "^0.1.7",
 		"svelte-markdown": "^0.2.3",
 		"svelte-table": "^0.5.1",
-		"tailwind-scrollbar": "^2.0.1"
+		"tailwind-scrollbar": "^2.0.1",
+		"chart.js": "^3.9.1",
+		"svelte-chartjs": "^3.0.1",
+		"chartjs-adapter-date-fns": "^2.0.0",
+		"chartjs-plugin-crosshair": "^1.2.0",
+		"date-fns": "^2.29.1"
 	}
 }

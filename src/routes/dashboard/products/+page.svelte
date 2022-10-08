@@ -7,7 +7,7 @@
 
 <div class="card flex-col lg:flex-row bg-base-300 shadow-xl">
 	<div class="overflow-x-auto w-full scrollbar-thin scrollbar-thumb-gray-400 overflow-y-scroll">
-		<div class="alert alert-info shadow-lg">
+		<div class="mb-5 alert alert-info shadow-lg">
 			<div>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"

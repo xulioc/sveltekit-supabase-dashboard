@@ -12,7 +12,12 @@ const config: UserConfig = {
 				// '/README.md',
 			]
 		}
-	}
+	},
+
+	// PREVENT CHARTS.JS ERROR
+	// ssr: {
+	// 	noExternal: ['chart.js']
+	// }
 };
 
 export default config;

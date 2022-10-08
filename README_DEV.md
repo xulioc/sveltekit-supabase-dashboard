@@ -12,7 +12,7 @@ Custom Claims are stored in the security token a user receives when logging in, 
 This may sound trivial, but this could have a significant effect on scalability if you use claims in an RLS (Row Level Security) Policy, as it could potentially eliminate thousands (or even millions) of database calls.
 
 More info [here](https://github.com/supabase-community/supabase-custom-claims
-)
+) and [here](https://github.com/supabase/supabase/discussions/1148)
 
 
 

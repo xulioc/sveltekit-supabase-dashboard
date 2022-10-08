@@ -12,18 +12,18 @@
 <div class="container mx-auto">
 	<div class="navbar bg-neutral">
 		<div class="flex-none" />
-		<div class="flex-1">
-			<a href="/" class="btn btn-ghost normal-case text-xl">{PUBLIC_APP_NAME}</a>
+		<div class="flex-1 ml-5">
+			<a href="/" class="text-xl">{PUBLIC_APP_NAME}</a>
 		</div>
 		<div class="flex-none">
-			<a href="/auth" role="button" class="btn btn-primary">Sign In</a>
+			<a href="/auth" role="button" class="btn btn-sm btn-primary">Sign In</a>
 		</div>
 	</div>
 
-	<div class="hero min-h-fit my-10 bg-base-200">
+	<div class="hero min-h-fit my-5 bg-base-200">
 		<div class="hero-content text-center">
 			<div class="max-w-xl my-10">
-				<h1 class="text-5xl font-bold">Welcome to</h1>
+				<h1 class="text-4xl font-bold">Welcome to</h1>
 				<div class="container flex h-20 my-10 py-2 justify-center border-red-600">
 					<div class="flex w-1/2 border-red-600">
 						<div class="flex w-1/3 border-red-600">
@@ -37,7 +37,7 @@
 						<img alt="supabase" src="supabase_white.svg" />
 					</div>
 				</div>
-				<h1 class="text-5xl font-bold">Dashboard!</h1>
+				<h1 class="text-4xl font-bold">Dashboard!</h1>
 
 				<p class="py-6">
 					Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi
@@ -72,7 +72,7 @@
 		</div>
 	</div>
 
-	<div class="mockup-window my-10 pb-10 bg-base-300">
+	<div class="mockup-window my-5 pb-10 bg-base-300">
 		<div class="prose mx-auto">
 			<SvelteMarkdown source={README} />
 		</div>

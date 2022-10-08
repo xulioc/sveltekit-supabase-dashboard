@@ -35,11 +35,17 @@
 
 <section id="body" class="flex flex-row h-screen">
 	<!-- LEFT MENU -->
-	<div class="border-2 border-neutral z-50">
-		<div class="flex flex-col p-3">
-			<a class="px-4 pt-2 pb-3" href="/">
-				<SmileIcon class="stroke-primary" />
-			</a>
+	<!-- <div class="flex flex-col w-full"></div> -->
+	<div class="flex flex-col h-full border-r border-opacity-10 border-base-content z-50">
+		<!-- <div class="flex flex-col p-3"> -->
+		<div class="navbar flex flex-col h-full bg-base-100">
+			<div class="mt-1 mb-7">
+				<a class="px-3 pt-2" href="/">
+					<!-- <SmileIcon class="" /> -->
+					<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="white" stroke="white" stroke-width="1"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+				</a>
+			</div>
+			<!-- <div class="divider my-2" /> -->
 
 			<!-- HOME -->
 			<div class="py-2 tooltip tooltip-right" data-tip="Home">
@@ -96,37 +102,54 @@
 				</a>
 			</div>
 
+			<!-- USERS -->
+			<div class="py-2 tooltip tooltip-right" data-tip="Users">
+				<a
+					href="/dashboard/users"
+					role="button"
+					class="btn btn-square gap-2 btn-ghost"
+					class:btn-active={menu === 'users'}
+					on:click={() => (menu = 'users')}
+				>
+					<UsersIcon />
+				</a>
+			</div>
+
 			{#if role === 'admin'}
 				<!-- TODO: HIDE FOR NORMAL USER  -->
 				<div class="divider" />
 
-				<!-- USERS -->
+				<!-- ADMIN USERS -->
 				<div class="py-2 tooltip tooltip-right" data-tip="Users">
 					<a
-						href="/dashboard/users"
+						href="/dashboard/admin/users"
 						role="button"
 						class="btn btn-square gap-2 btn-ghost"
-						class:btn-active={menu === 'users'}
-						on:click={() => (menu = 'users')}
+						class:btn-active={menu === 'admin_users'}
+						on:click={() => (menu = 'admin_users')}
 					>
-						<UsersIcon />
+						<UsersIcon class="stroke-accent" />
 					</a>
 				</div>
+
+				<div class="divider" />
 			{/if}
 
+			<div class="flex flex-1"></div>
+
 			<!-- USER  -->
-			<div class="fixed bottom-0 dropdown dropdown-right dropdown-end mb-5">
+			<div class="dropdown dropdown-right dropdown-end mb-4">
 				<!-- svelte-ignore a11y-label-has-associated-control -->
-				<label tabindex="0" class="btn btn-circle">
-					<UserIcon class="{role === 'admin' ? 'stroke-accent' : ''}"/>
+				<label tabindex="0" class="btn btn-ghost btn-circle">
+					<UserIcon class={role === 'admin' ? 'stroke-accent' : ''} />
 				</label>
-				<ul tabindex="0" class="dropdown-content menu p-3 shadow bg-neutral rounded-box w-fit">
+				<ul tabindex="0" class="dropdown-content menu ml-2 p-3 shadow bg-neutral rounded-box w-fit">
 					<li>
 						<a href="/dashboard/profile"><SettingsIcon />Settings</a>
 					</li>
 					<li>
 						<form action="/logout" method="post" use:enhance={logout}>
-							<!-- <a type="submit"><LogOutIcon />LogOut</a> -->
+							<!-- <a href="/logout" type="submit"><LogOutIcon />LogOut</a> -->
 							<button class="w-max" type="submit"><LogOutIcon />Sign Out</button>
 						</form>
 						<!-- <a href="/logout"><LogOutIcon />LogOut</a> -->
@@ -139,10 +162,10 @@
 
 	<div class="flex flex-col w-full">
 		<!-- NAV BAR -->
-		<div class="navbar px-5 border-b-2 border-neutral bg-base-100">
+		<div class="navbar px-5 border-b border-opacity-10 border-base-content">
 			<!-- APP TITLE  -->
 			<div class="flex-1">
-				<a href="/dashboard" class="link no-underline text-xl text-primary">
+				<a href="/dashboard" class="link no-underline text-xl">
 					{PUBLIC_APP_NAME}
 				</a>
 			</div>
@@ -153,9 +176,8 @@
 					<div class={role === 'admin' ? 'text-accent' : ''}>
 						{$page.data.session.user.email}
 						{#if org}
-						({org})
+							({org})
 						{/if}
-
 					</div>
 				</div>
 			{/if}
@@ -183,6 +205,29 @@
 
 		<!-- CONTENT -->
 		<div class="w-full h-full p-5 overflow-auto">
+			{#if role == 'admin'}
+				<div class="alert alert-warning shadow-lg mb-5">
+					<div>
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							class="stroke-current flex-shrink-0 h-6 w-6"
+							fill="none"
+							viewBox="0 0 24 24"
+							><path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+							/></svg
+						>
+						<span>You are an ADMIN! </span>
+						<!-- <span>Some items will be</span>
+						<div class="badge badge-accent">accent</div>
+						<span>to notice you are a breve admin</span> -->
+					</div>
+				</div>
+			{/if}
+
 			{#if $navigating}
 				<div class="flex h-full items-center justify-center">
 					<Jumper size="60" unit="px" duration="1s" />

@@ -1,3 +1,23 @@
+<div class="alert alert-info shadow-lg mb-5">
+	<div>
+		<svg
+			xmlns="http://www.w3.org/2000/svg"
+			class="stroke-current flex-shrink-0 h-6 w-6"
+			fill="none"
+			viewBox="0 0 24 24"
+			><path
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				stroke-width="2"
+				d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+			/></svg
+		>
+		<span
+			><a href="https://daisyui.com/components/table/">DaisyUI</a> table example with static data</span
+		>
+	</div>
+</div>
+
 <div class="card flex-col lg:flex-row bg-base-300 shadow-xl">
 	<div class="overflow-x-auto w-full scrollbar-thin scrollbar-thumb-gray-400 overflow-y-scroll">
 		<table class="table w-full">
@@ -162,3 +182,4 @@
 		</table>
 	</div>
 </div>
+
