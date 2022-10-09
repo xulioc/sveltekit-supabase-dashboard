@@ -42,7 +42,26 @@
 			<div class="mt-1 mb-7">
 				<a class="px-3 pt-2" href="/">
 					<!-- <SmileIcon class="" /> -->
-					<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="white" stroke="white" stroke-width="1"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						width="30"
+						height="30"
+						viewBox="0 0 24 24"
+						fill="white"
+						stroke="white"
+						stroke-width="1"
+						><rect x="3" y="3" width="7" height="7" /><rect
+							x="14"
+							y="3"
+							width="7"
+							height="7"
+						/><rect x="14" y="14" width="7" height="7" /><rect
+							x="3"
+							y="14"
+							width="7"
+							height="7"
+						/></svg
+					>
 				</a>
 			</div>
 			<!-- <div class="divider my-2" /> -->
@@ -135,7 +154,7 @@
 				<div class="divider" />
 			{/if}
 
-			<div class="flex flex-1"></div>
+			<div class="flex flex-1" />
 
 			<!-- USER  -->
 			<div class="dropdown dropdown-right dropdown-end mb-4">
@@ -143,17 +162,18 @@
 				<label tabindex="0" class="btn btn-ghost btn-circle">
 					<UserIcon class={role === 'admin' ? 'stroke-accent' : ''} />
 				</label>
-				<ul tabindex="0" class="dropdown-content menu ml-2 p-3 shadow bg-neutral rounded-box w-fit">
+				<ul tabindex="0" class="dropdown-content menu w-max ml-2 p-3 shadow bg-neutral rounded-box">
 					<li>
-						<a href="/dashboard/profile"><SettingsIcon />Settings</a>
+						<div class="flex flex-row">
+						<a class="flex w-max" href="/dashboard/profile"><SettingsIcon class="mr-4" />Settings</a>
+					</div>
 					</li>
 					<li>
-						<form action="/logout" method="post" use:enhance={logout}>
-							<!-- <a href="/logout" type="submit"><LogOutIcon />LogOut</a> -->
-							<button class="w-max" type="submit"><LogOutIcon />Sign Out</button>
-						</form>
-						<!-- <a href="/logout"><LogOutIcon />LogOut</a> -->
-						<!-- <a on:click={() => (document.location = '/api/auth/logout')}><LogOutIcon />LogOut</a> -->
+						<div class="flex flex-row">
+							<form action="/logout" method="post" use:enhance={logout}>
+								<button class="flex w-max" type="submit"><LogOutIcon class="mr-4"/>Sign Out</button>
+							</form>
+						</div>
 					</li>
 				</ul>
 			</div>
