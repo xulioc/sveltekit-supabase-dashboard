@@ -36,6 +36,3 @@
 		<!-- <UserTableAdvanced users={data.users} /> -->
 	</div>
 </div>
-
-
-

@@ -26,6 +26,8 @@
 			</div>
 		</div>
 
+		
+
 		<UserTableSimple users={data.users} />
 		<!-- <UserTableAdvanced users={data.users} /> -->
 	</div>

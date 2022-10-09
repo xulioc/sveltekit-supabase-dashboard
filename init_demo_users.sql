@@ -49,7 +49,7 @@ VALUES
     'admin@test.com',
     '{"provider":"email","providers":["email"],"role":"admin","org":"ACME"}',
     '{}',
-    FALSE,
+    TRUE,
     crypt('admin', gen_salt('bf')),
     NOW(),
     NOW(),
