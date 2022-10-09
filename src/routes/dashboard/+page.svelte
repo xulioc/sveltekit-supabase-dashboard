@@ -43,7 +43,7 @@ ADMIN
 	<div class="stats bg-primary text-primary-content">
 		<div class="stat">
 			<div class="stat-title">You are in</div>
-			<div class="stat-value">{data.location.regionName} ({data.location.country})</div>
+			<div class="stat-value">{data.location.region} ({data.location.country_name})</div>
 			<div class="stat-actions">
 				<button class="btn btn-sm btn-success">Yes I DO!</button>
 			</div>
