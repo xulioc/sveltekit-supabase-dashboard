@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { PUBLIC_APP_NAME } from '$env/static/public';
+	import { PUBLIC_APP_NAME, PUBLIC_DEMO_MODE } from '$env/static/public';
 
 	import {
 		HomeIcon,
@@ -31,6 +31,8 @@
 	const role = $page.data.session.user.app_metadata.role;
 	const org = $page.data.session.user.app_metadata.org;
 	// console.log(role);
+
+	console.log(PUBLIC_DEMO_MODE);
 </script>
 
 <section id="body" class="flex flex-row h-screen">
@@ -165,13 +167,16 @@
 				<ul tabindex="0" class="dropdown-content menu w-max ml-2 p-3 shadow bg-neutral rounded-box">
 					<li>
 						<div class="flex flex-row">
-						<a class="flex w-max" href="/dashboard/profile"><SettingsIcon class="mr-4" />Settings</a>
-					</div>
+							<a class="flex w-max" href="/dashboard/profile"
+								><SettingsIcon class="mr-4" />Settings</a
+							>
+						</div>
 					</li>
 					<li>
 						<div class="flex flex-row">
 							<form action="/logout" method="post" use:enhance={logout}>
-								<button class="flex w-max" type="submit"><LogOutIcon class="mr-4"/>Sign Out</button>
+								<button class="flex w-max" type="submit"><LogOutIcon class="mr-4" />Sign Out</button
+								>
 							</form>
 						</div>
 					</li>
@@ -225,33 +230,31 @@
 
 		<!-- CONTENT -->
 		<div class="w-full h-full p-5 overflow-auto">
-			{#if role == 'admin'}
-				<div class="alert alert-warning shadow-lg mb-5">
-					<div>
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							class="stroke-current flex-shrink-0 h-6 w-6"
-							fill="none"
-							viewBox="0 0 24 24"
-							><path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								stroke-width="2"
-								d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-							/></svg
-						>
-						<span>You are an ADMIN! </span>
-						<!-- <span>Some items will be</span>
-						<div class="badge badge-accent">accent</div>
-						<span>to notice you are a breve admin</span> -->
+			{#if PUBLIC_DEMO_MODE=='true'}
+				{#if role == 'admin'}
+					<div class="alert alert-warning shadow-lg mb-5">
+						<div>
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								class="stroke-current flex-shrink-0 h-6 w-6"
+								fill="none"
+								viewBox="0 0 24 24"
+								><path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									stroke-width="2"
+									d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+								/></svg
+							>
+							<span>You are an ADMIN!</span>
+						</div>
 					</div>
-				</div>
+				{/if}
 			{/if}
 
 			{#if $navigating}
 				<div class="flex h-full items-center justify-center">
 					<Jumper size="60" unit="px" duration="1s" />
-					<!-- <Square size="60" unit="px" duration="2s" /> -->
 				</div>
 			{:else}
 				<slot />

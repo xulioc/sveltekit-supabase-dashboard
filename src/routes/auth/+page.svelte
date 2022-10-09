@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { PUBLIC_APP_NAME, PUBLIC_DEMO_MODE } from '$env/static/public';
+
 	import { applyAction, enhance, type SubmitFunction } from '$app/forms';
 	import { invalidateAll } from '$app/navigation';
 
@@ -19,6 +21,23 @@
 
 <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
 	<div class="card-body">
+		<!-- <h1 class="text-center text-xl">{PUBLIC_APP_NAME}</h1> -->
+		<h1 class="text-primary-content text-center text-4xl mb-8">Sign In</h1>
+
+		{#if PUBLIC_DEMO_MODE == 'true'}
+			<div class="alert alert-info shadow-lg">
+				<div>
+					<span>USER: 'user@test.com' pass 'user'</span>
+				</div>
+			</div>
+
+			<div class="alert alert-warning shadow-lg">
+				<div>
+					<span>ADMIN: 'admin@test.com' pass 'admin'</span>
+				</div>
+			</div>
+		{/if}
+
 		<form method="post" use:enhance={handleSubmit}>
 			<div class="form-control">
 				<label class="label">
