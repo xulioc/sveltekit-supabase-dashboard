@@ -32,7 +32,7 @@
 	const org = $page.data.session.user.app_metadata.org;
 	// console.log(role);
 
-	console.log(PUBLIC_DEMO_MODE);
+	// console.log(PUBLIC_DEMO_MODE);
 </script>
 
 <section id="body" class="flex flex-row h-screen">
@@ -69,7 +69,7 @@
 			<!-- <div class="divider my-2" /> -->
 
 			<!-- HOME -->
-			<div class="py-2 tooltip tooltip-right" data-tip="Home">
+			<div class="py-2 tooltip tooltip-right tooltip-primary" data-tip="Home">
 				<a
 					href="/dashboard"
 					role="button"
@@ -85,7 +85,7 @@
 			</div>
 
 			<!-- TABLES -->
-			<div class="py-2 tooltip tooltip-right" data-tip="Tables">
+			<div class="py-2 tooltip tooltip-right tooltip-primary" data-tip="Tables">
 				<a
 					href="/dashboard/tables"
 					role="button"
@@ -98,7 +98,7 @@
 			</div>
 
 			<!-- CHARTS -->
-			<div class="py-2 tooltip tooltip-right" data-tip="Charts">
+			<div class="py-2 tooltip tooltip-right tooltip-primary" data-tip="Charts">
 				<a
 					href="/dashboard/"
 					role="button"
@@ -111,7 +111,7 @@
 			</div>
 
 			<!-- PRODUCTS -->
-			<div class="py-2 tooltip tooltip-right" data-tip="Products">
+			<div class="py-2 tooltip tooltip-right tooltip-primary" data-tip="Products">
 				<a
 					href="/dashboard/products"
 					role="button"
@@ -124,7 +124,7 @@
 			</div>
 
 			<!-- USERS -->
-			<div class="py-2 tooltip tooltip-right" data-tip="Users">
+			<div class="py-2 tooltip tooltip-right tooltip-primary" data-tip="Users">
 				<a
 					href="/dashboard/users"
 					role="button"
@@ -141,11 +141,11 @@
 				<div class="divider" />
 
 				<!-- ADMIN USERS -->
-				<div class="py-2 tooltip tooltip-right" data-tip="Users">
+				<div class="tooltip tooltip-right tooltip-accent" data-tip="Users">
 					<a
 						href="/dashboard/admin/users"
 						role="button"
-						class="btn btn-square gap-2 btn-ghost"
+						class="btn btn-square btn-ghost"
 						class:btn-active={menu === 'admin_users'}
 						on:click={() => (menu = 'admin_users')}
 					>
@@ -164,7 +164,7 @@
 				<label tabindex="0" class="btn btn-ghost btn-circle">
 					<UserIcon class={role === 'admin' ? 'stroke-accent' : ''} />
 				</label>
-				<ul tabindex="0" class="dropdown-content menu w-max ml-2 p-3 shadow bg-neutral rounded-box">
+				<ul tabindex="0" class="dropdown-content menu w-max ml-2 p-3 bg-primary rounded-box">
 					<li>
 						<div class="flex flex-row">
 							<a class="flex w-max" href="/dashboard/profile"
