@@ -1,5 +1,5 @@
 <script>
-	import UserTableSimple from '$lib/components/dashboard/UserTableSimple.svelte';
+	import UserTableSimple from '$lib/components/dashboard/UserTableAdmin.svelte';
 	import UserTableAdvanced from '$lib/components/dashboard/UserTableAdvanced.svelte';
 	
 	/** @type {import('./$types').PageData} */

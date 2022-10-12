@@ -25,7 +25,7 @@
 		<h1 class="text-primary-content text-center text-4xl mb-8">Sign In</h1>
 
 		{#if PUBLIC_DEMO_MODE == 'true'}
-			<div class="alert alert-info shadow-lg">
+			<div class="alert bg-secondary shadow-lg">
 				<div>
 					<span>USER: 'user@test.com' pass 'user'</span>
 				</div>
@@ -34,6 +34,12 @@
 			<div class="alert alert-warning shadow-lg">
 				<div>
 					<span>ADMIN: 'admin@test.com' pass 'admin'</span>
+				</div>
+			</div>
+
+			<div class="alert alert-warning bg-accent shadow-lg">
+				<div>
+					<span>SUPER: 'super@test.com' pass 'super'</span>
 				</div>
 			</div>
 		{/if}

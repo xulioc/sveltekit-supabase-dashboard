@@ -41,15 +41,16 @@
 		"@supabase/auth-helpers-sveltekit": "^0.7.1",
 		"@supabase/supabase-js": "^1.35.7",
 		"@tailwindcss/typography": "^0.5.7",
+		"chart.js": "^3.9.1",
+		"chartjs-adapter-date-fns": "^2.0.0",
+		"chartjs-plugin-crosshair": "^1.2.0",
+		"date-fns": "^2.29.1",
+		"svelte-chartjs": "^3.0.1",
 		"svelte-feather-icons": "^4.0.0",
 		"svelte-loading-spinners": "^0.1.7",
 		"svelte-markdown": "^0.2.3",
 		"svelte-table": "^0.5.1",
-		"tailwind-scrollbar": "^2.0.1",
-		"chart.js": "^3.9.1",
-		"svelte-chartjs": "^3.0.1",
-		"chartjs-adapter-date-fns": "^2.0.0",
-		"chartjs-plugin-crosshair": "^1.2.0",
-		"date-fns": "^2.29.1"
+		"svelte-time": "^0.7.1",
+		"tailwind-scrollbar": "^2.0.1"
 	}
 }

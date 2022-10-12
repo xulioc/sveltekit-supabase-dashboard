@@ -60,6 +60,26 @@ VALUES
     '',
     '',
     ''
+  ),
+   (
+    gen_random_uuid(),
+    '00000000-0000-0000-0000-000000000000',
+    'authenticated',
+    'authenticated',
+    'super@test.com',
+    '{"provider":"email","providers":["email"],"role":"super","org":"ACME"}',
+    '{}',
+    TRUE,
+    crypt('super', gen_salt('bf')),
+    NOW(),
+    NOW(),
+    NOW(),
+    NOW(),
+    NOW(),
+    '',
+    '',
+    '',
+    ''
   );
 
 INSERT INTO
