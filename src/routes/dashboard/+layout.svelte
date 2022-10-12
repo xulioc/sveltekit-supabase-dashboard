@@ -11,7 +11,8 @@
 		SmileIcon,
 		SettingsIcon,
 		BellIcon,
-		RadioIcon
+		RadioIcon,
+		ArchiveIcon
 	} from 'svelte-feather-icons';
 	import { Jumper, Square } from 'svelte-loading-spinners';
 	import { page, navigating } from '$app/stores';
@@ -30,6 +31,11 @@
 
 	const role = $page.data.session.user.app_metadata.role;
 	const org = $page.data.session.user.app_metadata.org;
+
+	let role_color = '';
+	if (role === 'admin') role_color = 'stroke-warning';
+	if (role === 'super') role_color = 'stroke-accent';
+
 	// console.log(role);
 
 	// console.log(PUBLIC_DEMO_MODE);
@@ -136,12 +142,10 @@
 				</a>
 			</div>
 
-			{#if role === 'admin'}
-				<!-- TODO: HIDE FOR NORMAL USER  -->
+			{#if role === 'admin' || role === 'super'}
 				<div class="divider" />
-
 				<!-- ADMIN USERS -->
-				<div class="tooltip tooltip-right tooltip-accent" data-tip="Users">
+				<div class="tooltip tooltip-right tooltip-warning" data-tip="Users">
 					<a
 						href="/dashboard/admin/users"
 						role="button"
@@ -149,7 +153,24 @@
 						class:btn-active={menu === 'admin_users'}
 						on:click={() => (menu = 'admin_users')}
 					>
-						<UsersIcon class="stroke-accent" />
+						<UsersIcon class="stroke-warning" />
+					</a>
+				</div>
+
+				<div class="divider" />
+			{/if}
+
+			{#if role === 'super'}
+				<!-- SUPERADMIN USERS -->
+				<div class="tooltip tooltip-right tooltip-accent" data-tip="Organizations">
+					<a
+						href="/dashboard/super/orgs"
+						role="button"
+						class="btn btn-square btn-ghost"
+						class:btn-active={menu === 'super_orgs'}
+						on:click={() => (menu = 'super_orgs')}
+					>
+						<ArchiveIcon class="stroke-accent" />
 					</a>
 				</div>
 
@@ -162,7 +183,8 @@
 			<div class="dropdown dropdown-right dropdown-end mb-4">
 				<!-- svelte-ignore a11y-label-has-associated-control -->
 				<label tabindex="0" class="btn btn-ghost btn-circle">
-					<UserIcon class={role === 'admin' ? 'stroke-accent' : ''} />
+					<!-- <UserIcon class={role === 'admin' ? 'stroke-accent' : ''} /> -->
+					<UserIcon class={role_color} />
 				</label>
 				<ul tabindex="0" class="dropdown-content menu w-max ml-2 p-3 bg-primary rounded-box">
 					<li>
@@ -198,7 +220,8 @@
 			<!-- USER -->
 			{#if $page.data.session.user}
 				<div class="px-5">
-					<div class={role === 'admin' ? 'text-accent' : ''}>
+					<!-- <div class={role === 'admin' ? 'text-accent' : ''}> -->
+					<div>
 						{$page.data.session.user.email}
 						{#if org}
 							({org})
@@ -230,9 +253,12 @@
 
 		<!-- CONTENT -->
 		<div class="w-full h-full p-5 overflow-auto">
-			{#if PUBLIC_DEMO_MODE=='true'}
-				{#if role == 'admin'}
-					<div class="alert alert-warning shadow-lg mb-5">
+			{#if PUBLIC_DEMO_MODE == 'true'}
+				{#if role != 'user'}
+					<div class="alert alert-warning shadow-lg mb-5"
+					class:bg-warning={role=='admin'}
+					class:bg-accent={role=='super'}
+					>
 						<div>
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
@@ -246,7 +272,7 @@
 									d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
 								/></svg
 							>
-							<span>You are an ADMIN!</span>
+							<span>You are {role.toUpperCase()}!</span>
 						</div>
 					</div>
 				{/if}

@@ -13,6 +13,5 @@
 	<div class="overflow-x-auto w-full scrollbar-thin scrollbar-thumb-gray-400 overflow-y-scroll">
 		
 	<UserTableAdmin users={data.users}/>
-
 	</div>
 </div>
