@@ -1,8 +1,14 @@
 import { error } from '@sveltejs/kit';
 import { supabaseClient } from '$lib/supabase';
 
-/** @type {import('./$types').PageServerLoad} */
-export async function load({ locals, params }) {
+import { page } from '$app/stores'
+
+/** @type {import('./$types').PageLoad} */
+export async function load({}) {
+
+  console.log(page.data.session)
+
+  // console.log(locals)
 
   const user_id = locals.session.user.id
   // console.log(user_id)

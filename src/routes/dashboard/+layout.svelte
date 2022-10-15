@@ -86,7 +86,7 @@
 						location.href = '/dashboard';
 					}}
 				>
-					<HomeIcon />
+					<HomeIcon/>
 				</a>
 			</div>
 

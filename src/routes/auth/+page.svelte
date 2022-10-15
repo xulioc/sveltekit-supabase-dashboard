@@ -46,6 +46,7 @@
 
 		<form method="post" use:enhance={handleSubmit}>
 			<div class="form-control">
+				<!-- svelte-ignore a11y-label-has-associated-control -->
 				<label class="label">
 					<span class="label-text">Email</span>
 				</label>
@@ -63,6 +64,7 @@
 			</div>
 
 			<div class="form-control">
+				<!-- svelte-ignore a11y-label-has-associated-control -->
 				<label class="label">
 					<span class="label-text">Password</span>
 				</label>
@@ -75,8 +77,10 @@
 					placeholder="password"
 					required
 				/>
+								<!-- svelte-ignore a11y-label-has-associated-control -->
+
 				<label class="label">
-					<a href="#" class="label-text-alt link link-hover">Forgot password?</a>
+					<a href="/" class="label-text-alt link link-hover">Forgot password?</a>
 				</label>
 			</div>
 			<div class="form-control mt-6">
