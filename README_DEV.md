@@ -1,5 +1,12 @@
 # SvelteKit Supabase Dashboard -- DEVELOPMENT
 
+## Demo mode
+You can enable/disable **demo mode** using the environment variable `PUBLIC_DEMO_MODE` in your `.env` file.
+```bash
+PUBLIC_DEMO_MODE="true" #ENABLE DEMO MODE
+```
+If **demo mode** is enabled you will see some hints in the dashboard and the database updates will be disabled.
+
 ## Organizations and Roles
 Multiple organizations and user roles are allowed using Supabase Custom Claims. 
 
@@ -30,6 +37,6 @@ There are three roles: `User`, `Admin` and `Super`.
 
 User can be created/deleted using Dashboard UI, if you are `Admin` or `Super`. If you are `Admin` you can create only users in your organization. `Super` can create users in any organization.
 
-![Users](/img/users.png)
+![Users](/img/create_user.png)
 
 
