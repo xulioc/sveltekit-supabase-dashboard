@@ -1,12 +1,20 @@
+
+
 # SvelteKit Supabase Dashboard (BETA)
 
 ![alt text](/img/dashboard.png)
 
 ---
 
+<p align="center">
+
+[![GitHub stars](https://img.shields.io/github/stars/xulioc/sveltekit-supabase-dashboard)](https://github.com/xulioc/sveltekit-supabase-dashboard/stargazers) [![GitHub issues](https://img.shields.io/github/issues/xulioc/sveltekit-supabase-dashboard)](https://github.com/xulioc/sveltekit-supabase-dashboard/issues) [![GitHub license](https://img.shields.io/github/license/xulioc/sveltekit-supabase-dashboard)](https://github.com/xulioc/sveltekit-supabase-dashboard/blob/main/LICENSE)
+
+</p>
+
 ## Simple dashboard inspired by Supabase UI made with [SvelteKit](https://kit.svelte.dev/) as frontend and  [Supabase](https://supabase.com/) as backend.
 
-**DISCLAIMER: This project is not production ready. Role based access is not fully tested. Use at your onw risk.**
+**DISCLAIMER: This project is not production ready. Role based access is not fully tested. Use at your own risk.**
 
 ## Demo
 
@@ -79,11 +87,11 @@ npm run preview
 ```
 
 ### Deploy
-This project uses Vercel adapter. Please follow instructions [here](https://vercel.com/guides/deploying-svelte-with-vercel)
+This project uses Vercel adapter. Please follow instructions [here](https://vercel.com/guides/deploying-svelte-with-vercel).
 
 
 ## Contribute
-Feel free to file issues and/or pull requests.
+Feel free to contribute. Issues and pull requests are welcome.
 
 ## License
 [MIT](https://github.com/xulioc/sveltekit-supabase-dashboard/blob/main/LICENSE)
