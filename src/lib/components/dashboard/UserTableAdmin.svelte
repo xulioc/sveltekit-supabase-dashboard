@@ -1,24 +1,28 @@
 <script lang="ts">
-  import Time from "svelte-time";
+	import Time from 'svelte-time';
+	import { TrashIcon } from 'svelte-feather-icons';
+	import type { AnyObject } from 'chart.js/types/basic';
+
 	export let users: Array<any>;
 	// console.log(users)
+
+	let current_user: AnyObject = {};
+
+	function updateUser(usr: AnyObject) : any{
+		// console.log(usr);
+		current_user = usr;
+		// console.log(current_user);
+	}
 </script>
 
 <table class="table w-full">
-	<!-- head -->
 	<thead>
 		<tr>
-			<!-- <th>
-				<label>
-					<input type="checkbox" class="checkbox" />
-				</label>
-			</th> -->
 			<th>email</th>
 			<th>organization</th>
 			<th>role</th>
 			<th>created</th>
 			<th>last sign in</th>
-			<!-- <th /> -->
 		</tr>
 	</thead>
 	<tbody>
@@ -40,18 +44,22 @@
 						{user.app_metadata.role}
 					</div>
 				</td>
-				
+
 				<td>
 					<Time timestamp={user.created_at} />
-					
 				</td>
 				<td>
-					<Time timestamp={user.last_sign_in_at}/>
-					
+					<Time timestamp={user.last_sign_in_at} />
 				</td>
-				<!-- <td>
-					<label for="user-modal" class="btn btn-primary btn-xs modal-button">details</label>
-				</td> -->
+				<td>
+					<label
+						on:click={updateUser(user)}
+						for="delete-modal"
+						class="btn btn-ghost btn-circle modal-button"
+					>
+						<TrashIcon class="stroke-warning" />
+					</label>
+				</td>
 			</tr>
 		{/each}
 	</tbody>
@@ -60,15 +68,17 @@
 </table>
 
 <!-- Put this part before </body> tag -->
-<!-- <input type="checkbox" id="user-modal" class="modal-toggle" />
+<input type="checkbox" id="delete-modal" class="modal-toggle" />
 <div class="modal">
-	<div class="modal-box w-11/12 max-w-5xl">
-		<h3 class="font-bold text-lg">Congratulations random Internet user!</h3>
-		<p class="py-4">
-			You've been selected for a chance to get one year of subscription to use Wikipedia for free!
-		</p>
-		<div class="modal-action">
-			<label for="user-modal" class="btn">Yay!</label>
-		</div>
+	<div class="modal-box">
+		<h3 class="font-bold text-lg">Are you sure?</h3>
+		<p class="py-4">You are going to delete <span class="font-bold">{current_user?.email}</span></p>
+		<form method="POST" action="?/delete">
+			<input name="user" value={current_user?.id} hidden />
+			<div class="modal-action">
+				<label for="delete-modal" class="btn">CANCEL</label>
+				<button class="btn btn-warning">DELETE</button>
+			</div>
+		</form>
 	</div>
-</div> -->
+</div>

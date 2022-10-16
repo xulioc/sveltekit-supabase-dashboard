@@ -4,7 +4,9 @@ import { error } from '@sveltejs/kit';
 /** @type {import('./$types').PageServerLoad} */
 export async function load() {
 
-    const { data: users } = await supabaseClient.auth.api.listUsers()
+    const { data: users, error: e } = await supabaseClient.auth.api.listUsers()
+
+    console.log(users, e)
 
     return {
         users: users
