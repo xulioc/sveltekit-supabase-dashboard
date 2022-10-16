@@ -8,10 +8,13 @@
 
 ## Simple dashboard inspired by Supabase UI made with [SvelteKit](https://kit.svelte.dev/) as frontend and  [Supabase](https://supabase.com/) as backend.
 
-**DISCLAIMER: This project is not production ready. Role based access is not fully tested. Use at your own risk.**
+<h3>
+<span style="color:red">
+DISCLAIMER: This project is not production ready. Role based access is not fully tested. Use at your own risk.
+</h3>
+</span>
 
 ## Demo
-
 Try different access roles and views [here](https://sveltekit-supabase-dashboard.vercel.app/).
 
 ## Features
@@ -36,8 +39,14 @@ Try different access roles and views [here](https://sveltekit-supabase-dashboard
 - [Vercel](https://vercel.com/) as deployment platform
 
 ## TODO
-- Improve docs
+- Improve development docs
 - Fix TypeScript issues
+- Add more chart views
+- Update supabase-js v2
+- User profiles
+- Light/Dark mode
+- Improve mobile navigation
+- PWA
  
 ## Installation
 ### Setup Supabase
@@ -83,9 +92,11 @@ npm run preview
 ### Deploy
 This project uses Vercel adapter. Please follow instructions [here](https://vercel.com/guides/deploying-svelte-with-vercel).
 
+## Development
+FInd more development details [here](https://github.com/xulioc/sveltekit-supabase-dashboard/blob/main/README_DEV.md).
 
 ## Contribute
-Feel free to contribute. Issues and pull requests are welcome.
+Feel free to contribute. Issues and Pull Requests are welcome.
 
 ## License
 [MIT](https://github.com/xulioc/sveltekit-supabase-dashboard/blob/main/LICENSE)
