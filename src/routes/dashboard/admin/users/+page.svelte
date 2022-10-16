@@ -5,17 +5,31 @@
 
 	/** @type {import('./$types').PageData} */
 	export let data;
-
 	// console.log(data);
+
+	/** @type {import('./$types').ActionData} */
+	export let form;
+	// console.log(form);
 
 	const role = $page.data.session.user.app_metadata.role;
 </script>
 
+{#if form}
+	<div class="toast toast-top z-10">
+		<div class="alert alert-success" class:alert-error={form.error}>
+			<div>
+				<span>{form.message}</span>
+			</div>
+		</div>
+	</div>
+{/if}
+
 <!-- The button to open modal -->
 <div class="flex justify-end">
 	<label for="add-user-modal" class="my-5 btn btn-warning">
-		<PlusIcon class="mr-2 h-4 w-4"/>
-		add user</label>
+		<PlusIcon class="mr-2 h-4 w-4" />
+		add user</label
+	>
 </div>
 
 <div class="card flex-col lg:flex-row bg-base-300 shadow-xl">
@@ -84,15 +98,19 @@
 						<span class="label-text">Role</span>
 					</label>
 					<select id="role" name="role" class="select select-bordered">
-							<option disabled selected>Select Role</option>
-							<option value="user">User</option>
-							<option value="admin">Admin</option>
+						<option disabled selected>Select Role</option>
+						<option value="user">User</option>
+						<option value="admin">Admin</option>
 					</select>
 				</div>
 			{/if}
 
 			<div class="form-control mt-6">
-				<button class="btn btn-primary btn-warning">SUBMIT</button>
+				<!-- {#if form}
+					<button class="btn loading btn-primary btn-warning" />
+				{:else} -->
+					<button class="btn btn-primary btn-warning">SUBMIT</button>
+				<!-- {/if} -->
 			</div>
 
 			<div class="form-control mt-6 modal-action">

@@ -75,7 +75,7 @@
 			<!-- <div class="divider my-2" /> -->
 
 			<!-- HOME -->
-			<div class="py-2 tooltip tooltip-right tooltip-primary" data-tip="Home">
+			<div class="py-2 tooltip tooltip-right" data-tip="Home">
 				<a
 					href="/dashboard"
 					role="button"
@@ -91,7 +91,7 @@
 			</div>
 
 			<!-- TABLES -->
-			<div class="py-2 tooltip tooltip-right tooltip-primary" data-tip="Tables">
+			<div class="py-2 tooltip tooltip-right" data-tip="Tables">
 				<a
 					href="/dashboard/tables"
 					role="button"
@@ -104,7 +104,7 @@
 			</div>
 
 			<!-- CHARTS -->
-			<div class="py-2 tooltip tooltip-right tooltip-primary" data-tip="Charts">
+			<div class="py-2 tooltip tooltip-right" data-tip="Charts">
 				<a
 					href="/dashboard/"
 					role="button"
@@ -117,7 +117,7 @@
 			</div>
 
 			<!-- PRODUCTS -->
-			<div class="py-2 tooltip tooltip-right tooltip-primary" data-tip="Products">
+			<div class="py-2 tooltip tooltip-right" data-tip="Products">
 				<a
 					href="/dashboard/products"
 					role="button"
@@ -130,7 +130,7 @@
 			</div>
 
 			<!-- USERS -->
-			<div class="py-2 tooltip tooltip-right tooltip-primary" data-tip="Users">
+			<div class="py-2 tooltip tooltip-right" data-tip="Users">
 				<a
 					href="/dashboard/users"
 					role="button"
