@@ -2,10 +2,15 @@
 
 ![alt text](/img/dashboard.png)
 
+---
 
+## Simple dashboard inspired by Supabase UI made with [SvelteKit](https://kit.svelte.dev/) as frontend and  [Supabase](https://supabase.com/) as backend.
 
+**DISCLAIMER: This project is not production ready. Role based access is not fully tested. Use at your onw risk.**
 
-Simple dashboard inspired by Supabase UI made with [SvelteKit](https://kit.svelte.dev/) as frontend and  [Supabase](https://supabase.com/) as backend.
+## Demo
+
+Try different access roles and views [here](https://sveltekit-supabase-dashboard.vercel.app/).
 
 ## Features
 - Supabase inspired UI
@@ -13,6 +18,7 @@ Simple dashboard inspired by Supabase UI made with [SvelteKit](https://kit.svelt
 - Role based access
 - User creation and deletion in dashboard UI
 - Tables & Charts demo views
+- Demo mode (show hints and disable database updates)
 
 
 ## Technologies
