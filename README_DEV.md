@@ -1,6 +1,6 @@
 # SvelteKit Supabase Dashboard -- DEVELOPMENT
 
-# Organizations and Roles
+## Organizations and Roles
 Multiple organizations and user roles are allowed using Supabase Custom Claims. 
 
 Custom Claims are special attributes attached to a user that you can use to control access to portions of your application. 
@@ -14,5 +14,22 @@ This may sound trivial, but this could have a significant effect on scalability 
 More info [here](https://github.com/supabase-community/supabase-custom-claims
 ) and [here](https://github.com/supabase/supabase/discussions/1148)
 
+### Organizations
+
+Currently there is no UI to create **organizations**. You must create them directly into the `orgs` table using Supabase UI. You can view organizations if you are `Super` user.
+
+![Organizations](/img/organizations.png)
+
+### Roles
+There are three roles: `User`, `Admin` and `Super`.
+- `User` is the standard user with no privilleges.
+- `Admin` is the organization admin. `Admin` can add user to organizations. `Admin` can also acess the routes `/dhasboard/admin/...`
+- `Super` is the superuser. `Super` can do everything and also access the routes `/dashboard/super/...`
+
+### Users
+
+User can be created/deleted using Dashboard UI, if you are `Admin` or `Super`. If you are `Admin` you can create only users in your organization. `Super` can create users in any organization.
+
+![Users](/img/users.png)
 
 
