@@ -1,16 +1,20 @@
 <script lang="ts">
 	import '../app.postcss';
 
-	// we need to make sure the supabase instance is initialized on the client
-	import '$lib/supabase';
-	import { startSupabaseSessionSync } from '@supabase/auth-helpers-sveltekit';
-	import { invalidateAll } from '$app/navigation';
-	import { page } from '$app/stores';
+	import { supabaseClient } from '$lib/supabase';
+	import { invalidate } from '$app/navigation';
+	import { onMount } from 'svelte';
 
-	// this sets up automatic token refreshing
-	startSupabaseSessionSync({
-		page,
-		handleRefresh: () => invalidateAll()
+	onMount(() => {
+		const {
+			data: { subscription }
+		} = supabaseClient.auth.onAuthStateChange(() => {
+			invalidate('supabase:auth');
+		});
+
+		return () => {
+			subscription.unsubscribe();
+		};
 	});
 </script>
 

@@ -1,9 +1,12 @@
-import { supabaseClient } from '$lib/supabase';
-import { invalid, redirect, Actions } from '@sveltejs/kit';
-import { saveSession } from '@supabase/auth-helpers-sveltekit/server';
+import { getSupabase } from '@supabase/auth-helpers-sveltekit';
+import { AuthApiError } from '@supabase/supabase-js';
+import { invalid, redirect, type ValidationError } from '@sveltejs/kit';
+import type { Actions } from './$types';
 
 export const actions: Actions = {
-	async default({ request, cookies, url }) {
+	async default(event): Promise<ValidationError<{ error: string; values?: { email: string } }>> {
+		const { request } = event;
+		const { supabaseClient } = await getSupabase(event);
 		const formData = await request.formData();
 
 		const email = formData.get('email') as string;
@@ -23,14 +26,12 @@ export const actions: Actions = {
 			});
 		}
 
-		const { data, error } = await supabaseClient.auth.api.signInWithEmail(email, password, {
-			redirectTo: `${url.origin}/logging-in`
-		});
+		const { error } = await supabaseClient.auth.signInWithPassword({ email, password });
 
-		if (error || !data) {
-			if (error?.status === 400) {
+		if (error) {
+			if (error instanceof AuthApiError && error.status === 400) {
 				return invalid(400, {
-					error: 'Invalid credentials',
+					error: 'Invalid credentials.',
 					values: {
 						email
 					}
@@ -44,7 +45,6 @@ export const actions: Actions = {
 			});
 		}
 
-		saveSession(cookies, data);
 		throw redirect(303, '/dashboard');
 	}
 };
