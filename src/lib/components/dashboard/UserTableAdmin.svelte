@@ -8,7 +8,7 @@
 
 	let current_user: AnyObject = {};
 
-	function updateUser(usr: AnyObject) : any{
+	function updateUser(usr: AnyObject): any {
 		// console.log(usr);
 		current_user = usr;
 		// console.log(current_user);
@@ -21,6 +21,7 @@
 			<th>email</th>
 			<th>organization</th>
 			<th>role</th>
+			<th>name</th>
 			<th>created</th>
 			<th>last sign in</th>
 		</tr>
@@ -43,6 +44,11 @@
 					>
 						{user.app_metadata.role}
 					</div>
+				</td>
+				<td>
+					{#if user.user_metadata.name}
+						{user.user_metadata.name}
+					{/if}
 				</td>
 
 				<td>
