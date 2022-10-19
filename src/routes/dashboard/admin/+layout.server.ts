@@ -1,8 +1,10 @@
 import type { LayoutServerLoad } from './$types';
-import { withAuth } from '@supabase/auth-helpers-sveltekit';
+import { getSupabase } from '@supabase/auth-helpers-sveltekit';
 import { redirect } from '@sveltejs/kit';
 
-export const load:LayoutServerLoad = withAuth((async ({ session }) => {
+export const load:LayoutServerLoad = async (event) => {
+
+    const { session, supabaseClient } = await getSupabase(event);
 
     if (!session) {
         console.log("SESSION NOT FOUND")
@@ -21,4 +23,4 @@ export const load:LayoutServerLoad = withAuth((async ({ session }) => {
         throw redirect(303, '/dashboard');
     }
 
-}));
+};

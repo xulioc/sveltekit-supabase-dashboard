@@ -1,8 +1,10 @@
 import type { LayoutServerLoad } from './$types';
-import { withAuth } from '@supabase/auth-helpers-sveltekit';
-import { redirect, error } from '@sveltejs/kit';
+import { getSupabase } from '@supabase/auth-helpers-sveltekit';
+import { redirect } from '@sveltejs/kit';
 
-export const load:LayoutServerLoad = withAuth((async ({ session }) => {
+export const load:LayoutServerLoad = async (event) => {
+
+    const { session, supabaseClient } = await getSupabase(event);
 
     if (!session) {
         console.log("SESSION NOT FOUND")
@@ -18,7 +20,8 @@ export const load:LayoutServerLoad = withAuth((async ({ session }) => {
 
     if (session.user.app_metadata.role !== 'super') {
         console.log("UNAUTHORIZED")
-        throw error(403, 'UNAUTHORIZED');
+        throw redirect(303, '/dashboard');
     }
 
-}));
+};
+
