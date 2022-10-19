@@ -1,4 +1,13 @@
--- CREATE DEMO USERS (USER AND ADMIN)
+-- CREATE DEMO ORGS
+DELETE FROM orgs;
+INSERT INTO
+  orgs (id, name)
+VALUES
+  (1, 'ACME'), (2, 'POPCORN');
+
+
+-- CREATE DEMO USERS
+DELETE FROM auth.users;
 INSERT INTO
   auth.users (
     id,
@@ -40,7 +49,7 @@ VALUES
     '',
     '',
     ''
-  ), 
+  ),
   (
     gen_random_uuid(),
     '00000000-0000-0000-0000-000000000000',
@@ -61,7 +70,7 @@ VALUES
     '',
     ''
   ),
-   (
+  (
     gen_random_uuid(),
     '00000000-0000-0000-0000-000000000000',
     'authenticated',
