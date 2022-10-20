@@ -18,12 +18,17 @@
 	import { page, navigating } from '$app/stores';
 
 	import { applyAction, enhance, type SubmitFunction } from '$app/forms';
-	import { invalidateAll } from '$app/navigation';
+	import { invalidate } from '$app/navigation';
+
+	// console.log("LAYOUT...")
 
 	const logout: SubmitFunction = () => {
 		return async ({ result }) => {
-			await invalidateAll();
-			applyAction(result);
+			if (result.type === 'redirect') {
+				await invalidate('supabase:auth');
+			} else {
+				await applyAction(result);
+			}
 		};
 	};
 
@@ -37,7 +42,6 @@
 	if (role === 'super') role_color = 'stroke-accent';
 
 	// console.log(role);
-
 	// console.log(PUBLIC_DEMO_MODE);
 </script>
 

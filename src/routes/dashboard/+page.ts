@@ -1,7 +1,14 @@
-import { error } from '@sveltejs/kit';
+import type { PageLoad } from './$types';
+import { redirect } from '@sveltejs/kit';
+import { getSupabase } from '@supabase/auth-helpers-sveltekit';
 
-/** @type {import('./$types').PageLoad} */
-export async function load({ fetch }) {
+export const load: PageLoad = async (event) => {
+	const { session } = await getSupabase(event);
+	if (!session) {
+		throw redirect(303, '/');
+	}
+
+    // console.log("PAGE LOAD...")
 
     const ip_api_result = await fetch("https://ipapi.co/json")
     const location = await ip_api_result.json()
@@ -18,5 +25,4 @@ export async function load({ fetch }) {
         weather: weather
     }
 
-    // throw error(404, 'Not found');
-}
+};

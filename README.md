@@ -42,8 +42,8 @@ Try different access roles and views [here](https://sveltekit-supabase-dashboard
 - Improve development docs
 - Fix TypeScript issues
 - Add more chart views
-- Update supabase-js v2
-- User profiles
+- ~~Update supabase-js v2~~
+- ~~User profiles~~
 - Light/Dark mode
 - Improve mobile navigation
 - PWA
