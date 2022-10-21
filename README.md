@@ -44,7 +44,7 @@ Try different access roles and views [here](https://sveltekit-supabase-dashboard
 - Add more chart views
 - ~~Update supabase-js v2~~
 - ~~User profiles~~
-- Light/Dark mode
+- ~~Light/Dark mode~~
 - Improve mobile navigation
 - PWA
  
