@@ -51,6 +51,7 @@
 		"svelte-markdown": "^0.2.3",
 		"svelte-table": "^0.5.1",
 		"svelte-time": "^0.7.1",
-		"tailwind-scrollbar": "^2.0.1"
+		"tailwind-scrollbar": "^2.0.1",
+		"theme-change": "^2.2.0"
 	}
 }
