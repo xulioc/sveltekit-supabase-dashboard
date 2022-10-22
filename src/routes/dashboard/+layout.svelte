@@ -12,18 +12,34 @@
 		SettingsIcon,
 		BellIcon,
 		RadioIcon,
-		ArchiveIcon
+		ArchiveIcon,
+		SunIcon,
+		MoonIcon
 	} from 'svelte-feather-icons';
 	import { Jumper, Square } from 'svelte-loading-spinners';
 	import { page, navigating } from '$app/stores';
 
 	import { applyAction, enhance, type SubmitFunction } from '$app/forms';
-	import { invalidateAll } from '$app/navigation';
+	import { invalidate } from '$app/navigation';
+
+	import { onMount } from 'svelte';
+	import { themeChange } from 'theme-change';
+
+	// NOTE: the element that is using one of the theme attributes must be in the DOM on mount
+	onMount(() => {
+		themeChange(false);
+		// 👆 false parameter is required for svelte
+	});
+
+	// console.log("LAYOUT...")
 
 	const logout: SubmitFunction = () => {
 		return async ({ result }) => {
-			await invalidateAll();
-			applyAction(result);
+			if (result.type === 'redirect') {
+				await invalidate('supabase:auth');
+			} else {
+				await applyAction(result);
+			}
 		};
 	};
 
@@ -37,7 +53,6 @@
 	if (role === 'super') role_color = 'stroke-accent';
 
 	// console.log(role);
-
 	// console.log(PUBLIC_DEMO_MODE);
 </script>
 
@@ -86,7 +101,7 @@
 						location.href = '/dashboard';
 					}}
 				>
-					<HomeIcon/>
+					<HomeIcon />
 				</a>
 			</div>
 
@@ -230,6 +245,17 @@
 				</div>
 			{/if}
 
+			<!-- THEME CHANGE -->
+			<div class="flex-none mx-3">
+				<label class="btn btn-ghost btn-circle swap swap-rotate">
+					<!-- this hidden checkbox controls the state -->
+					<input data-toggle-theme="business, light" data-act-class="ACTIVECLASS" type="checkbox" />
+					<MoonIcon class="swap-on fill-current" />
+					<SunIcon class="swap-off fill-curren" />
+				</label>
+			</div>
+
+			<!-- ALERTS  -->
 			<div class="flex-none">
 				<div class="dropdown dropdown-end">
 					<!-- svelte-ignore a11y-label-has-associated-control -->
@@ -255,9 +281,10 @@
 		<div class="w-full h-full p-5 overflow-auto">
 			{#if PUBLIC_DEMO_MODE == 'true'}
 				{#if role != 'user'}
-					<div class="alert alert-warning shadow-lg mb-5"
-					class:bg-warning={role=='admin'}
-					class:bg-accent={role=='super'}
+					<div
+						class="alert alert-warning shadow-lg mb-5"
+						class:bg-warning={role == 'admin'}
+						class:bg-accent={role == 'super'}
 					>
 						<div>
 							<svg

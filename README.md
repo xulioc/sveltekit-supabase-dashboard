@@ -42,9 +42,9 @@ Try different access roles and views [here](https://sveltekit-supabase-dashboard
 - Improve development docs
 - Fix TypeScript issues
 - Add more chart views
-- Update supabase-js v2
-- User profiles
-- Light/Dark mode
+- ~~Update supabase-js v2~~
+- ~~User profiles~~
+- ~~Light/Dark mode~~
 - Improve mobile navigation
 - PWA
  
@@ -93,7 +93,7 @@ npm run preview
 This project uses Vercel adapter. Please follow instructions [here](https://vercel.com/guides/deploying-svelte-with-vercel).
 
 ## Development
-FInd more development details [here](https://github.com/xulioc/sveltekit-supabase-dashboard/blob/main/README_DEV.md).
+Find more development details [here](https://github.com/xulioc/sveltekit-supabase-dashboard/blob/main/README_DEV.md).
 
 ## Contribute
 Feel free to contribute. Issues and Pull Requests are welcome.

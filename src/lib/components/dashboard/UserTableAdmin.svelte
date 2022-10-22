@@ -2,13 +2,14 @@
 	import Time from 'svelte-time';
 	import { TrashIcon } from 'svelte-feather-icons';
 	import type { AnyObject } from 'chart.js/types/basic';
+	import RoleBadge from '$lib/components/dashboard/RoleBadge.svelte';
 
 	export let users: Array<any>;
 	// console.log(users)
 
 	let current_user: AnyObject = {};
 
-	function updateUser(usr: AnyObject) : any{
+	function updateUser(usr: AnyObject): any {
 		// console.log(usr);
 		current_user = usr;
 		// console.log(current_user);
@@ -21,6 +22,7 @@
 			<th>email</th>
 			<th>organization</th>
 			<th>role</th>
+			<th>name</th>
 			<th>created</th>
 			<th>last sign in</th>
 		</tr>
@@ -35,14 +37,20 @@
 					{user.app_metadata.org}
 				</td>
 				<td>
-					<div
+					<RoleBadge role={user.app_metadata.role}/>
+					<!-- <div
 						class="badge"
 						class:badge-secondary={user.app_metadata.role === 'user'}
 						class:badge-warning={user.app_metadata.role === 'admin'}
 						class:badge-accent={user.app_metadata.role === 'super'}
 					>
 						{user.app_metadata.role}
-					</div>
+					</div> -->
+				</td>
+				<td>
+					{#if user.user_metadata.name}
+						{user.user_metadata.name}
+					{/if}
 				</td>
 
 				<td>

@@ -51,6 +51,7 @@
 					<span class="label-text">Email</span>
 				</label>
 				<input
+					autocomplete="username"
 					id="email"
 					name="email"
 					value={form?.values?.email ?? ''}
@@ -70,6 +71,7 @@
 				</label>
 				<!-- <input type="text" placeholder="password" class="input input-bordered" /> -->
 				<input
+					autocomplete="current-password"
 					id="password"
 					name="password"
 					class="input input-bordered"

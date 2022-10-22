@@ -1,41 +1,54 @@
 <script>
-	import { supabaseClient } from '$lib/supabase';
-	import { page } from '$app/stores';
+	import RoleBadge from '$lib/components/dashboard/RoleBadge.svelte';
 
-	// export const prerender = false
-	// export const ssr = false
+	/** @type {import('./$types').PageData} */
+	export let data;
+	// console.log(data);
 
-	// console.log($page.data.session);
-
-	let user=[]
-
-	async function loadUser(id) {
-		const { data, error } = await supabaseClient.from('profiles').select().eq('id', id).single();
-		// console.log(data,error)
-		user=data
-		console.log(user)
-	}
-
-	$: if ($page.data.session.user) {
-		loadUser($page.data.session.user.id)
-  	}
-
+	const user = data.session?.user;
 </script>
 
-{#if $page.data.session.user}
+<form class="w-full max-w-sm" method="POST" action="?/save">
+	<div class="md:flex md:items-center mb-6 form-control">
+		<label class="input-group">
+			<span class="md:w-1/3 mr-1">Email</span>
+			<input type="text" 
+				value={user?.email} 
+				disabled 
+				class="input input-bordered md:w-2/3 " />
+		</label>
 
-<div>
-	{user.username}
-</div>
+		<label class="input-group pt-2">
+			<span class="md:w-1/3 mr-1">Organization</span>
+			<input
+				type="text"
+				value={user?.app_metadata.org}
+				disabled
+				class="input input-bordered md:w-2/3 "
+			/>
+		</label>
 
-<div>
-	{$page.data.session.user.email}
-</div>
+		<label class="input-group pt-2">
+			<span class="md:w-1/3 mr-1">Role</span>
+			<input
+				type="text"
+				value={user?.app_metadata.role}
+				disabled
+				class="input input-bordered md:w-2/3"
+			/>
 
-<div>
-	{$page.data.session.user.app_metadata.org} ({$page.data.session.user.app_metadata.role})
-</div>
+		</label>
 
+		<label class="input-group pt-2 pb-5">
+			<span class="md:w-1/3 mr-1">User Name</span>
+			<input
+				type="text"
+				name="user_name"
+				value={user?.user_metadata.name}
+				class="input input-bordered md:w-2/3"
+			/>
+		</label>
 
-	
-{/if}
+		<input type="submit" value="SAVE" class="btn btn-primary w-full" />
+	</div>
+</form>
