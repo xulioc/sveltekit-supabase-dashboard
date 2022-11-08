@@ -6,6 +6,8 @@ import { supabaseAdminClient as supabaseClient } from '$lib/server/supabase';
 import { error, invalid } from '@sveltejs/kit';
 // import { redirect } from '@sveltejs/kit';
 
+import { PUBLIC_DEMO_MODE } from '$env/static/public';
+
 
 export const load: PageServerLoad = async (event) => {
 
@@ -71,6 +73,10 @@ export const actions: Actions = {
     },
 
     delete: async (event) => {
+
+        if (PUBLIC_DEMO_MODE=='true'){
+            return { error: true, message: "USER DELETION DISABLED IN DEMO MODE!" }
+        }
 
         const form_data = await event.request.formData();
         const user = form_data.get('user');
