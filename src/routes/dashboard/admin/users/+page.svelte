@@ -49,6 +49,7 @@
 					<span class="label-text">Email</span>
 				</label>
 				<input
+					autocomplete="username"
 					id="email"
 					name="email"
 					class="input input-bordered"
