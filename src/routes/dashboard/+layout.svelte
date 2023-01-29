@@ -22,6 +22,7 @@
 	import { invalidate } from '$app/navigation';
 
 	import DemoUserNotice from '$lib/components/DemoMode/DemoUserNotice.svelte';
+	import { Toast } from '$lib/components/Toast';
 	import { onMount } from 'svelte';
 	import { themeChange } from 'theme-change';
 
@@ -57,6 +58,8 @@
 </script>
 
 <section id="body" class="flex flex-row h-screen">
+	<Toast />
+
 	<!-- LEFT MENU -->
 	<!-- <div class="flex flex-col w-full"></div> -->
 	<div class="flex flex-col h-full border-r border-opacity-10 border-base-content z-50">
