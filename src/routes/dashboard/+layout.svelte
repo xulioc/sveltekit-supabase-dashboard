@@ -197,10 +197,12 @@
 			<!-- USER  -->
 			<div class="dropdown dropdown-right dropdown-end mb-4">
 				<!-- svelte-ignore a11y-label-has-associated-control -->
+				<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
 				<label tabindex="0" class="btn btn-ghost btn-circle">
 					<!-- <UserIcon class={role === 'admin' ? 'stroke-accent' : ''} /> -->
 					<UserIcon class={role_color} />
 				</label>
+				<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
 				<ul tabindex="0" class="dropdown-content menu w-max ml-2 p-3 bg-primary rounded-box">
 					<li>
 						<div class="flex flex-row">
@@ -259,12 +261,14 @@
 			<div class="flex-none">
 				<div class="dropdown dropdown-end">
 					<!-- svelte-ignore a11y-label-has-associated-control -->
+					<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
 					<label tabindex="0" class="btn btn-ghost btn-circle">
 						<div class="indicator">
 							<BellIcon />
 							<span class="badge bg-accent indicator-item" />
 						</div>
 					</label>
+					<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
 					<div tabindex="0" class="mt-3 card card-compact dropdown-content w-52 bg-base-100 shadow">
 						<div class="card-body">
 							<span class="font-bold text-lg">8 Items</span>

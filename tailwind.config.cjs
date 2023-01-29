@@ -1,7 +1,3 @@
-const tailwind_typography = require('@tailwindcss/typography');
-const daisyui = require('daisyui');
-const tailwind_scrollbar = require('tailwind-scrollbar');
-
 const config = {
 	content: ['./src/**/*.{html,js,svelte,ts}'],
 
@@ -9,7 +5,11 @@ const config = {
 		extend: {}
 	},
 
-	plugins: [tailwind_typography, tailwind_scrollbar, daisyui],
+	plugins: [
+		require('@tailwindcss/typography'),
+		require('daisyui'),
+		require('tailwind-scrollbar'),
+	],
 	
 	daisyui: {
 		themes: ["light", "dark", "black", "business" ]},
