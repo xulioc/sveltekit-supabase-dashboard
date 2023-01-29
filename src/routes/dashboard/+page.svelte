@@ -2,8 +2,13 @@
 	// import { browser } from '$app/environment';
 
 	import WeatherChart from '$lib/components/dashboard/WeatherChart.svelte';
+	import { toast } from '$lib/components/Toast';
 	/** @type {import('./$types').PageData} */
 	export let data;
+
+	const action = () => {
+		toast.push('TOAST!', { classes: ['alert-success'] });
+	};
 </script>
 
 <svelte:head>
@@ -45,7 +50,7 @@ ADMIN
 			<div class="stat-title">You are in</div>
 			<div class="stat-value">{data.location.region} ({data.location.country_name})</div>
 			<div class="stat-actions">
-				<button class="btn btn-sm btn-success">Yes I DO!</button>
+				<button on:click={action} class="btn btn-sm btn-success">Yes I DO!</button>
 			</div>
 		</div>
 

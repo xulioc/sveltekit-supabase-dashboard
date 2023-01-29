@@ -12,10 +12,7 @@
 	<div class="md:flex md:items-center mb-6 form-control">
 		<label class="input-group">
 			<span class="md:w-1/3 mr-1">Email</span>
-			<input type="text" 
-				value={user?.email} 
-				disabled 
-				class="input input-bordered md:w-2/3 " />
+			<input type="text" value={user?.email} disabled class="input input-bordered md:w-2/3 " />
 		</label>
 
 		<label class="input-group pt-2">
@@ -36,7 +33,6 @@
 				disabled
 				class="input input-bordered md:w-2/3"
 			/>
-
 		</label>
 
 		<label class="input-group pt-2 pb-5">

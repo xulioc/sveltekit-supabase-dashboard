@@ -5,14 +5,11 @@ const config = {
 		extend: {}
 	},
 
-	plugins: [
-		require('@tailwindcss/typography'),
-		require('daisyui'),
-		require('tailwind-scrollbar'),
-	],
-	
+	plugins: [require('@tailwindcss/typography'), require('daisyui'), require('tailwind-scrollbar')],
+
 	daisyui: {
-		themes: ["light", "dark", "black", "business" ]},
+		themes: ['light', 'dark', 'black', 'business']
+	}
 };
 
 module.exports = config;
