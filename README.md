@@ -90,7 +90,7 @@ npm run preview
 ```
 
 ### Deploy
-This project uses Vercel adapter. Please follow instructions [here](https://vercel.com/guides/deploying-svelte-with-vercel).
+To deploy to Vercel please follow instructions [here](https://vercel.com/guides/deploying-svelte-with-vercel).
 
 ## Development
 Find more development details [here](https://github.com/xulioc/sveltekit-supabase-dashboard/blob/main/README_DEV.md).
