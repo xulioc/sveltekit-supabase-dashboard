@@ -4,6 +4,10 @@ import type { UserConfig } from 'vite';
 const config: UserConfig = {
 	plugins: [sveltekit()],
 
+	test: {
+		include: ['src/**/*.{test,spec}.{js,ts}']
+	},
+
 	// ALLOW VITE SERVE README.md
 	// https://vitejs.dev/config/server-options.html#server-fs-allow
 	server: {

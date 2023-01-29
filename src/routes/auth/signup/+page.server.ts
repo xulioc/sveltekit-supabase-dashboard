@@ -1,21 +1,22 @@
 import { supabaseClient } from '$lib/supabase';
-import { invalid } from '@sveltejs/kit';
 import type { Actions } from './$types';
+import { fail } from '@sveltejs/kit';
 
-export const actions: Actions = {
-	async default({ request, url }) {
+export const actions = {
+	default: async({ request, url }) => {
+	// async default({ request, url }) {
 		const formData = await request.formData();
 
 		const email = formData.get('email') as string;
 		const password = formData.get('password') as string;
 
 		if (!email) {
-			return invalid(400, {
+			return fail(400, {
 				error: 'Please enter your email'
 			});
 		}
 		if (!password) {
-			return invalid(400, {
+			return fail(400, {
 				error: 'Please enter a password'
 			});
 		}
@@ -26,15 +27,15 @@ export const actions: Actions = {
 
 		if (error || !data) {
 			if (error?.status === 400) {
-				return invalid(400, {
-					error: 'Invalid credentials'
+				return fail(400, {
+					error: 'invalid credentials'
 				});
 			}
-			return invalid(500, {
+			return fail(500, {
 				error: 'Server error. Try again later.'
 			});
 		}
 
 		return { success: true };
 	}
-};
+} satisfies Actions;
