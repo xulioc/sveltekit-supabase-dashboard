@@ -1,4 +1,4 @@
-<script lang ts>
+<script lang="ts">
 	import SvelteTable from 'svelte-table';
 	export let products: Array<any>;
 

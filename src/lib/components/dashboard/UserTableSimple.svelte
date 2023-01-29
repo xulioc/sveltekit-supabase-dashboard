@@ -1,4 +1,4 @@
-<script lang ts>
+<script lang="ts">
 	export let users: Array<any>;
 </script>
 
