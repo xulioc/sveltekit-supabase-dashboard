@@ -1,6 +1,6 @@
-import type { LayoutServerLoad } from './$types';
 import { getSupabase } from '@supabase/auth-helpers-sveltekit';
 import { redirect } from '@sveltejs/kit';
+import type { LayoutServerLoad } from './$types';
 
 export const load: LayoutServerLoad = async (event) => {
 	const { session, supabaseClient } = await getSupabase(event);
@@ -14,8 +14,6 @@ export const load: LayoutServerLoad = async (event) => {
 		console.log('USER NOT FOUND');
 		throw redirect(303, '/');
 	}
-
-	// console.log(session.user.app_metadata)
 
 	if (session.user.app_metadata.role !== 'super') {
 		console.log('UNAUTHORIZED');

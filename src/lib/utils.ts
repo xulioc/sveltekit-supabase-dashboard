@@ -36,8 +36,8 @@ export const myRole = (session: Session | null) => {
     return session?.user.app_metadata.role ?? null;
 }
 
-export const imSuper = (user: User) => {
-    if (['super'].includes(user.app_metadata.role))
+export const imSuper = (user: User | null) => {
+    if (['super'].includes(user?.app_metadata.role))
         return true;
     else return false;
 }
