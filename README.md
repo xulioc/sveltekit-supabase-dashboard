@@ -72,7 +72,7 @@ PRIVATE_SUPABASE_SERVICE_KEY="YOUR PROJECT SERVICE KEY"
 ```
 
 ### Initialize database
-Execute `init_databse.sql` and `init_demo_data.sql` in Supabase SQL Editor.
+Execute `sql/init_databse.sql` and `sql/init_demo_data.sql` in Supabase SQL Editor.
 
 ### Install & run
 
