@@ -1,50 +1,62 @@
 import { getSupabase } from '@supabase/auth-helpers-sveltekit';
 import { AuthApiError } from '@supabase/supabase-js';
 import { fail, redirect } from '@sveltejs/kit';
-import type { Actions } from './$types';
+import type { Actions, PageServerLoad } from './$types';
 
-export const actions = {
-	default: async (event) => {
-		const { request } = event;
-		const { supabaseClient } = await getSupabase(event);
-		const formData = await request.formData();
+export const load: PageServerLoad = async (event) => {
+	const { session } = await getSupabase(event);
+	if (session?.user) {
+		throw redirect(303, '/dashboard');
+	}
+}
 
-		const email = formData.get('email') as string;
-		const password = formData.get('password') as string;
+// https://supabase.com/docs/guides/auth/auth-helpers/sveltekit#saving-and-deleting-the-session
 
-		if (!email) {
-			return fail(400, {
-				error: 'Please enter your email'
-			});
-		}
-		if (!password) {
-			return fail(400, {
-				error: 'Please enter your password',
-				values: {
-					email
-				}
-			});
-		}
+export const actions: Actions = {
 
-		const { error } = await supabaseClient.auth.signInWithPassword({ email, password });
+	signin: async (event) => {
+
+		const { supabaseClient } = await getSupabase(event)
+		const formData = await event.request.formData()
+		const email = formData.get('email') as string
+		const password = formData.get('password') as string
+		const to = formData.get('to') as string
+
+
+		const { error } = await supabaseClient.auth.signInWithPassword({
+			email,
+			password,
+		})
 
 		if (error) {
 			if (error instanceof AuthApiError && error.status === 400) {
 				return fail(400, {
-					error: 'fail credentials.',
+					error: 'Invalid credentials.',
 					values: {
-						email
-					}
-				});
+						email,
+					},
+				})
 			}
 			return fail(500, {
 				error: 'Server error. Try again later.',
 				values: {
-					email
-				}
-			});
+					email,
+				},
+			})
 		}
 
-		throw redirect(303, '/dashboard');
-	}
-}satisfies Actions;
+
+
+		if (to) {
+			throw redirect(303, to)
+		} else {
+			throw redirect(303, '/dashboard')
+		}
+	},
+
+	signout: async (event) => {
+		const { supabaseClient } = await getSupabase(event)
+		await supabaseClient.auth.signOut()
+		throw redirect(303, '/')
+	},
+};
