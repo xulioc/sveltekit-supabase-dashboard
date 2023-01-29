@@ -8,55 +8,50 @@ export const load: PageServerLoad = async (event) => {
 	if (session?.user) {
 		throw redirect(303, '/dashboard');
 	}
-}
+};
 
 // https://supabase.com/docs/guides/auth/auth-helpers/sveltekit#saving-and-deleting-the-session
 
 export const actions: Actions = {
-
 	signin: async (event) => {
-
-		const { supabaseClient } = await getSupabase(event)
-		const formData = await event.request.formData()
-		const email = formData.get('email') as string
-		const password = formData.get('password') as string
-		const to = formData.get('to') as string
-
+		const { supabaseClient } = await getSupabase(event);
+		const formData = await event.request.formData();
+		const email = formData.get('email') as string;
+		const password = formData.get('password') as string;
+		const to = formData.get('to') as string;
 
 		const { error } = await supabaseClient.auth.signInWithPassword({
 			email,
-			password,
-		})
+			password
+		});
 
 		if (error) {
 			if (error instanceof AuthApiError && error.status === 400) {
 				return fail(400, {
 					error: 'Invalid credentials.',
 					values: {
-						email,
-					},
-				})
+						email
+					}
+				});
 			}
 			return fail(500, {
 				error: 'Server error. Try again later.',
 				values: {
-					email,
-				},
-			})
+					email
+				}
+			});
 		}
 
-
-
 		if (to) {
-			throw redirect(303, to)
+			throw redirect(303, to);
 		} else {
-			throw redirect(303, '/dashboard')
+			throw redirect(303, '/dashboard');
 		}
 	},
 
 	signout: async (event) => {
-		const { supabaseClient } = await getSupabase(event)
-		await supabaseClient.auth.signOut()
-		throw redirect(303, '/')
-	},
+		const { supabaseClient } = await getSupabase(event);
+		await supabaseClient.auth.signOut();
+		throw redirect(303, '/');
+	}
 };

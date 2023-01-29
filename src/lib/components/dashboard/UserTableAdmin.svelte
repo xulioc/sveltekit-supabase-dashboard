@@ -37,7 +37,7 @@
 					{user.app_metadata.org}
 				</td>
 				<td>
-					<RoleBadge role={user.app_metadata.role}/>
+					<RoleBadge role={user.app_metadata.role} />
 					<!-- <div
 						class="badge"
 						class:badge-secondary={user.app_metadata.role === 'user'}

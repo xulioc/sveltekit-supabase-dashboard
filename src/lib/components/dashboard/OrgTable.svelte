@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Time from "svelte-time";
+	import Time from 'svelte-time';
 	export let orgs: Array<any>;
 </script>
 
@@ -19,12 +19,12 @@
 				<!-- <td>{org.id}</td> -->
 				<td>
 					{#if org.logo}
-					<img alt={org.name} src={org.logo} width="30" height="30"/>
+						<img alt={org.name} src={org.logo} width="30" height="30" />
 					{/if}
 				</td>
 				<td>{org.name.toUpperCase()}</td>
-				<td><Time timestamp={org.created_at}/></td>
-				<td><Time timestamp={org.updated_at}/></td>
+				<td><Time timestamp={org.created_at} /></td>
+				<td><Time timestamp={org.updated_at} /></td>
 			</tr>
 		{/each}
 	</tbody>

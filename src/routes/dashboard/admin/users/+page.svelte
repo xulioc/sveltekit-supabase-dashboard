@@ -111,7 +111,7 @@
 				<!-- {#if form}
 					<button class="btn loading btn-primary btn-warning" />
 				{:else} -->
-					<button class="btn btn-primary btn-warning">SUBMIT</button>
+				<button class="btn btn-primary btn-warning">SUBMIT</button>
 				<!-- {/if} -->
 			</div>
 

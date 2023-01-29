@@ -7,11 +7,8 @@
 	// console.log(data)
 </script>
 
-
 <div class="card flex-col lg:flex-row bg-base-300 shadow-xl">
-
 	<div class="overflow-x-auto w-full scrollbar-thin scrollbar-thumb-gray-400 overflow-y-scroll">
-		
-	<UserTableAdmin users={data.users}/>
+		<UserTableAdmin users={data.users} />
 	</div>
 </div>

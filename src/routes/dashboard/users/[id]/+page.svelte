@@ -1,7 +1,7 @@
 <script>
 	import UserTableSimple from '$lib/components/dashboard/UserTableAdmin.svelte';
 	import UserTableAdvanced from '$lib/components/dashboard/UserTableAdvanced.svelte';
-	
+
 	/** @type {import('./$types').PageData} */
 	export let data;
 </script>
@@ -25,8 +25,6 @@
 				<span>User data fetched from https://dummyjson.com/users</span>
 			</div>
 		</div>
-
-		
 
 		<UserTableSimple users={data.users} />
 		<!-- <UserTableAdvanced users={data.users} /> -->
