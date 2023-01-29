@@ -60,6 +60,7 @@
 					<Time timestamp={user.last_sign_in_at} />
 				</td>
 				<td>
+					<!-- svelte-ignore a11y-click-events-have-key-events -->
 					<label
 						on:click={updateUser(user)}
 						for="delete-modal"
