@@ -8,3 +8,5 @@ node_modules
 !.env.example
 *.Identifier
 .vercel
+vite.config.js.timestamp-*
+vite.config.ts.timestamp-*

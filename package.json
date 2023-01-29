@@ -48,7 +48,6 @@
 		"@supabase/supabase-js": "^2.5.0",
 		"chart.js": "^4.2.0",
 		"chartjs-adapter-date-fns": "^3.0.0",
-		"chartjs-plugin-crosshair": "^1.2.0",
 		"date-fns": "^2.29.3",
 		"svelte-chartjs": "^3.1.2",
 		"svelte-markdown": "^0.2.3",

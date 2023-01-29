@@ -10,13 +10,13 @@ const config: UserConfig = {
 
 	// ALLOW VITE SERVE README.md
 	// https://vitejs.dev/config/server-options.html#server-fs-allow
-	server: {
-		fs: {
-			allow: [
-				// '/README.md',
-			]
-		}
-	},
+	// server: {
+	// 	fs: {
+	// 		allow: [
+	// 			// '/README.md',
+	// 		]
+	// 	}
+	// },
 
 	// PREVENT CHARTS.JS ERROR
 	// ssr: {

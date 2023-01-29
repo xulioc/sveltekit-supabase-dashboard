@@ -12,7 +12,6 @@ specifiers:
   autoprefixer: ^10.4.13
   chart.js: ^4.2.0
   chartjs-adapter-date-fns: ^3.0.0
-  chartjs-plugin-crosshair: ^1.2.0
   daisyui: ^2.49.0
   date-fns: ^2.29.3
   eslint: ^8.33.0
@@ -44,7 +43,6 @@ dependencies:
   '@supabase/supabase-js': 2.5.0
   chart.js: 4.2.0
   chartjs-adapter-date-fns: 3.0.0_n6szoxj4ax2zhp2sxsxxj6zdla
-  chartjs-plugin-crosshair: 1.2.0_chart.js@4.2.0
   date-fns: 2.29.3
   svelte-chartjs: 3.1.2_sb7g7nvzgbbexijgaje6yhompe
   svelte-markdown: 0.2.3_svelte@3.55.1
@@ -887,14 +885,6 @@ packages:
     dependencies:
       chart.js: 4.2.0
       date-fns: 2.29.3
-    dev: false
-
-  /chartjs-plugin-crosshair/1.2.0_chart.js@4.2.0:
-    resolution: {integrity: sha512-yohsbME+wT1ODBdErBzWnC6xUDcn2tLeWmGjGDTykjpiT7+FMgibffajxqaCVmdzselxNPirpt76vx33EewSSQ==}
-    peerDependencies:
-      chart.js: ^3.4.0
-    dependencies:
-      chart.js: 4.2.0
     dev: false
 
   /check-error/1.0.2:
