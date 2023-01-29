@@ -6,7 +6,11 @@ const config: UserConfig = {
 
 	test: {
 		include: ['src/**/*.{test,spec}.{js,ts}']
-	}
+	},
+
+	define: {
+		__VERSION__: JSON.stringify(process.env.npm_package_version),
+	},
 
 	// ALLOW VITE SERVE README.md
 	// https://vitejs.dev/config/server-options.html#server-fs-allow
