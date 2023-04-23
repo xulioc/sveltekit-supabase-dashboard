@@ -1,11 +1,9 @@
 import { imSuper } from '$lib/utils';
-import { getSupabase } from '@supabase/auth-helpers-sveltekit';
 import { fail } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from './$types';
 
-export const load: PageServerLoad = async (event) => {
-
-    const { session, supabaseClient: supabase } = await getSupabase(event);
+export const load: PageServerLoad = async ({ request, locals: { supabase, getSession } }) => {
+    const session = await getSession();
 
     if (imSuper(session?.user ?? null)) {
         // GET ALL ORGS
@@ -19,7 +17,9 @@ export const load: PageServerLoad = async (event) => {
 }
 
 export const actions: Actions = {
-    create: async (event) => {
+    create: async ({ request, locals: { supabase, getSession } }) => {
+
+        const session = await getSession();
 
         let res;
 
@@ -27,8 +27,7 @@ export const actions: Actions = {
         //     return { error: true, message: "ORGANIZATION CREATION DISABLED IN DEMO MODE!" }
         // }
 
-        const { session, supabaseClient: supabase } = await getSupabase(event);
-        const formData = await event.request.formData();
+        const formData = await request.formData();
         const name = formData.get('name')?.toString()
 
         if (!name) {

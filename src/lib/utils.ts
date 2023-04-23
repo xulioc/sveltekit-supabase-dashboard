@@ -6,17 +6,17 @@ export const userColor = (role: string) => {
     return '';
 }
 
-export const isAdmin = (role: string) => {
-    if (['admin', 'super'].includes(role))
-        return true;
-    else return false;
-}
+// export const isAdmin = (role: string) => {
+//     if (['admin', 'super'].includes(role))
+//         return true;
+//     else return false;
+// }
 
-export const isSuper = (role: string) => {
-    if (['super'].includes(role))
-        return true;
-    else return false;
-}
+// export const isSuper = (role: string) => {
+//     if (['super'].includes(role))
+//         return true;
+//     else return false;
+// }
 
 export const orgIdToName = (orgs: any, id: number) => {
     console.log(orgs)

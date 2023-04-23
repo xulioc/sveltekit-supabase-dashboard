@@ -1,10 +1,10 @@
-import { getSupabase } from '@supabase/auth-helpers-sveltekit';
 import { AuthApiError } from '@supabase/supabase-js';
 import { fail, redirect } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from './$types';
 
-export const load: PageServerLoad = async (event) => {
-	const { session } = await getSupabase(event);
+export const load: PageServerLoad = async ({ request, locals: { supabase, getSession } }) => {
+
+	const session = await getSession();
 	if (session?.user) {
 		throw redirect(303, '/dashboard');
 	}
@@ -13,14 +13,13 @@ export const load: PageServerLoad = async (event) => {
 // https://supabase.com/docs/guides/auth/auth-helpers/sveltekit#saving-and-deleting-the-session
 
 export const actions: Actions = {
-	signin: async (event) => {
-		const { supabaseClient } = await getSupabase(event);
-		const formData = await event.request.formData();
+	signin: async ({ request, locals: { supabase, getSession } }) => {
+		const formData = await request.formData();
 		const email = formData.get('email') as string;
 		const password = formData.get('password') as string;
 		const to = formData.get('to') as string;
 
-		const { error } = await supabaseClient.auth.signInWithPassword({
+		const { error } = await supabase.auth.signInWithPassword({
 			email,
 			password
 		});
@@ -49,9 +48,8 @@ export const actions: Actions = {
 		}
 	},
 
-	signout: async (event) => {
-		const { supabaseClient } = await getSupabase(event);
-		await supabaseClient.auth.signOut();
+	signout: async ({ request, locals: { supabase, getSession } }) => {
+		await supabase.auth.signOut();
 		throw redirect(303, '/');
 	}
 };

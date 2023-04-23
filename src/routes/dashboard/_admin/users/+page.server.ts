@@ -1,15 +1,14 @@
-import type { PageServerLoad, Actions } from './$types';
 import type { User } from '@supabase/supabase-js';
+import type { Actions, PageServerLoad } from './$types';
 
-import { getSupabase } from '@supabase/auth-helpers-sveltekit';
 import { supabaseAdminClient as supabaseClient } from '$lib/server/supabase';
-import { error, invalid } from '@sveltejs/kit';
+import { error } from '@sveltejs/kit';
 // import { redirect } from '@sveltejs/kit';
 
 import { PUBLIC_DEMO_MODE } from '$env/static/public';
 
-export const load: PageServerLoad = async (event) => {
-	const { session } = await getSupabase(event);
+export const load: PageServerLoad = async ({ request, locals: { supabase, getSession } }) => {
+	const session = await getSession();
 
 	// console.log(session)
 	const org = session?.user.app_metadata.org;
@@ -39,15 +38,15 @@ export const load: PageServerLoad = async (event) => {
 };
 
 export const actions: Actions = {
-	create: async (event) => {
-		const { session } = await getSupabase(event);
+	create: async ({ request, locals: { supabase, getSession } }) => {
+		const session = await getSession();
 
 		if (!session) {
 			// the user is not signed in
 			throw error(403, { message: 'Unauthorized' });
 		}
 
-		const form_data = await event.request.formData();
+		const form_data = await request.formData();
 		const email = form_data.get('email');
 		// console.log(email)
 		const password = form_data.get('password');
