@@ -36,13 +36,13 @@ export const myRole = (session: Session | null) => {
     return session?.user.app_metadata.role ?? null;
 }
 
-export const imSuper = (user: User | null) => {
+export const imSuper = (user: User | null | undefined) => {
     if (['super'].includes(user?.app_metadata.role))
         return true;
     else return false;
 }
 
-export const imAdmin = (user: User) => {
+export const imAdmin = (user: User | null | undefined) => {
     if (['super', 'admin'].includes(user.app_metadata.role))
         return true;
     else return false;
