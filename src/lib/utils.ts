@@ -6,17 +6,17 @@ export const userColor = (role: string) => {
     return '';
 }
 
-// export const isAdmin = (role: string) => {
-//     if (['admin', 'super'].includes(role))
-//         return true;
-//     else return false;
-// }
+export const isAdmin = (role: string) => {
+    if (['admin', 'super'].includes(role))
+        return true;
+    else return false;
+}
 
-// export const isSuper = (role: string) => {
-//     if (['super'].includes(role))
-//         return true;
-//     else return false;
-// }
+export const isSuper = (role: string) => {
+    if (['super'].includes(role))
+        return true;
+    else return false;
+}
 
 export const orgIdToName = (orgs: any, id: number) => {
     console.log(orgs)
@@ -33,7 +33,7 @@ export const myOrg = (session: Session | null) => {
 }
 
 export const myRole = (session: Session | null) => {
-    return session?.user.app_metadata.role ?? null;
+    return session?.user.app_metadata.role ?? 'user';
 }
 
 export const imSuper = (user: User | null | undefined) => {
