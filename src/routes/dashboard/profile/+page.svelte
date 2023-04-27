@@ -1,7 +1,7 @@
 <script>
 	import ActionButton from '$lib/components/dashboard/ActionButton.svelte';
 	import DashboardPage from '$lib/components/dashboard/DashboardPage.svelte';
-	import { SaveIcon, SettingsIcon, XIcon } from 'svelte-feather-icons';
+	import { SaveIcon, SettingsIcon } from 'svelte-feather-icons';
 
 	/** @type {import('./$types').PageData} */
 	export let data;
@@ -18,14 +18,14 @@
 			<span slot="icon"><SaveIcon /></span>
 		</ActionButton>
 
-		<ActionButton
+		<!-- <ActionButton
 			text="CANCEL"
 			onAction={() => {
 				history.back();
 			}}
 		>
 			<span slot="icon"><XIcon /></span>
-		</ActionButton>
+		</ActionButton> -->
 	</span>
 	<span slot="content">
 		<form id="edit" class="w-full max-w-sm" method="POST" action="?/save">

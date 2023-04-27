@@ -4,7 +4,7 @@ import { fail, redirect } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from './$types';
 
 
-export const load: PageServerLoad = async ({ request, locals: { supabase, getSession } }) => {
+export const load: PageServerLoad = async ({ locals: { getSession } }) => {
 	const session = await getSession();
 	if (session?.user) {
 		throw redirect(303, '/dashboard');
@@ -54,7 +54,7 @@ export const actions: Actions = {
 		const email = formData.get('email') as string;
 		const password = formData.get('password') as string;
 
-		const { data, error } = await supabase.auth.signUp({
+		const { error } = await supabase.auth.signUp({
 			email,
 			password
 		})
@@ -73,7 +73,7 @@ export const actions: Actions = {
 			});
 		}
 
-		throw redirect(303, '/dashboard');
+		throw redirect(303, '/dashboard/startup');
 
 	},
 
@@ -96,7 +96,7 @@ export const actions: Actions = {
 		const email = formData.get('email') as string;
 
 		console.log(PUBLIC_SITE_URL + '/auth?reset')
-		const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
+		const { error } = await supabase.auth.resetPasswordForEmail(email, {
 
 			redirectTo: PUBLIC_SITE_URL + '/auth?reset',
 		})
@@ -122,7 +122,7 @@ export const actions: Actions = {
 		const formData = await request.formData();
 		const password = formData.get('password') as string;
 
-		const { data, error } = await supabase.auth.updateUser({
+		const { error } = await supabase.auth.updateUser({
 			password
 		})
 
@@ -141,7 +141,7 @@ export const actions: Actions = {
 
 	},
 
-	signout: async ({ request, locals: { supabase, getSession } }) => {
+	signout: async ({ locals: { supabase } }) => {
 		await supabase.auth.signOut();
 		throw redirect(303, '/');
 	}

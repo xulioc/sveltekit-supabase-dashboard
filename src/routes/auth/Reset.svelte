@@ -1,8 +1,6 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
-	import type { ActionData } from './$types';
 
-	export let form: ActionData;
 	let loading = false;
 	let disabled = true;
 

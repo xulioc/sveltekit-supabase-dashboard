@@ -18,6 +18,8 @@ export const actions: Actions = {
 			{
 				data: { name: user_name }
 			});
+
 		console.log(data, error);
+
 	}
 };
