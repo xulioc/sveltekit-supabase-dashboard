@@ -33,7 +33,7 @@ export const myOrg = (session: Session | null) => {
 }
 
 export const myRole = (session: Session | null) => {
-    return session?.user.app_metadata.role ?? null;
+    return session?.user.app_metadata.role ?? 'user';
 }
 
 export const imSuper = (user: User | null | undefined) => {
@@ -44,6 +44,18 @@ export const imSuper = (user: User | null | undefined) => {
 
 export const imAdmin = (user: User | null | undefined) => {
     if (['super', 'admin'].includes(user.app_metadata.role))
+        return true;
+    else return false;
+}
+
+export const roleSuper = (session: any) => {
+    if (['super'].includes(session.user.app_metadata.role))
+        return true;
+    else return false;
+}
+
+export const roleAdmin = (session: any) => {
+    if (['super', 'admin'].includes(session.user.app_metadata.role))
         return true;
     else return false;
 }

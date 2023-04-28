@@ -16,8 +16,8 @@
 </script>
 
 <section id="body" class="flex flex-row h-screen">
-	<Toast />
 	<DashboardMenu />
+	<Toast />
 
 	<div class="flex flex-col w-full">
 		<DashboardNavBar />
@@ -25,7 +25,7 @@
 		<div class="w-full h-full p-5 overflow-auto">
 			{#if $navigating}
 				<div class="flex h-full items-center justify-center">
-					<Jumper size="60" unit="px" duration="1s" />
+					<Jumper size="120" unit="px" duration="1s" color="#FFFFFF" />
 				</div>
 			{:else}
 				<slot />

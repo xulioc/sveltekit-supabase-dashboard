@@ -88,7 +88,8 @@
 			<ul tabindex="0" class="dropdown-content menu w-max ml-2 p-3 bg-primary rounded-box">
 				<li>
 					<div class="flex flex-row">
-						<a class="flex w-max" href="/dashboard/profile"><SettingsIcon class="mr-4" />Settings</a
+						<a class="flex w-max" href="/dashboard/settings"
+							><SettingsIcon class="mr-4" />Settings</a
 						>
 					</div>
 				</li>

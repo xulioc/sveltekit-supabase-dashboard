@@ -2,12 +2,12 @@
 // for information about these interfaces
 declare global {
 	namespace App {
-		interface Supabase {
-			Database: import('./DatabaseDefinitions').Database;
-			SchemaName: 'public';
+		interface Locals {
+			supabase: SupabaseClient<Database>;
+			getSession(): Promise<Session | null>;
 		}
 		interface PageData {
-			session: import('@supabase/supabase-js').Session | null;
+			session: Session | null;
 		}
 		// interface Error {}
 		// interface Locals {}
@@ -16,4 +16,5 @@ declare global {
 	}
 }
 
-export {};
+export { };
+
