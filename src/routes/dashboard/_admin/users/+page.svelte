@@ -1,12 +1,11 @@
 <script lang="ts">
 	import { applyAction, deserialize, enhance } from '$app/forms';
 	import { invalidateAll } from '$app/navigation';
-	import { page } from '$app/stores';
 	import { toast } from '$lib/components/Toast';
 	import ActionButton from '$lib/components/dashboard/ActionButton.svelte';
 	import DashboardPage from '$lib/components/dashboard/DashboardPage.svelte';
 	import UsersTable from '$lib/components/dashboard/UsersTable.svelte';
-	import { isSuper } from '$lib/utils';
+	import { roleSuper } from '$lib/utils';
 	import type { ActionResult } from '@sveltejs/kit';
 	import { PlusIcon, UsersIcon, XIcon } from 'svelte-feather-icons';
 	import type { ActionData, PageData } from './$types';
@@ -15,7 +14,6 @@
 	export let form: ActionData;
 
 	let view: string = 'home';
-	const role = $page.data.session.user.app_metadata.role;
 
 	// https://kit.svelte.dev/docs/form-actions#progressive-enhancement-custom-event-listener
 	const deleteAction = async (id: any) => {
@@ -121,7 +119,7 @@
 					</label>
 				</div>
 
-				{#if isSuper(role)}
+				{#if roleSuper(data.session)}
 					<div class="form-control mt-5">
 						<label class="input-group">
 							<span class="w-1/5 text-xl bg-primary">Organization</span>
@@ -142,8 +140,8 @@
 							<option disabled selected>Role</option>
 							<option value="user">User</option>
 							<option value="admin">Admin</option>
-							{#if isSuper(role)}
-								<option value="admin">Super</option>
+							{#if roleSuper(data.session)}
+								<option value="super">Super</option>
 							{/if}
 						</select>
 					</label>
