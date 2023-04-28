@@ -13,3 +13,8 @@
     @apply mb-2;
   }
 }
+
+/* FIX svelte-table thead dont update background color, so make it transparent */
+.table :where(thead, tfoot) :where(th, td) {
+    background:rgba(0,0,0,0);
+}

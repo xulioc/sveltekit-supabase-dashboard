@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
+	import { logo } from '$lib/stores';
 	import { FrownIcon, SmileIcon } from 'svelte-feather-icons';
 	import { fade } from 'svelte/transition';
 	import type { ActionData } from './$types';
@@ -10,8 +11,7 @@
 	import SignUp from './SignUp.svelte';
 
 	export let form: ActionData;
-
-	// console.log($page.url.searchParams.toString());
+	const to: string | null = $page.url.searchParams.get('to');
 
 	let view = 'signin';
 
@@ -38,6 +38,9 @@
 	<div class="flex my-auto align-middle justify-center w-1/2">
 		<div>
 			<div class="card my-5 w-full max-w-sm shadow-2xl bg-black">
+				{#if $logo}
+					<img class="mt-2 mb-5" alt="logo" src={$logo} />
+				{/if}
 				{#if view == 'signin'}
 					<SignIn {form} />
 				{:else if view == 'signup'}

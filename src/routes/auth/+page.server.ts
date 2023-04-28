@@ -11,14 +11,12 @@ export const load: PageServerLoad = async ({ locals: { getSession } }) => {
 	}
 };
 
-// https://supabase.com/docs/guides/auth/auth-helpers/sveltekit#saving-and-deleting-the-session
-
 export const actions: Actions = {
 	signin: async ({ request, locals: { supabase } }) => {
-		const formData = await request.formData();
-		const email = formData.get('email') as string;
-		const password = formData.get('password') as string;
-		const to = formData.get('to') as string;
+		const form_data = await request.formData();
+		const email = form_data.get('email') as string;
+		const password = form_data.get('password') as string;
+		const to = form_data.get('to') as string;
 
 		const { error } = await supabase.auth.signInWithPassword({
 			email,
@@ -50,9 +48,9 @@ export const actions: Actions = {
 	},
 
 	signup: async ({ request, locals: { supabase } }) => {
-		const formData = await request.formData();
-		const email = formData.get('email') as string;
-		const password = formData.get('password') as string;
+		const form_data = await request.formData();
+		const email = form_data.get('email') as string;
+		const password = form_data.get('password') as string;
 
 		const { error } = await supabase.auth.signUp({
 			email,
@@ -81,8 +79,8 @@ export const actions: Actions = {
 	// 	console.log("invite");
 	// 	console.log(supabaseAdminClient.auth.admin)
 
-	// 	const formData = await request.formData();
-	// 	const email = formData.get('email') as string;
+	// 	const form_data = await request.form_data();
+	// 	const email = form_data.get('email') as string;
 
 	// 	const { data: user, error } = await supabaseAdminClient.auth
 	// 		.admin
@@ -92,8 +90,8 @@ export const actions: Actions = {
 	// },
 
 	forgot: async ({ request, locals: { supabase } }) => {
-		const formData = await request.formData();
-		const email = formData.get('email') as string;
+		const form_data = await request.formData();
+		const email = form_data.get('email') as string;
 
 		// console.log(PUBLIC_SITE_URL + '/auth?reset')
 		const { error } = await supabase.auth.resetPasswordForEmail(email, {
@@ -119,8 +117,8 @@ export const actions: Actions = {
 	},
 
 	reset: async ({ request, locals: { supabase } }) => {
-		const formData = await request.formData();
-		const password = formData.get('password') as string;
+		const form_data = await request.formData();
+		const password = form_data.get('password') as string;
 
 		const { error } = await supabase.auth.updateUser({
 			password
