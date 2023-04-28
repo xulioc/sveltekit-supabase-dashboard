@@ -5,7 +5,7 @@
 	import DashboardPage from '$lib/components/dashboard/DashboardPage.svelte';
 	import OrgsTable from '$lib/components/dashboard/OrgsTable.svelte';
 	import type { ActionResult } from '@sveltejs/kit';
-	import { ArchiveIcon, EditIcon, PlusIcon, SaveIcon, XIcon } from 'svelte-feather-icons';
+	import { ArchiveIcon, EditIcon, PlusIcon, XIcon } from 'svelte-feather-icons';
 	import type { ActionData, PageData } from './$types';
 
 	export let data: PageData;
@@ -79,11 +79,10 @@
 		<span slot="icon"><EditIcon /></span>
 		<span slot="title">Add organization</span>>
 		<span slot="actions">
-			<button type="submit" form="user" class="btn btn-primary mx-2">
+			<!-- <button type="submit" form="user" class="btn btn-primary mx-2">
 				<SaveIcon class="mr-2 h-4 w-4" />
 				SAVE
-			</button>
-
+			</button> -->
 			<button
 				on:click={() => {
 					view = 'home';

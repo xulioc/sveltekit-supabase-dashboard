@@ -29,6 +29,7 @@
 <SvelteTable
 	{columns}
 	rows={orgs}
+	sortBy="name"
 	classNameTable={'table table-compact table-zebra'}
 	classNameThead={'bg-black'}
 />

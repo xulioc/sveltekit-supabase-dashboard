@@ -95,7 +95,7 @@ export const actions: Actions = {
 		const formData = await request.formData();
 		const email = formData.get('email') as string;
 
-		console.log(PUBLIC_SITE_URL + '/auth?reset')
+		// console.log(PUBLIC_SITE_URL + '/auth?reset')
 		const { error } = await supabase.auth.resetPasswordForEmail(email, {
 
 			redirectTo: PUBLIC_SITE_URL + '/auth?reset',
