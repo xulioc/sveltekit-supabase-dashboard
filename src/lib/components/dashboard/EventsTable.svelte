@@ -1,5 +1,6 @@
 <script lang="ts">
 	import SvelteTable from 'svelte-table';
+	import TimeInTable from './TimeInTable.svelte';
 	export let events: Array<any>;
 
 	const columns = [
@@ -7,7 +8,11 @@
 			key: 'timestamp',
 			title: 'Timestamp',
 			value: (v: any) => v.timestamp,
-			sortable: true
+			sortable: true,
+			renderComponent: {
+				component: TimeInTable,
+				props: { format: 'YYYY-MM-DD HH:mm:sss' }
+			}
 		},
 		{
 			key: 'user',
