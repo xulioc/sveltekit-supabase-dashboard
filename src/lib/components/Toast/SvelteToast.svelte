@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { fade, fly } from 'svelte/transition';
 	import { flip } from 'svelte/animate';
-	import { toast } from './stores.js';
+	import { fade, fly } from 'svelte/transition';
 	import ToastItem from './ToastItem.svelte';
+	import { toast } from './stores.js';
 
 	export let options = {};
 	export let target = 'default';
@@ -19,7 +19,7 @@
 
 <!-- class={item.classes.join(' ')} -->
 
-<div class="toast toast-top toast-center w-1/2 z-50">
+<div class="toast toast-top w-full z-50">
 	<ul>
 		{#each items as item (item.id)}
 			<li class="mb-2" in:fly={item.intro} out:fade animate:flip={{ duration: 200 }}>

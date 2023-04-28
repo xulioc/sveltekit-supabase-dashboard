@@ -1,25 +1,12 @@
 <script lang="ts">
+	import { page } from '$app/stores';
 	import '../app.postcss';
-
-	import { supabaseClient } from '$lib/supabase';
-	import { invalidate } from '$app/navigation';
-	import { onMount } from 'svelte';
-
-	onMount(() => {
-		const {
-			data: { subscription }
-		} = supabaseClient.auth.onAuthStateChange(() => {
-			invalidate('supabase:auth');
-		});
-
-		return () => {
-			subscription.unsubscribe();
-		};
-	});
 </script>
 
 <svelte:head>
-	<!-- Google tag (gtag.js) -->
+	<title>{$page.url.hostname}</title>
+	<link rel="icon" type="image/x-icon" href={`/${$page.url.hostname}/favicon.ico`} />
+
 	<script async src="https://www.googletagmanager.com/gtag/js?id=G-J1TGFG0V29"></script>
 	<script>
 		window.dataLayer = window.dataLayer || [];

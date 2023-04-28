@@ -1,7 +1,7 @@
 <script lang="ts">
+	import 'chart.js/auto';
 	import 'chartjs-adapter-date-fns';
 	import { Line } from 'svelte-chartjs';
-	import 'chart.js/auto';
 
 	export let weather;
 
@@ -11,8 +11,6 @@
 			temp: weather.hourly.temperature_2m[index]
 		};
 	});
-
-	// console.log(series);
 
 	const options = {
 		responsive: true,

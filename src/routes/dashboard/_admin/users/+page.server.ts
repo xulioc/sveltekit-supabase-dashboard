@@ -1,90 +1,102 @@
-import type { PageServerLoad, Actions } from './$types';
 import type { User } from '@supabase/supabase-js';
-
-import { getSupabase } from '@supabase/auth-helpers-sveltekit';
-import { supabaseAdminClient as supabaseClient } from '$lib/server/supabase';
-import { error, invalid } from '@sveltejs/kit';
-// import { redirect } from '@sveltejs/kit';
+import type { Actions, PageServerLoad } from './$types';
 
 import { PUBLIC_DEMO_MODE } from '$env/static/public';
+import { supabaseAdminClient as supabaseClient } from '$lib/server/supabase';
+import { roleAdmin, roleSuper } from '$lib/utils';
+import { fail } from '@sveltejs/kit';
+import type { AnyObject } from 'chart.js/dist/types/basic';
 
-export const load: PageServerLoad = async (event) => {
-	const { session } = await getSupabase(event);
 
-	// console.log(session)
+export const load: PageServerLoad = async ({ locals: { supabase, getSession } }) => {
+	const session = await getSession();
 	const org = session?.user.app_metadata.org;
-	const role = session?.user.app_metadata.role;
-	// console.log(org)
 
-	// GET USERS
-	const {
-		data: { users: users_all },
-		error: users_error
-	} = await supabaseClient.auth.admin.listUsers();
-	// console.log(users_all,users_error)
-
-	// GET ORGS (MAYBE ONLY IF IM SUPER?)
-	const { data: orgs, error: orgs_error } = await supabaseClient.from('orgs').select('id, name');
-	// console.log(orgs,orgs_error)
-
+	const res = await supabaseClient.auth.admin.listUsers();
 	let users: User[] = [];
-	if (role === 'super') {
-		users = users_all;
-	} else {
-		users = users_all.filter((user) => user.app_metadata.org == org);
-	}
-	// console.log(users)
+	let orgs = [];
+	// console.log(session.user)
+	if (roleAdmin(session)) {
+		users = res.data.users
 
-	return { users, orgs };
+		const r = await supabase
+			.from('orgs')
+			.select('id,name')
+		orgs = r.data;
+		// console.log(orgs)
+
+		// ONLY GET ORGS FROM ALREADY CREATED USERS
+		// orgs = users.map(x => x.app_metadata.org.name);
+		// // console.log(orgs)
+		// orgs = orgs.filter((x, i, a) => a.indexOf(x) == i)
+		// orgs = orgs.filter((x) => x)
+		// // console.log(orgs)
+
+	}
+	else {
+		users = res.data.users.filter((user) => user.app_metadata.org.id == org.id);
+	}
+	return { users, orgs }
 };
 
 export const actions: Actions = {
-	create: async (event) => {
-		const { session } = await getSupabase(event);
+	create: async ({ request, locals: { getSession } }) => {
+		const session = await getSession();
+		const form_data = await request.formData();
+		const email = form_data.get('email')?.toString();
+		const role = form_data.get('role')?.toString();
+		const password = form_data.get('password')?.toString();
+		let org: AnyObject | undefined;
 
-		if (!session) {
-			// the user is not signed in
-			throw error(403, { message: 'Unauthorized' });
+		if (roleSuper(session)) {
+			const tmp = JSON.parse(form_data.get('org')?.toString() ?? '')
+			org = { id: tmp.id, name: tmp.name }
+			console.log(org)
+		} else {
+			if (role == 'super') {
+				return fail(400, { error: "You are kidding me?" })
+			}
+			org = session.user.app_metadata.org;
 		}
 
-		const form_data = await event.request.formData();
-		const email = form_data.get('email');
-		// console.log(email)
-		const password = form_data.get('password');
-		// console.log(password)
+		// console.log(session)
 
-		const organization = form_data.get('organization');
-		// console.log(organization)
-
-		const role = form_data.get('role');
-		// console.log(role)
-
-		if (PUBLIC_DEMO_MODE == 'true') {
-			return { error: true, message: 'USER CREATION DISABLED IN DEMO MODE!' };
-		}
-
-		const { data, error: create_error } = await supabaseClient.auth.admin.createUser({
+		const res = await supabaseClient.auth.admin.createUser({
 			email,
 			password,
-			app_metadata: { org: organization, role: role }
+			app_metadata: { org, role },
+			email_confirm: true
 		});
-		// console.log(data, error)
+		// console.log(res)
 
-		// console.log(data, create_error)
+		if (res.error) {
+			return fail(400, { error: res.error.message })
+		}
+
+		return ({ success: "User created succesfully" })
 	},
 
-	delete: async (event) => {
+	delete: async ({ request }) => {
+
 		if (PUBLIC_DEMO_MODE == 'true') {
-			return { error: true, message: 'USER DELETION DISABLED IN DEMO MODE!' };
+			return fail(400, { error: "USER DELETION DISABLED IN DEMO MODE!" })
 		}
 
-		const form_data = await event.request.formData();
-		const user = form_data.get('user');
+		const form_data = await request.formData();
+		const id = form_data.get('id')?.toString();
 
-		if (user) {
-			const { data, error } = await supabaseClient.auth.admin.deleteUser(user.toString());
+		// TODO PREVENT DELETING USERS FROM OTHER ORGS
+
+		if (id) {
+			const res = await supabaseClient.auth.admin.deleteUser(id);
+			if (res.error) {
+				// console.log(res)
+				return fail(400, { error: res.error.message })
+
+			}
 		} else {
-			throw error(403, { message: 'USER NOT FOUND' });
+			return fail(400, { error: "Invalid data" })
 		}
+		return ({ success: "User deleted succesfully" })
 	}
 };

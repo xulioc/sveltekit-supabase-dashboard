@@ -1,12 +1,11 @@
 <script lang="ts">
-	import { applyAction, deserialize } from '$app/forms';
+	import { applyAction, deserialize, enhance } from '$app/forms';
 	import { invalidateAll } from '$app/navigation';
-	import DashboardPage from '$lib/components/dashboard/DashboardPage.svelte';
-	import OrgTable from '$lib/components/dashboard/OrgTable.svelte';
 	import { toast } from '$lib/components/Toast';
+	import DashboardPage from '$lib/components/dashboard/DashboardPage.svelte';
+	import OrgsTable from '$lib/components/dashboard/OrgsTable.svelte';
 	import type { ActionResult } from '@sveltejs/kit';
-	import { onMount } from 'svelte';
-	import { ArchiveIcon, EditIcon, PlusIcon, SaveIcon, XIcon } from 'svelte-feather-icons';
+	import { ArchiveIcon, EditIcon, PlusIcon, XIcon } from 'svelte-feather-icons';
 	import type { ActionData, PageData } from './$types';
 
 	export let data: PageData;
@@ -43,13 +42,15 @@
 		}
 	};
 
-	onMount(async () => {
-		if (form && form?.success) {
-			toast.push(form.message, { classes: ['alert-success'] });
-		} else {
-			toast.push(form.message, { classes: ['alert-error'] });
+	$: {
+		if (form?.success) {
+			view = 'home';
+			toast.push(form.success, { classes: ['alert-success'] });
 		}
-	});
+		if (form?.error) {
+			toast.push(form.error, { classes: ['alert-error'] });
+		}
+	}
 </script>
 
 <!-- https://svelte.dev/repl/b17c13d4f1bb40799ccf09e0841ddd90?version=3.55.0 -->
@@ -70,7 +71,7 @@
 			</button>
 		</span>
 		<span slot="content" class="w-full">
-			<OrgTable orgs={data.orgs} {onAction} />
+			<OrgsTable orgs={data.orgs} {onAction} />
 		</span>
 	</DashboardPage>
 {:else if view == 'add'}
@@ -78,11 +79,10 @@
 		<span slot="icon"><EditIcon /></span>
 		<span slot="title">Add organization</span>>
 		<span slot="actions">
-			<button type="submit" form="user" class="btn btn-primary mx-2">
+			<!-- <button type="submit" form="user" class="btn btn-primary mx-2">
 				<SaveIcon class="mr-2 h-4 w-4" />
 				SAVE
-			</button>
-
+			</button> -->
 			<button
 				on:click={() => {
 					view = 'home';
@@ -94,7 +94,7 @@
 			</button>
 		</span>
 		<span slot="content" class="w-full">
-			<form id="user" method="POST" action="?/create" enctype="multipart/form-data">
+			<form id="user" method="POST" action="?/create" enctype="multipart/form-data" use:enhance>
 				<div class="form-control gap-y-3">
 					<div class="flex flex-row">
 						<label class="input-group w-full">
@@ -110,6 +110,9 @@
 							/>
 						</label>
 					</div>
+				</div>
+				<div class="form-control mt-6">
+					<button class="btn btn-primary">ADD ORGANIZATION</button>
 				</div>
 			</form>
 		</span>
