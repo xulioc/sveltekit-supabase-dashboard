@@ -39,7 +39,7 @@
 		<div>
 			<div class="card my-5 w-full max-w-sm shadow-2xl bg-black">
 				{#if $logo}
-					<img class="mt-2 mb-5" alt="logo" src={$logo} />
+					<img class="mx-10 mt-10" alt="logo" src={$logo} />
 				{/if}
 				{#if view == 'signin'}
 					<SignIn {form} />
