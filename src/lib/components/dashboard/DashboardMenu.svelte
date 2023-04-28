@@ -5,6 +5,7 @@
 		ArchiveIcon,
 		HomeIcon,
 		LayoutIcon,
+		ListIcon,
 		LogOutIcon,
 		RadioIcon,
 		SettingsIcon,
@@ -67,6 +68,9 @@
 		{#if isSuper(role)}
 			<NavBarButton tooltip="Organizations" dest="/dashboard/_super/orgs">
 				<span slot="icon"><ArchiveIcon class="stroke-accent" /></span>
+			</NavBarButton>
+			<NavBarButton tooltip="Events" dest="/dashboard/_super/events">
+				<span slot="icon"><ListIcon class="stroke-accent" /></span>
 			</NavBarButton>
 			<div class="max-md:my-0 divider" />
 		{/if}
