@@ -15,10 +15,10 @@ export const handle: Handle = async ({ event, resolve }) => {
     });
 
     /**
-     * a little helper that is written for convenience so that instead
-     * of calling `const { data: { session } } = await supabase.auth.getSession()`
-     * you just call this `await getSession()`
-     */
+    * a little helper that is written for convenience so that instead
+    * of calling `const { data: { session } } = await supabase.auth.getSession()`
+    * you just call this `await getSession()`
+    */
     event.locals.getSession = async () => {
         const {
             data: { session }
@@ -48,6 +48,15 @@ export const handle: Handle = async ({ event, resolve }) => {
             console.log('You are not SUPER!');
             throw redirect(303, '/dashboard');
         }
+    }
+
+    // LOG EVENTS HERE
+    // console.log(event)
+    const res = await event.locals.supabase.from('tracking').insert([
+        { 'user': session?.user, 'event': event.url }
+    ])
+    if (res.error) {
+        console.log(res.error)
     }
 
     return resolve(event, {
