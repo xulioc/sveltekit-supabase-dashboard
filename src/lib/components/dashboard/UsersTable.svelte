@@ -15,9 +15,8 @@
 		{
 			key: 'role',
 			title: 'ROLE',
-			renderComponent: {
-				component: RoleBadge
-			},
+			value: (v: any) => v.app_metadata.role,
+			renderComponent: RoleBadge,
 			sortable: true
 		},
 		{
