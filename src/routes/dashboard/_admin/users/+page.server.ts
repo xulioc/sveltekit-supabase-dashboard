@@ -64,9 +64,10 @@ export const actions: Actions = {
 		const res = await supabaseClient.auth.admin.createUser({
 			email,
 			password,
-			app_metadata: { org, role }
+			app_metadata: { org, role },
+			email_confirm: true
 		});
-		console.log(res)
+		// console.log(res)
 
 		if (res.error) {
 			return fail(400, { error: res.error.message })
