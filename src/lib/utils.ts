@@ -47,3 +47,15 @@ export const imAdmin = (user: User | null | undefined) => {
         return true;
     else return false;
 }
+
+export const roleSuper = (session: any) => {
+    if (['super'].includes(session.user.app_metadata.role))
+        return true;
+    else return false;
+}
+
+export const roleAdmin = (session: any) => {
+    if (['super', 'admin'].includes(session.user.app_metadata.role))
+        return true;
+    else return false;
+}

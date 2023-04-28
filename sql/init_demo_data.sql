@@ -36,7 +36,7 @@ VALUES
     'authenticated',
     'authenticated',
     'user@test.com',
-    '{"provider":"email","providers":["email"],"role":"user","org":"ACME"}',
+    '{"provider":"email","providers":["email"],"role":"user","org":{"id":1,"name":"ACME"}}',
     '{}',
     FALSE,
     crypt('user', gen_salt('bf')),

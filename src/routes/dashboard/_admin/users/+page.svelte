@@ -6,6 +6,7 @@
 	import ActionButton from '$lib/components/dashboard/ActionButton.svelte';
 	import DashboardPage from '$lib/components/dashboard/DashboardPage.svelte';
 	import UsersTable from '$lib/components/dashboard/UsersTable.svelte';
+	import { isSuper } from '$lib/utils';
 	import type { ActionResult } from '@sveltejs/kit';
 	import { PlusIcon, UsersIcon, XIcon } from 'svelte-feather-icons';
 	import type { ActionData, PageData } from './$types';
@@ -103,7 +104,7 @@
 			</ActionButton>
 		</span>
 
-		<span slot="content" class="w-full">
+		<span slot="content" class="w-full h-full">
 			<form method="POST" action="?/create" use:enhance>
 				<div class="form-control mt-5">
 					<label class="input-group">
@@ -120,13 +121,30 @@
 					</label>
 				</div>
 
+				{#if isSuper(role)}
+					<div class="form-control mt-5">
+						<label class="input-group">
+							<span class="w-1/5 text-xl bg-primary">Organization</span>
+							<select id="org" name="org" class="select select-bordered w-4/5">
+								<option disabled selected>Organization</option>
+								{#each data.orgs as org}
+									<option value={JSON.stringify(org)} class="block w-full">{org.name}</option>
+								{/each}
+							</select>
+						</label>
+					</div>
+				{/if}
+
 				<div class="form-control mt-5">
 					<label class="input-group">
-						<span class="w-1/5 text-xl bg-primary">Email</span>
+						<span class="w-1/5 text-xl bg-primary">Role</span>
 						<select id="role" name="role" class="w-4/5 select select-bordered">
 							<option disabled selected>Role</option>
 							<option value="user">User</option>
 							<option value="admin">Admin</option>
+							{#if isSuper(role)}
+								<option value="admin">Super</option>
+							{/if}
 						</select>
 					</label>
 				</div>

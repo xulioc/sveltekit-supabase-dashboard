@@ -10,8 +10,7 @@
 			key: 'email',
 			title: 'EMAIL',
 			value: (v: any) => v.email,
-			sortable: true,
-			class: 'w-10 text-ellipsis '
+			sortable: true
 		},
 		{
 			key: 'role',
@@ -19,6 +18,12 @@
 			renderComponent: {
 				component: RoleBadge
 			},
+			sortable: true
+		},
+		{
+			key: 'org',
+			title: 'ORG',
+			value: (v: any) => v.app_metadata.org.name,
 			sortable: true
 		},
 		{
@@ -34,6 +39,7 @@
 			sortable: true
 		},
 		{
+			key: 'actions',
 			title: '',
 			renderComponent: {
 				component: TableActions,

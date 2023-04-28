@@ -55,7 +55,7 @@
 					/>
 				</label>
 
-				<label class="input-group pt-2 pb-5">
+				<!-- <label class="input-group pt-2 pb-5">
 					<span class="md:w-1/3 mr-1">User Name</span>
 					<input
 						type="text"
@@ -63,9 +63,7 @@
 						value={user?.user_metadata.name}
 						class="input input-bordered md:w-2/3"
 					/>
-				</label>
-
-				<!-- <input type="submit" value="SAVE" class="btn btn-primary w-full" /> -->
+				</label> -->
 			</div>
 		</form>
 	</span>

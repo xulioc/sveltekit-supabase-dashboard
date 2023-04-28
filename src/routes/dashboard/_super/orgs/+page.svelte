@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { applyAction, deserialize } from '$app/forms';
 	import { invalidateAll } from '$app/navigation';
-	import DashboardPage from '$lib/components/dashboard/DashboardPage.svelte';
-	import OrgTable from '$lib/components/dashboard/OrgTable.svelte';
 	import { toast } from '$lib/components/Toast';
+	import DashboardPage from '$lib/components/dashboard/DashboardPage.svelte';
+	import OrgsTable from '$lib/components/dashboard/OrgsTable.svelte';
 	import type { ActionResult } from '@sveltejs/kit';
 	import { onMount } from 'svelte';
 	import { ArchiveIcon, EditIcon, PlusIcon, SaveIcon, XIcon } from 'svelte-feather-icons';
@@ -70,7 +70,7 @@
 			</button>
 		</span>
 		<span slot="content" class="w-full">
-			<OrgTable orgs={data.orgs} {onAction} />
+			<OrgsTable orgs={data.orgs} {onAction} />
 		</span>
 	</DashboardPage>
 {:else if view == 'add'}

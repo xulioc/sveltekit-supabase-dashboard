@@ -14,7 +14,7 @@
 			</div>
 		</div>
 	{/if}
-	<div class="flex w-full overflow-y-auto">
+	<div class="flex w-full h-full overflow-x-hidden overflow-y-auto">
 		<slot name="content" />
 	</div>
 	<!-- <div class="footer flex w-full p-2 bottom-0 border">

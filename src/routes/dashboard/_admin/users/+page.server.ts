@@ -1,21 +1,42 @@
 import type { User } from '@supabase/supabase-js';
 import type { Actions, PageServerLoad } from './$types';
 
+import { PUBLIC_DEMO_MODE } from '$env/static/public';
 import { supabaseAdminClient as supabaseClient } from '$lib/server/supabase';
+import { roleAdmin, roleSuper } from '$lib/utils';
 import { fail } from '@sveltejs/kit';
+import type { AnyObject } from 'chart.js/dist/types/basic';
 
 
-export const load: PageServerLoad = async ({ locals: { getSession } }) => {
+export const load: PageServerLoad = async ({ locals: { supabase, getSession } }) => {
 	const session = await getSession();
 	const org = session?.user.app_metadata.org;
 
 	const res = await supabaseClient.auth.admin.listUsers();
-	// console.log(res.data.users)
 	let users: User[] = [];
-	users = res.data.users.filter((user) => user.app_metadata.org.id == org.id);
+	let orgs = [];
+	// console.log(session.user)
+	if (roleAdmin(session)) {
+		users = res.data.users
 
-	// console.log(users)
-	return { users };
+		const r = await supabase
+			.from('orgs')
+			.select('id,name')
+		orgs = r.data;
+		// console.log(orgs)
+
+		// ONLY GET ORGS FROM ALREADY CREATED USERS
+		// orgs = users.map(x => x.app_metadata.org.name);
+		// // console.log(orgs)
+		// orgs = orgs.filter((x, i, a) => a.indexOf(x) == i)
+		// orgs = orgs.filter((x) => x)
+		// // console.log(orgs)
+
+	}
+	else {
+		users = res.data.users.filter((user) => user.app_metadata.org.id == org.id);
+	}
+	return { users, orgs }
 };
 
 export const actions: Actions = {
@@ -25,13 +46,20 @@ export const actions: Actions = {
 		const email = form_data.get('email')?.toString();
 		const role = form_data.get('role')?.toString();
 		const password = form_data.get('password')?.toString();
+		let org: AnyObject | undefined;
 
-		if (role == 'super') {
-			return fail(400, { error: "You are kidding me?" })
+		if (roleSuper(session)) {
+			const tmp = JSON.parse(form_data.get('org')?.toString() ?? '')
+			org = { id: tmp.id, name: tmp.name }
+			console.log(org)
+		} else {
+			if (role == 'super') {
+				return fail(400, { error: "You are kidding me?" })
+			}
+			org = session.user.app_metadata.org;
 		}
 
 		// console.log(session)
-		const org = session.user.app_metadata.org;
 
 		const res = await supabaseClient.auth.admin.createUser({
 			email,
@@ -48,6 +76,10 @@ export const actions: Actions = {
 	},
 
 	delete: async ({ request }) => {
+
+		if (PUBLIC_DEMO_MODE == 'true') {
+			return fail(400, { error: "USER DELETION DISABLED IN DEMO MODE!" })
+		}
 
 		const form_data = await request.formData();
 		const id = form_data.get('id')?.toString();
