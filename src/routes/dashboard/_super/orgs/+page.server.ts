@@ -20,7 +20,6 @@ export const actions: Actions = {
     create: async ({ request, locals: { supabase, getSession } }) => {
 
         const session = await getSession();
-
         let res;
 
         // if (PUBLIC_DEMO_MODE == 'true') {
@@ -31,7 +30,7 @@ export const actions: Actions = {
         const name = formData.get('name')?.toString()
 
         if (!name) {
-            return fail(400, { success: false, message: "NAME ERROR" });
+            return fail(400, { error: "NAME ERROR" });
         }
 
         // CHECK IF ORG EXISTS
@@ -41,7 +40,7 @@ export const actions: Actions = {
             .eq('name', name)
             .single()
         if (res.data) {
-            return fail(400, { success: false, message: "ORG ALREADY EXISTS" });
+            return fail(400, { error: "ORG ALREADY EXISTS" });
         }
 
         // INSERT ORG
@@ -56,6 +55,6 @@ export const actions: Actions = {
             return fail(400)
         }
 
-        return { success: true, message: `Organization ${name} created succesfully` }
+        return { success: `Organization ${name} created succesfully` }
     }
 }

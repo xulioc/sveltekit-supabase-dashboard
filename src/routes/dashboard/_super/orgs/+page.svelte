@@ -1,11 +1,10 @@
 <script lang="ts">
-	import { applyAction, deserialize } from '$app/forms';
+	import { applyAction, deserialize, enhance } from '$app/forms';
 	import { invalidateAll } from '$app/navigation';
 	import { toast } from '$lib/components/Toast';
 	import DashboardPage from '$lib/components/dashboard/DashboardPage.svelte';
 	import OrgsTable from '$lib/components/dashboard/OrgsTable.svelte';
 	import type { ActionResult } from '@sveltejs/kit';
-	import { onMount } from 'svelte';
 	import { ArchiveIcon, EditIcon, PlusIcon, SaveIcon, XIcon } from 'svelte-feather-icons';
 	import type { ActionData, PageData } from './$types';
 
@@ -43,13 +42,15 @@
 		}
 	};
 
-	onMount(async () => {
-		if (form && form?.success) {
-			toast.push(form.message, { classes: ['alert-success'] });
-		} else {
-			toast.push(form.message, { classes: ['alert-error'] });
+	$: {
+		if (form?.success) {
+			view = 'home';
+			toast.push(form.success, { classes: ['alert-success'] });
 		}
-	});
+		if (form?.error) {
+			toast.push(form.error, { classes: ['alert-error'] });
+		}
+	}
 </script>
 
 <!-- https://svelte.dev/repl/b17c13d4f1bb40799ccf09e0841ddd90?version=3.55.0 -->
@@ -94,7 +95,7 @@
 			</button>
 		</span>
 		<span slot="content" class="w-full">
-			<form id="user" method="POST" action="?/create" enctype="multipart/form-data">
+			<form id="user" method="POST" action="?/create" enctype="multipart/form-data" use:enhance>
 				<div class="form-control gap-y-3">
 					<div class="flex flex-row">
 						<label class="input-group w-full">
@@ -110,6 +111,9 @@
 							/>
 						</label>
 					</div>
+				</div>
+				<div class="form-control mt-6">
+					<button class="btn btn-primary">ADD ORGANIZATION</button>
 				</div>
 			</form>
 		</span>
