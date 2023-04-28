@@ -2,6 +2,7 @@
 	import SvelteTable from 'svelte-table';
 	import RoleBadge from './RoleBadge.svelte';
 	import TableActions from './TableActions.svelte';
+	import TimeInTable from './TimeInTable.svelte';
 	export let users: Array<any>;
 	export let onAction: any | null = null;
 
@@ -29,13 +30,15 @@
 			key: 'created',
 			title: 'CREATED',
 			value: (v: any) => v.created_at,
-			sortable: true
+			sortable: true,
+			renderComponent: TimeInTable
 		},
 		{
 			key: 'last',
 			title: 'LAST SEEN',
 			value: (v: any) => v.last_sign_in_at,
-			sortable: true
+			sortable: true,
+			renderComponent: TimeInTable
 		},
 		{
 			key: 'actions',
