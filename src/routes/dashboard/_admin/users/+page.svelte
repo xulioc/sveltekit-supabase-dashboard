@@ -1,123 +1,170 @@
-<script>
-	import UserTableAdmin from '$lib/components/dashboard/UserTableAdmin.svelte';
-	import { PlusIcon } from 'svelte-feather-icons';
+<script lang="ts">
+	import { applyAction, deserialize, enhance } from '$app/forms';
+	import { invalidateAll } from '$app/navigation';
 	import { page } from '$app/stores';
+	import { toast } from '$lib/components/Toast';
+	import ActionButton from '$lib/components/dashboard/ActionButton.svelte';
+	import DashboardPage from '$lib/components/dashboard/DashboardPage.svelte';
+	import UsersTable from '$lib/components/dashboard/UsersTable.svelte';
+	import type { ActionResult } from '@sveltejs/kit';
+	import { PlusIcon, UsersIcon, XIcon } from 'svelte-feather-icons';
+	import type { ActionData, PageData } from './$types';
 
-	/** @type {import('./$types').PageData} */
-	export let data;
-	// console.log(data);
+	export let data: PageData;
+	export let form: ActionData;
 
-	/** @type {import('./$types').ActionData} */
-	export let form;
-	// console.log(form);
-
+	let view: string = 'home';
 	const role = $page.data.session.user.app_metadata.role;
+
+	// https://kit.svelte.dev/docs/form-actions#progressive-enhancement-custom-event-listener
+	const deleteAction = async (id: any) => {
+		const data = new FormData();
+		data.append('id', id);
+		const response = await fetch('users?/delete', {
+			method: 'POST',
+			body: data
+		});
+
+		const result: ActionResult = deserialize(await response.text());
+		await invalidateAll();
+		applyAction(result);
+	};
+
+	const onAction = (a: any) => {
+		switch (a.action) {
+			case 'delete':
+				deleteAction(a.row.id);
+				break;
+		}
+	};
+
+	$: {
+		if (form?.success) {
+			view = 'home';
+			toast.push(form.success, { classes: ['alert-success'] });
+		}
+		if (form?.error) {
+			toast.push(form.error, { classes: ['alert-error'] });
+		}
+	}
+
+	let disabled = true;
+	let password = '';
+	let password2 = '';
+
+	$: {
+		if (password == password2) {
+			disabled = false;
+		} else {
+			disabled = true;
+		}
+	}
 </script>
 
-{#if form}
-	<div class="toast toast-top z-10">
-		<div class="alert alert-success" class:alert-error={form.error}>
-			<div>
-				<span>{form.message}</span>
+{#if view == 'home'}
+	<DashboardPage>
+		<span slot="icon"><UsersIcon /></span>
+		<span slot="title">Users</span>
+
+		<span slot="actions">
+			<ActionButton
+				class="btn-warning"
+				text="add user"
+				onAction={() => {
+					view = 'add';
+				}}
+			>
+				<span slot="icon"><PlusIcon /></span>
+			</ActionButton>
+		</span>
+
+		<span slot="content" class="w-full">
+			<div class="card flex-col lg:flex-row bg-base-300 shadow-xl">
+				<div
+					class="overflow-x-auto w-full scrollbar-thin scrollbar-thumb-gray-400 overflow-y-scroll"
+				>
+					<UsersTable users={data.users} {onAction} />
+				</div>
 			</div>
-		</div>
-	</div>
+		</span>
+	</DashboardPage>
+{:else if (view = 'add')}
+	<DashboardPage>
+		<span slot="icon"> <PlusIcon /></span>
+		<span slot="title"> Add user </span>
+		<span slot="actions">
+			<ActionButton
+				text="CANCEL"
+				onAction={() => {
+					view = 'home';
+				}}
+			>
+				<span slot="icon"><XIcon /></span>
+			</ActionButton>
+		</span>
+
+		<span slot="content" class="w-full">
+			<form method="POST" action="?/create" use:enhance>
+				<div class="form-control mt-5">
+					<label class="input-group">
+						<span class="w-1/5 text-xl bg-primary">Email</span>
+						<input
+							autocomplete="username"
+							id="email"
+							name="email"
+							class="w-4/5 input input-bordered"
+							type="email"
+							placeholder="email"
+							required
+						/>
+					</label>
+				</div>
+
+				<div class="form-control mt-5">
+					<label class="input-group">
+						<span class="w-1/5 text-xl bg-primary">Email</span>
+						<select id="role" name="role" class="w-4/5 select select-bordered">
+							<option disabled selected>Role</option>
+							<option value="user">User</option>
+							<option value="admin">Admin</option>
+						</select>
+					</label>
+				</div>
+
+				<div class="form-control mt-5">
+					<label class="input-group">
+						<span class="w-1/5 text-xl bg-primary">Password</span>
+						<input
+							autocomplete="current-password"
+							id="password"
+							name="password"
+							class="w-4/5 input input-bordered"
+							type="password"
+							placeholder="enter password"
+							required
+						/>
+					</label>
+				</div>
+
+				<div class="form-control mt-5">
+					<label class="input-group">
+						<span class="w-1/5 text-xl bg-primary">Confirm</span>
+						<input
+							autocomplete="current-password"
+							id="password"
+							name="password"
+							class="w-4/5 input input-bordered"
+							type="password"
+							placeholder="confirm password"
+							required
+						/>
+					</label>
+				</div>
+
+				<div class="form-control mt-6">
+					<button class:btn-disabled={disabled} class="btn btn-primary">ADD USER</button>
+				</div>
+			</form>
+		</span>
+	</DashboardPage>
 {/if}
-
-<!-- The button to open modal -->
-<div class="flex justify-end">
-	<label for="add-user-modal" class="my-5 btn btn-warning">
-		<PlusIcon class="mr-2 h-4 w-4" />
-		add user</label
-	>
-</div>
-
-<div class="card flex-col lg:flex-row bg-base-300 shadow-xl">
-	<div class="overflow-x-auto w-full scrollbar-thin scrollbar-thumb-gray-400 overflow-y-scroll">
-		<UserTableAdmin users={data.users} />
-	</div>
-</div>
-
-<!-- ADD USER MODAL -->
-<input type="checkbox" id="add-user-modal" class="modal-toggle" />
-<div class="modal">
-	<div class="modal-box">
-		<form method="POST" action="?/create">
-			<div class="form-control">
-				<!-- svelte-ignore a11y-label-has-associated-control -->
-				<label class="label">
-					<span class="label-text">Email</span>
-				</label>
-				<input
-					autocomplete="username"
-					id="email"
-					name="email"
-					class="input input-bordered"
-					type="email"
-					placeholder="email"
-					required
-				/>
-			</div>
-
-			<div class="form-control">
-				<!-- svelte-ignore a11y-label-has-associated-control -->
-				<label class="label">
-					<span class="label-text">Password</span>
-				</label>
-				<!-- <input type="text" placeholder="password" class="input input-bordered" /> -->
-				<input
-					autocomplete="current-password"
-					id="password"
-					name="password"
-					class="input input-bordered"
-					type="password"
-					placeholder="password"
-					required
-				/>
-			</div>
-
-			<!-- ONLY SUPER CAN ADD USERS TO ANY ORG -->
-			{#if role == 'super'}
-				<div class="form-control">
-					<!-- svelte-ignore a11y-label-has-associated-control -->
-					<label class="label">
-						<span class="label-text">Organization</span>
-					</label>
-					<select id="organization" name="organization" class="select select-bordered">
-						<option disabled selected>Select Organization</option>
-						{#each data.orgs as org}
-							<option>{org.name.toUpperCase()}</option>
-						{/each}
-					</select>
-				</div>
-			{/if}
-
-			<!-- ONLY SUPER CAN ADD USERS TO ANY ORG -->
-			{#if role == 'super'}
-				<div class="form-control">
-					<!-- svelte-ignore a11y-label-has-associated-control -->
-					<label class="label">
-						<span class="label-text">Role</span>
-					</label>
-					<select id="role" name="role" class="select select-bordered">
-						<option disabled selected>Select Role</option>
-						<option value="user">User</option>
-						<option value="admin">Admin</option>
-					</select>
-				</div>
-			{/if}
-
-			<div class="form-control mt-6">
-				<!-- {#if form}
-					<button class="btn loading btn-primary btn-warning" />
-				{:else} -->
-				<button class="btn btn-primary btn-warning">SUBMIT</button>
-				<!-- {/if} -->
-			</div>
-
-			<div class="form-control mt-6 modal-action">
-				<label for="add-user-modal" class="btn">CANCEL</label>
-			</div>
-		</form>
-	</div>
-</div>

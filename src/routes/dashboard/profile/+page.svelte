@@ -39,7 +39,7 @@
 					<span class="md:w-1/3 mr-1">Organization</span>
 					<input
 						type="text"
-						value={user?.app_metadata.org}
+						value={user?.app_metadata.org.name}
 						disabled
 						class="input input-bordered md:w-2/3"
 					/>

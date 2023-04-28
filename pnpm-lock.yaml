@@ -22,6 +22,9 @@ dependencies:
   svelte-markdown:
     specifier: ^0.2.3
     version: 0.2.3(svelte@3.58.0)
+  svelte-select:
+    specifier: ^5.6.0
+    version: 5.6.0
   svelte-table:
     specifier: ^0.5.9
     version: 0.5.9
@@ -326,6 +329,16 @@ packages:
     resolution: {integrity: sha512-kf9RB0Fg7NZfap83B3QOqOGg9QmD9yBudqQXzzOtn3i4y7ZUXe5ONeW34Gwi+TxhH4mvj72R1Zc300KUMa9Bng==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dev: true
+
+  /@floating-ui/core@1.2.6:
+    resolution: {integrity: sha512-EvYTiXet5XqweYGClEmpu3BoxmsQ4hkj3QaYA6qEnigCWffTP3vNRwBReTdrwDwo7OoJ3wM8Uoe9Uk4n+d4hfg==}
+    dev: false
+
+  /@floating-ui/dom@1.2.7:
+    resolution: {integrity: sha512-DyqylONj1ZaBnzj+uBnVfzdjjCkFCL2aA9ESHLyUOGSqb03RpbLMImP1ekIQXYs4KLk9jAjJfZAU8hXfWSahEg==}
+    dependencies:
+      '@floating-ui/core': 1.2.6
+    dev: false
 
   /@humanwhocodes/config-array@0.11.8:
     resolution: {integrity: sha512-UybHIJzJnR5Qc/MsD9Kr+RpO2h+/P1GhOwdiLPXK5TWk5sgTdu88bTD9UP+CKbPPh5Rni1u0GjAdYQLemG8g+g==}
@@ -2247,6 +2260,13 @@ packages:
       svelte: 3.58.0
     dev: true
 
+  /svelte-floating-ui@1.2.8:
+    resolution: {integrity: sha512-8Ifi5CD2Ui7FX7NjJRmutFtXjrB8T/FMNoS2H8P81t5LHK4I9G4NIs007rLWG/nRl7y+zJUXa3tWuTjYXw/O5A==}
+    dependencies:
+      '@floating-ui/core': 1.2.6
+      '@floating-ui/dom': 1.2.7
+    dev: false
+
   /svelte-hmr@0.15.1(svelte@3.58.0):
     resolution: {integrity: sha512-BiKB4RZ8YSwRKCNVdNxK/GfY+r4Kjgp9jCLEy0DuqAKfmQtpL38cQK3afdpjw4sqSs4PLi3jIPJIFp259NkZtA==}
     engines: {node: ^12.20 || ^14.13.1 || >= 16}
@@ -2317,6 +2337,13 @@ packages:
       svelte: 3.58.0
       typescript: 5.0.4
     dev: true
+
+  /svelte-select@5.6.0:
+    resolution: {integrity: sha512-+EDXupp3Lr/hKlXNra1vR1VEGxEEsFxYPs5yDDqQE+xagyAOd8P54IJtU84Z5QN3HYc8l2Hp+tNCCYZoTWWxyQ==}
+    dependencies:
+      '@floating-ui/dom': 1.2.7
+      svelte-floating-ui: 1.2.8
+    dev: false
 
   /svelte-table@0.5.9:
     resolution: {integrity: sha512-joNUpG3eAVETyDeW2cXRLciOl1R6J2YtDY481zOlH6kPq0q4MJKsXW6SDUuK108XhlVK0bpTMjRmB+ewz+xf0w==}

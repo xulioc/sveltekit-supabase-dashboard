@@ -31,12 +31,14 @@ export const actions: Actions = {
 				return fail(400, { error: res.error.details })
 		}
 
+		console.log(res.data)
+
 		res = await supabaseAdminClient.auth.admin.updateUserById(
 			session?.user.id,
-			{ app_metadata: { org, role: 'admin' } }
+			{ app_metadata: { org: { id: res.data.id, name: org }, role: 'admin' } }
 		)
 
-		console.log(res)
+		// console.log(res)
 
 		if (res.error) {
 			console.log(res.error)
