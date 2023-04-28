@@ -13,7 +13,6 @@ export const actions: Actions = {
 	save: async ({ request, locals: { supabase, getSession } }) => {
 
 		const session = await getSession();
-		// console.log(session)
 		const form_data = await request.formData();
 		const org = form_data.get('org')?.toString()
 
@@ -24,24 +23,18 @@ export const actions: Actions = {
 			.select('id')
 			.single()
 		if (res.error) {
-			console.log(res.error)
-			if (res.error.code == 23505)
+			if (res.error.code == '23505')
 				return fail(400, { error: "Organization name already exists!" })
 			else
 				return fail(400, { error: res.error.details })
 		}
 
-		console.log(res.data)
-
 		res = await supabaseAdminClient.auth.admin.updateUserById(
-			session?.user.id,
+			session?.user.id ?? '',
 			{ app_metadata: { org: { id: res.data.id, name: org }, role: 'admin' } }
 		)
 
-		// console.log(res)
-
 		if (res.error) {
-			console.log(res.error)
 			return fail(400, { error: res.error })
 		}
 
