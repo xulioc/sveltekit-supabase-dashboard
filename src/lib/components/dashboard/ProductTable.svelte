@@ -22,7 +22,6 @@
 			sortable: true
 		}
 	];
-	// console.log(products)
 </script>
 
 <!-- https://svelte.dev/repl/8b2264e66d9a456abeb5f2b9322605f7?version=3.49.0 -->

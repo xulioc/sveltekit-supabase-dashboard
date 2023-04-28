@@ -19,7 +19,6 @@ export const isSuper = (role: string) => {
 }
 
 export const orgIdToName = (orgs: any, id: number) => {
-    console.log(orgs)
     const result = orgs.find(e => e.id == id)
     return result.name
 }
