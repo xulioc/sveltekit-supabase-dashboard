@@ -1,9 +1,9 @@
 // index.d.ts
-import type { SvelteComponent } from 'svelte'
-import type { FlyParams } from 'svelte/types/runtime/transition/index'
-import type { Subscriber, Unsubscriber } from 'svelte/types/runtime/store/index'
+import type { SvelteComponent } from 'svelte';
+import type { FlyParams } from 'svelte/types/runtime/transition/index';
+import type { Subscriber, Unsubscriber } from 'svelte/types/runtime/store/index';
 
-declare module '@zerodevx/svelte-toast'
+declare module '@zerodevx/svelte-toast';
 
 /**
  * Default Toast Options
@@ -22,37 +22,37 @@ declare module '@zerodevx/svelte-toast'
  * ```
  */
 export interface SvelteToastOptions {
-  id?: number
-  target?: string
-  msg?: string
-  duration?: number
-  initial?: number
-  next?: number
-  progress?: number
-  pausable?: boolean
-  dismissable?: boolean
-  reversed?: boolean
-  intro?: FlyParams
-  theme?: { [key: string]: string | number }
-  classes?: string[]
-  component?: {
-    src: typeof SvelteComponent
-    props?: { [key: string]: any }
-    sendIdTo?: string
-  }
-  onpop?(id?: number): any
+	id?: number;
+	target?: string;
+	msg?: string;
+	duration?: number;
+	initial?: number;
+	next?: number;
+	progress?: number;
+	pausable?: boolean;
+	dismissable?: boolean;
+	reversed?: boolean;
+	intro?: FlyParams;
+	theme?: { [key: string]: string | number };
+	classes?: string[];
+	component?: {
+		src: typeof SvelteComponent;
+		props?: { [key: string]: any };
+		sendIdTo?: string;
+	};
+	onpop?(id?: number): any;
 }
 
 export class SvelteToast extends SvelteComponent {
-  options: SvelteToastOptions
-  target: string
+	options: SvelteToastOptions;
+	target: string;
 }
 
 declare namespace toast {
-  export function push(msg: string, options?: SvelteToastOptions): number
-  export function push(options: SvelteToastOptions): number
-  export function pop(arg?: any): void
-  export function set(id: number, options?: SvelteToastOptions): void
-  export function set(options: SvelteToastOptions): void
-  export function subscribe(run: Subscriber<any>): Unsubscriber
+	export function push(msg: string, options?: SvelteToastOptions): number;
+	export function push(options: SvelteToastOptions): number;
+	export function pop(arg?: any): void;
+	export function set(id: number, options?: SvelteToastOptions): void;
+	export function set(options: SvelteToastOptions): void;
+	export function subscribe(run: Subscriber<any>): Unsubscriber;
 }

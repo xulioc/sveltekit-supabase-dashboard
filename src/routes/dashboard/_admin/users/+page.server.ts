@@ -7,7 +7,6 @@ import { roleAdmin, roleSuper } from '$lib/utils';
 import { fail } from '@sveltejs/kit';
 import type { AnyObject } from 'chart.js/dist/types/basic';
 
-
 export const load: PageServerLoad = async ({ locals: { supabase, getSession } }) => {
 	const session = await getSession();
 	const org = session?.user.app_metadata.org;
@@ -17,11 +16,9 @@ export const load: PageServerLoad = async ({ locals: { supabase, getSession } })
 	let orgs = [];
 	// console.log(session.user)
 	if (roleAdmin(session)) {
-		users = res.data.users
+		users = res.data.users;
 
-		const r = await supabase
-			.from('orgs')
-			.select('id,name')
+		const r = await supabase.from('orgs').select('id,name');
 		orgs = r.data;
 		// console.log(orgs)
 
@@ -31,12 +28,10 @@ export const load: PageServerLoad = async ({ locals: { supabase, getSession } })
 		// orgs = orgs.filter((x, i, a) => a.indexOf(x) == i)
 		// orgs = orgs.filter((x) => x)
 		// // console.log(orgs)
-
-	}
-	else {
+	} else {
 		users = res.data.users.filter((user) => user.app_metadata.org.id == org.id);
 	}
-	return { users, orgs }
+	return { users, orgs };
 };
 
 export const actions: Actions = {
@@ -49,12 +44,12 @@ export const actions: Actions = {
 		let org: AnyObject | undefined;
 
 		if (roleSuper(session)) {
-			const tmp = JSON.parse(form_data.get('org')?.toString() ?? '')
-			org = { id: tmp.id, name: tmp.name }
-			console.log(org)
+			const tmp = JSON.parse(form_data.get('org')?.toString() ?? '');
+			org = { id: tmp.id, name: tmp.name };
+			console.log(org);
 		} else {
 			if (role == 'super') {
-				return fail(400, { error: "You are kidding me?" })
+				return fail(400, { error: 'You are kidding me?' });
 			}
 			org = session.user.app_metadata.org;
 		}
@@ -70,16 +65,15 @@ export const actions: Actions = {
 		// console.log(res)
 
 		if (res.error) {
-			return fail(400, { error: res.error.message })
+			return fail(400, { error: res.error.message });
 		}
 
-		return ({ success: "User created succesfully" })
+		return { success: 'User created succesfully' };
 	},
 
 	delete: async ({ request }) => {
-
 		if (PUBLIC_DEMO_MODE == 'true') {
-			return fail(400, { error: "USER DELETION DISABLED IN DEMO MODE!" })
+			return fail(400, { error: 'USER DELETION DISABLED IN DEMO MODE!' });
 		}
 
 		const form_data = await request.formData();
@@ -91,12 +85,11 @@ export const actions: Actions = {
 			const res = await supabaseClient.auth.admin.deleteUser(id);
 			if (res.error) {
 				// console.log(res)
-				return fail(400, { error: res.error.message })
-
+				return fail(400, { error: res.error.message });
 			}
 		} else {
-			return fail(400, { error: "Invalid data" })
+			return fail(400, { error: 'Invalid data' });
 		}
-		return ({ success: "User deleted succesfully" })
+		return { success: 'User deleted succesfully' };
 	}
 };

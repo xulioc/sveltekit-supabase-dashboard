@@ -4,68 +4,60 @@ import { fail } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async ({ request, locals: { supabase, getSession } }) => {
-    const session = await getSession();
+	const session = await getSession();
 
-    if (imSuper(session?.user ?? null)) {
-        // GET ALL ORGS
-        const res = await supabase
-            .from('orgs')
-            .select()
-        if (res.data) {
-            return { orgs: res.data };
-        }
-    }
-}
+	if (imSuper(session?.user ?? null)) {
+		// GET ALL ORGS
+		const res = await supabase.from('orgs').select();
+		if (res.data) {
+			return { orgs: res.data };
+		}
+	}
+};
 
 export const actions: Actions = {
-    create: async ({ request, locals: { supabase, getSession } }) => {
+	create: async ({ request, locals: { supabase, getSession } }) => {
+		// if (PUBLIC_DEMO_MODE == 'true') {
+		//     return { error: "ORGANIZATION CREATION DISABLED IN DEMO MODE!" }
+		// }
 
-        // if (PUBLIC_DEMO_MODE == 'true') {
-        //     return { error: "ORGANIZATION CREATION DISABLED IN DEMO MODE!" }
-        // }
+		const session = await getSession();
+		const formData = await request.formData();
+		const name = formData.get('name')?.toString();
 
-        const session = await getSession();
-        const formData = await request.formData();
-        const name = formData.get('name')?.toString()
+		// INSERT ORG
+		const res = await supabase
+			.from('orgs')
+			.upsert({ name, created_by: session?.user.email })
+			.select('id')
+			.single();
 
-        // INSERT ORG
-        const res = await supabase
-            .from('orgs')
-            .upsert({ name, created_by: session?.user.email })
-            .select('id')
-            .single()
+		if (res.error) {
+			return fail(400, { error: res.error.details });
+		}
 
-        if (res.error) {
-            return fail(400, { error: res.error.details })
-        }
+		return { success: `Organization ${name} created succesfully` };
+	},
 
-        return { success: `Organization ${name} created succesfully` }
-    },
+	delete: async ({ request, locals: { supabase } }) => {
+		if (PUBLIC_DEMO_MODE == 'true') {
+			return { error: 'ORGANIZATION DELETE DISABLED IN DEMO MODE!' };
+		}
 
-    delete: async ({ request, locals: { supabase } }) => {
+		// console.log('deleting org')
+		const form_data = await request.formData();
+		const id = form_data.get('id')?.toString();
 
-        if (PUBLIC_DEMO_MODE == 'true') {
-            return { error: "ORGANIZATION DELETE DISABLED IN DEMO MODE!" }
-        }
+		// console.log(form_data)
 
-        // console.log('deleting org')
-        const form_data = await request.formData();
-        const id = form_data.get('id')?.toString()
+		const res = await supabase.from('orgs').delete().eq('id', id);
 
-        // console.log(form_data)
+		// console.log(res)
 
-        const res = await supabase
-            .from('orgs')
-            .delete()
-            .eq('id', id)
+		if (res.error) {
+			return fail(400, { error: res.error.message });
+		}
 
-        // console.log(res)
-
-        if (res.error) {
-            return fail(400, { error: res.error.message })
-        }
-
-        return ({ success: "Organization deleted succesfully" })
-
-    }
-}
+		return { success: 'Organization deleted succesfully' };
+	}
+};

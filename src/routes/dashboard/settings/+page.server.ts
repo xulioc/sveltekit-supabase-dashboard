@@ -6,17 +6,13 @@ export const load: PageServerLoad = async ({ locals: { getSession } }) => {
 	return user;
 };
 
-
 export const actions: Actions = {
 	save: async ({ request, locals: { supabase } }) => {
-
 		const form_data = await request.formData();
 		const user_name = form_data.get('user_name');
 
-		const { data, error } = await supabase.auth.updateUser(
-			{
-				data: { name: user_name }
-			});
-
+		const { data, error } = await supabase.auth.updateUser({
+			data: { name: user_name }
+		});
 	}
 };
