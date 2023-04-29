@@ -18,9 +18,9 @@
 		<div class="px-5">
 			<!-- <div class={role === 'admin' ? 'text-accent' : ''}> -->
 			<div>
-				{$page.data.session.user.email}
-				{#if $page.data.session.user.app_metadata.org.name}
-					({$page.data.session.user.app_metadata.org.name})
+				{$page.data.session?.user.email}
+				{#if $page.data.session?.user.app_metadata.org?.name}
+					({$page.data.session?.user.app_metadata.org?.name})
 				{/if}
 			</div>
 		</div>
