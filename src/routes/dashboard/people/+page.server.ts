@@ -1,7 +1,7 @@
 import { error } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 
-export const load: PageServerLoad = async ({ fetch, locals: { supabase, getSession } }) => {
+export const load: PageServerLoad = async ({ fetch }) => {
 	try {
 		const result = await fetch('https://dummyjson.com/users');
 		const users = await result.json();
@@ -9,7 +9,7 @@ export const load: PageServerLoad = async ({ fetch, locals: { supabase, getSessi
 			return users;
 		}
 	} catch {
-		throw error(404, 'SOMETHING WRING');
+		throw error(404, 'SOMETHING WRONG');
 	}
 
 	throw error(404, 'Not found');

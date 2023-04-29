@@ -1,6 +1,6 @@
 import type { PageServerLoad } from './$types';
 
-export const load: PageServerLoad = async ({ request, locals: { supabase, getSession } }) => {
+export const load: PageServerLoad = async ({ locals: { supabase } }) => {
 	// GET EVENTS
 	// console.log("EVENTS")
 	const res = await supabase

@@ -5,7 +5,6 @@ import { PUBLIC_DEMO_MODE } from '$env/static/public';
 import { supabaseAdminClient as supabaseClient } from '$lib/server/supabase';
 import { roleAdmin, roleSuper } from '$lib/utils';
 import { fail } from '@sveltejs/kit';
-import type { AnyObject } from 'chart.js/dist/types/basic';
 
 export const load: PageServerLoad = async ({ locals: { supabase, getSession } }) => {
 	const session = await getSession();
@@ -41,7 +40,7 @@ export const actions: Actions = {
 		const email = form_data.get('email')?.toString();
 		const role = form_data.get('role')?.toString();
 		const password = form_data.get('password')?.toString();
-		let org: AnyObject | undefined;
+		let org: any | undefined;
 
 		if (roleSuper(session)) {
 			const tmp = JSON.parse(form_data.get('org')?.toString() ?? '');
@@ -51,7 +50,7 @@ export const actions: Actions = {
 			if (role == 'super') {
 				return fail(400, { error: 'You are kidding me?' });
 			}
-			org = session.user.app_metadata.org;
+			org = session?.user.app_metadata.org;
 		}
 
 		// console.log(session)

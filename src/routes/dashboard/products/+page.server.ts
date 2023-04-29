@@ -1,7 +1,7 @@
 import { error } from '@sveltejs/kit';
+import type { PageServerLoad } from './$types';
 
-/** @type {import('./$types').PageServerLoad} */
-export async function load({ params }) {
+export const load: PageServerLoad = async ({ fetch }) => {
 	const result = await fetch('https://dummyjson.com/products');
 	const products = await result.json();
 
@@ -10,4 +10,4 @@ export async function load({ params }) {
 	}
 
 	throw error(404, 'Not found');
-}
+};

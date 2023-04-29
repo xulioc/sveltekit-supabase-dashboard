@@ -11,7 +11,7 @@
 	import SignUp from './SignUp.svelte';
 
 	export let form: ActionData;
-	const to: string | null = $page.url.searchParams.get('to');
+	// const to: string | null = $page.url.searchParams.get('to');
 
 	let view = 'signin';
 
@@ -50,7 +50,7 @@
 				{:else if view == 'forgot'}
 					<Forgot {form} />
 				{:else if view == 'reset'}
-					<Reset {form} />
+					<Reset />
 				{/if}
 			</div>
 			{#if form?.error}

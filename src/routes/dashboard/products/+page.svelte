@@ -1,9 +1,7 @@
-<script>
+<script lang="ts">
 	import ProductTable from '$lib/components/dashboard/ProductTable.svelte';
-	import { Link2Icon } from 'svelte-feather-icons';
-
-	/** @type {import('./$types').PageData} */
-	export let data;
+	import type { PageData } from './$types';
+	export let data: PageData;
 </script>
 
 <div class="card flex-col lg:flex-row bg-base-300 shadow-xl">

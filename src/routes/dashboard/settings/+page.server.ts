@@ -11,8 +11,12 @@ export const actions: Actions = {
 		const form_data = await request.formData();
 		const user_name = form_data.get('user_name');
 
-		const { data, error } = await supabase.auth.updateUser({
+		const res = await supabase.auth.updateUser({
 			data: { name: user_name }
 		});
+
+		if (res.error) {
+			console.log(res.error);
+		}
 	}
 };

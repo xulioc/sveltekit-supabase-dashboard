@@ -1,14 +1,13 @@
 <script lang="ts">
 	import RoleBadge from '$lib/components/dashboard/RoleBadge.svelte';
-	import type { AnyObject } from 'chart.js/types/basic';
 	import { TrashIcon } from 'svelte-feather-icons';
 	import Time from 'svelte-time';
 
 	export let users: Array<any>;
 
-	let current_user: AnyObject = {};
+	let current_user: any = {};
 
-	function updateUser(usr: AnyObject): any {
+	function updateUser(usr: any): any {
 		current_user = usr;
 	}
 </script>
