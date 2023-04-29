@@ -60,10 +60,11 @@ export const handle: Handle = async ({ event, resolve }) => {
 
     // LOG EVENTS HERE
     // console.log(event)
-    // console.log(event.url)
-
-    if (event.url.toString().startsWith('http://localhost')) {
-        return ret;
+    if (import.meta.env.DEV) {
+        // DISCARD LOCALHOST EVENTS
+        if (event.url.toString().startsWith('http://localhost')) {
+            return ret;
+        }
     }
 
     // DISCARD _app events
