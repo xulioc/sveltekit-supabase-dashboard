@@ -1,3 +1,4 @@
+import { PUBLIC_DEMO_MODE } from '$env/static/public';
 import { imSuper } from '$lib/utils';
 import { fail } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from './$types';
@@ -39,5 +40,32 @@ export const actions: Actions = {
         }
 
         return { success: `Organization ${name} created succesfully` }
+    },
+
+    delete: async ({ request, locals: { supabase } }) => {
+
+        if (PUBLIC_DEMO_MODE == 'true') {
+            return { error: "ORGANIZATION DELETE DISABLED IN DEMO MODE!" }
+        }
+
+        // console.log('deleting org')
+        const form_data = await request.formData();
+        const id = form_data.get('id')?.toString()
+
+        // console.log(form_data)
+
+        const res = await supabase
+            .from('orgs')
+            .delete()
+            .eq('id', id)
+
+        // console.log(res)
+
+        if (res.error) {
+            return fail(400, { error: res.error.message })
+        }
+
+        return ({ success: "Organization deleted succesfully" })
+
     }
 }

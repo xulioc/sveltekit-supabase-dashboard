@@ -3,5 +3,8 @@
 	"editor.codeActionsOnSave": {
 		"source.organizeImports": true
 	},
-	"svg.preview.background": "editor"
+	"svg.preview.background": "editor",
+	"[svelte]": {
+		"editor.defaultFormatter": "svelte.svelte-vscode"
+	},
 }

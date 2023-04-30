@@ -1,7 +1,9 @@
 <script lang="ts">
 	import SvelteTable from 'svelte-table';
+	import TableActions from './TableActions.svelte';
 	import TimeInTable from './TimeInTable.svelte';
 	export let orgs: Array<any>;
+	export let onAction;
 
 	const columns = [
 		{
@@ -21,7 +23,17 @@
 			title: 'Created at',
 			value: (v: any) => v.created_at,
 			sortable: true,
-			renderComponent: TimeInTable
+			renderComponent: {
+				component: TimeInTable,
+				props: { field: 'created_at', format: 'YYYY-MM-DD HH:mm' }
+			}
+		},
+		{
+			title: '',
+			renderComponent: {
+				component: TableActions,
+				props: { actions: ['delete'], onAction }
+			}
 		}
 	];
 </script>

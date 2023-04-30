@@ -31,14 +31,20 @@
 			title: 'CREATED',
 			value: (v: any) => v.created_at,
 			sortable: true,
-			renderComponent: TimeInTable
+			renderComponent: {
+				component: TimeInTable,
+				props: { field: 'created_at', format: 'YY-MM-DD HH:mm' }
+			}
 		},
 		{
 			key: 'last',
 			title: 'LAST SEEN',
 			value: (v: any) => v.last_sign_in_at,
 			sortable: true,
-			renderComponent: TimeInTable
+			renderComponent: {
+				component: TimeInTable,
+				props: { field: 'last_sign_in_at', format: 'YY-MM-DD HH:mm' }
+			}
 		},
 		{
 			key: 'actions',

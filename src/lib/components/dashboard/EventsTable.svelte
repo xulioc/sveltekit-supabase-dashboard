@@ -11,7 +11,7 @@
 			sortable: true,
 			renderComponent: {
 				component: TimeInTable,
-				props: { format: 'YYYY-MM-DD HH:mm:sss' }
+				props: { field: 'timestamp', format: 'YYYY-MM-DD HH:mm:sss' }
 			}
 		},
 		{

@@ -52,6 +52,9 @@ export const handle: Handle = async ({ event, resolve }) => {
 
     // LOG EVENTS HERE
     // console.log(event)
+    // console.log(event.url)
+    // const form_data = await event.request.formData();
+    // console.log(form_data)
     const res = await event.locals.supabase.from('tracking').insert([
         { 'user': session?.user, 'event': event.url }
     ])
