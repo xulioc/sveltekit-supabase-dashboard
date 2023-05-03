@@ -23,7 +23,7 @@
 		{
 			key: 'org',
 			title: 'ORG',
-			value: (v: any) => v.app_metadata.org.name,
+			value: (v: any) => v.app_metadata.org?.name,
 			sortable: true
 		},
 		{
