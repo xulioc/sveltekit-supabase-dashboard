@@ -4,12 +4,7 @@
 	import README from '../../README.md?raw';
 </script>
 
-<svelte:head>
-	<!-- Place this tag in your head or just before your close body tag. -->
-	<!-- Place this tag in your head or just before your close body tag. -->
-	<!-- Place this tag in your head or just before your close body tag. -->
-	<script async defer src="https://buttons.github.io/buttons.js"></script>
-</svelte:head>
+<svelte:head />
 
 <div class="container mx-auto">
 	<div class="navbar bg-neutral">
@@ -40,36 +35,6 @@
 					</div>
 				</div>
 				<h1 class="text-4xl font-bold">Dashboard!</h1>
-
-				<!-- <p class="py-6">
-					Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi
-					exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.
-				</p> -->
-				<!-- <a
-					href="https://github.com/xulioc/sveltekit-supabase-dashboard"
-					role="button"
-					class="btn btn-primary">GitHub</a
-				> -->
-
-				<!-- Place this tag where you want the button to render. -->
-				<!-- <a
-					class="github-button"
-					href="https://github.com/xulioc/sveltekit-supabase-dashboard"
-					data-color-scheme="no-preference: light; light: light; dark: dark;"
-					data-icon="octicon-star"
-					data-size="large"
-					aria-label="Star xulioc/sveltekit-supabase-dashboard on GitHub">Star</a
-				> -->
-
-				<!-- Place this tag where you want the button to render. -->
-				<!-- <a
-					class="github-button"
-					href="https://github.com/xulioc/sveltekit-supabase-dashboard/subscription"
-					data-color-scheme="no-preference: light; light: light; dark: dark;"
-					data-icon="octicon-eye"
-					data-size="large"
-					aria-label="Watch xulioc/sveltekit-supabase-dashboard on GitHub">Watch</a
-				> -->
 			</div>
 		</div>
 	</div>

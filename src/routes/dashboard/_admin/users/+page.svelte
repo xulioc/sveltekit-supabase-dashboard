@@ -13,10 +13,10 @@
 	export let data: PageData;
 	export let form: ActionData;
 
-	let view: string = 'home';
+	let view = 'home';
 
 	// https://kit.svelte.dev/docs/form-actions#progressive-enhancement-custom-event-listener
-	const deleteAction = async (id: any) => {
+	const deleteAction = async (id: string) => {
 		const data = new FormData();
 		data.append('id', id);
 		const response = await fetch('users?/delete', {

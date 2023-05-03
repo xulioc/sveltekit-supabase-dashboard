@@ -4,7 +4,7 @@
 
 	export let noghost: string | boolean = false;
 	export let tooltip: string | null = null;
-	export let dest: string = '/dashboard';
+	export let dest = '/dashboard';
 	let clazz: string | null = null;
 	export { clazz as class };
 	let active: string | boolean = false;

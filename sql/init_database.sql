@@ -153,4 +153,17 @@ CREATE TABLE IF NOT EXISTS tracking (
   event jsonb
 );
 
+-- STORAGE RULES
+-- DROP POLICY IF EXISTS "SUPER ACCES TO OBJECTS" ON storage.objects;
+CREATE POLICY "SUPER ACCES TO OBJECTS" ON storage.objects
+AS PERMISSIVE FOR ALL
+TO authenticated
+USING (get_my_claim('role') = '"super"');
+
+-- DROP POLICY IF EXISTS "SUPER ACCES TO BUCKETS" ON storage.objects;
+CREATE POLICY "SUPER ACCES TO BUCKETS" ON storage.buckets
+AS PERMISSIVE FOR ALL
+TO authenticated
+USING (get_my_claim('role') = '"super"');
+
 NOTIFY pgrst, 'reload schema';

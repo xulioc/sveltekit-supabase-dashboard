@@ -70,7 +70,7 @@ ADMIN
 	<div><WeatherChart weather={data.weather} /></div>
 </div>
 
-<div class="card flex-col lg:flex-row bg-base-200 shadow-xl mt-5 ">
+<div class="card flex-col lg:flex-row bg-base-200 shadow-xl mt-5">
 	<div class="hero">
 		<div class="hero-content flex-col lg:flex-row">
 			<!-- <img

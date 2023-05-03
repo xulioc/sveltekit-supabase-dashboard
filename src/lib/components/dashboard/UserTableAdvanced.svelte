@@ -6,13 +6,13 @@
 		{
 			key: 'firstName',
 			title: 'Name',
-			value: (v) => v.firstName,
+			value: (v: any) => v.firstName,
 			sortable: true
 		},
 		{
 			key: 'firstName',
 			title: 'Name',
-			value: (v) => v.firstName,
+			value: (v: any) => v.firstName,
 			sortable: true
 		}
 	];

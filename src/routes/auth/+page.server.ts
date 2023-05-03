@@ -3,7 +3,6 @@ import { AuthApiError } from '@supabase/supabase-js';
 import { fail, redirect } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from './$types';
 
-
 export const load: PageServerLoad = async ({ locals: { getSession } }) => {
 	const session = await getSession();
 	if (session?.user) {
@@ -55,7 +54,7 @@ export const actions: Actions = {
 		const { error } = await supabase.auth.signUp({
 			email,
 			password
-		})
+		});
 
 		if (error) {
 			if (error instanceof AuthApiError) {
@@ -67,12 +66,11 @@ export const actions: Actions = {
 				});
 			}
 			return fail(500, {
-				error: 'Server error. Try again later.',
+				error: 'Server error. Try again later.'
 			});
 		}
 
 		throw redirect(303, '/dashboard/startup');
-
 	},
 
 	// invite: async ({ request, locals: { supabase, getSession } }) => {
@@ -95,25 +93,23 @@ export const actions: Actions = {
 
 		// console.log(PUBLIC_SITE_URL + '/auth?reset')
 		const { error } = await supabase.auth.resetPasswordForEmail(email, {
-
-			redirectTo: PUBLIC_SITE_URL + '/auth?reset',
-		})
+			redirectTo: PUBLIC_SITE_URL + '/auth?reset'
+		});
 
 		if (error) {
 			if (error instanceof AuthApiError) {
 				return fail(400, {
-					error: error.message,
+					error: error.message
 				});
 			}
 			return fail(500, {
-				error: 'Server error. Try again later.',
+				error: 'Server error. Try again later.'
 			});
 		} else {
 			return {
-				message: "Reset link sent to email"
-			}
+				message: 'Reset link sent to email'
+			};
 		}
-
 	},
 
 	reset: async ({ request, locals: { supabase } }) => {
@@ -122,21 +118,20 @@ export const actions: Actions = {
 
 		const { error } = await supabase.auth.updateUser({
 			password
-		})
+		});
 
 		if (error) {
 			if (error instanceof AuthApiError) {
 				return fail(400, {
-					error: error.message,
+					error: error.message
 				});
 			}
 			return fail(500, {
-				error: 'Server error. Try again later.',
+				error: 'Server error. Try again later.'
 			});
 		}
 
 		throw redirect(303, '/dashboard');
-
 	},
 
 	signout: async ({ locals: { supabase } }) => {
