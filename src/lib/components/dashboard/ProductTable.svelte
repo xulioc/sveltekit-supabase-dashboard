@@ -29,5 +29,6 @@
 	{columns}
 	rows={products}
 	classNameTable={['table table-compact table-zebra']}
+	classNameThead={'bg-black'}
 	classNameRow="hover cursor-pointer"
 />

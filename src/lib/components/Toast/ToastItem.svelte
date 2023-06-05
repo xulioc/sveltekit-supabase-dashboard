@@ -1,9 +1,9 @@
 <script>
-	import { onMount, onDestroy } from 'svelte';
-	import { tweened } from 'svelte/motion';
-	import { linear } from 'svelte/easing';
-	import { toast } from './stores.js';
+	import { onDestroy, onMount } from 'svelte';
 	import { AlertTriangleIcon, InfoIcon } from 'svelte-feather-icons';
+	import { linear } from 'svelte/easing';
+	import { tweened } from 'svelte/motion';
+	import { toast } from './stores.js';
 
 	export let item;
 
@@ -87,6 +87,8 @@
 		{:else if item.classes.includes('alert-error')}
 			<AlertTriangleIcon />
 		{/if}
+	</div>
+	<div class="grow">
 		<span> {@html item.msg}</span>
 	</div>
 	{#if item.dismissable}

@@ -1,5 +1,5 @@
-<div class="alert alert-info shadow-lg mb-5">
-	<div>
+<div class="flex alert alert-info shadow-lg mb-5">
+	<div class="flex-none">
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
 			class="stroke-current flex-shrink-0 h-6 w-6"
@@ -12,6 +12,8 @@
 				d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
 			/></svg
 		>
+	</div>
+	<div>
 		<span
 			><a href="https://daisyui.com/components/table/">DaisyUI</a> table example with static data</span
 		>
