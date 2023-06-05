@@ -5,6 +5,15 @@
 	import DemoUserNotice from '$lib/components/DemoMode/DemoUserNotice.svelte';
 	import { Toast } from '$lib/components/Toast';
 	import { onMount } from 'svelte';
+	import {
+		ArchiveIcon,
+		FileIcon,
+		HomeIcon,
+		LayoutIcon,
+		ListIcon,
+		RadioIcon,
+		UsersIcon
+	} from 'svelte-feather-icons';
 	import { Jumper } from 'svelte-loading-spinners';
 	import { themeChange } from 'theme-change';
 
@@ -13,10 +22,26 @@
 		themeChange(false);
 		// 👆 false parameter is required for svelte
 	});
+
+	const menu = {
+		user: [
+			{ tooltip: 'Home', dest: '/dashboard', icon: HomeIcon },
+			{ tooltip: 'Tables', dest: '/dashboard/tables', icon: LayoutIcon },
+			{ tooltip: 'Products', dest: '/dashboard/products', icon: RadioIcon },
+			{ tooltip: 'People', dest: '/dashboard/people', icon: UsersIcon },
+			// { tooltip: 'Items', dest: '/dashboard/items', icon: BoxIcon },
+			{ tooltip: 'Files', dest: '/dashboard/files', icon: FileIcon }
+		],
+		admin: [{ tooltip: 'Users', dest: '/dashboard/_admin/users', icon: UsersIcon }],
+		super: [
+			{ tooltip: 'Organizations', dest: '/dashboard/_super/orgs', icon: ArchiveIcon },
+			{ tooltip: 'Events', dest: '/dashboard/_super/events', icon: ListIcon }
+		]
+	};
 </script>
 
 <section id="body" class="flex flex-row h-screen">
-	<DashboardMenu />
+	<DashboardMenu {menu} />
 	<Toast />
 
 	<div class="flex flex-col w-full">

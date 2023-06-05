@@ -166,4 +166,24 @@ AS PERMISSIVE FOR ALL
 TO authenticated
 USING (get_my_claim('role') = '"super"');
 
+-- FILE ACCESS WHEN ORGANIZATION = FOLDER
+DROP POLICY IF EXISTS "FILES OBJECTS ACCESS" ON storage.objects;
+CREATE POLICY "FILES OBJECTS ACCESS"
+ON storage.objects FOR ALL 
+TO authenticated
+USING (
+  bucket_id = 'files'
+  --AND get_my_claim('role') = '"admin"'
+  AND (storage.foldername(name))[1] = get_my_claim('org') ->>'name'
+);
+
+CREATE POLICY "FILES ACCESS TO ADMIN (BUCKETS)"
+ON storage.buckets FOR ALL 
+TO authenticated
+USING (
+  get_my_claim('role') = '"admin"'
+  -- AND (storage.foldername(name))[0] = 'ACME'
+  -- AND ((storage.foldername(name))[0])::text = (get_my_claim('org') -> 'name')::text
+);
+
 NOTIFY pgrst, 'reload schema';

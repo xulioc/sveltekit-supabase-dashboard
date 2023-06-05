@@ -1,5 +1,6 @@
 <script lang="ts">
 	export let row;
+	export let col: any;
 	const role = row.app_metadata.role;
 </script>
 

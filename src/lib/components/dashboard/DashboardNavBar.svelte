@@ -8,7 +8,7 @@
 <div class="navbar px-5 border-b border-opacity-10 border-base-content">
 	<!-- APP TITLE  -->
 	<div class="flex-1">
-		<a href="/dashboard" class="link no-underline text-xl">
+		<a href="/dashboard" class="link no-underline max-md:hidden text-xl">
 			{PUBLIC_APP_NAME}
 		</a>
 	</div>
@@ -18,10 +18,10 @@
 		<div class="px-5">
 			<!-- <div class={role === 'admin' ? 'text-accent' : ''}> -->
 			<div>
-				{$page.data.session?.user.email}
+				<!-- {$page.data.session?.user.email}
 				{#if $page.data.session?.user.app_metadata.org?.name}
 					({$page.data.session?.user.app_metadata.org?.name})
-				{/if}
+				{/if} -->
 			</div>
 		</div>
 	{/if}
@@ -58,4 +58,14 @@
 			</div>
 		</div>
 	</div>
+
+	<!-- <form action="/auth?/signout" method="POST">
+		<div class="z-50 dropdown dropdown-hover dropdown-end">
+			<label tabindex="0" class="btn btn-circle btn-ghost m-1"><UserIcon /></label>
+			<ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-max">
+				<li><p class="text-sm">{$page.data.session?.user.email ?? ''}</p></li>
+				<button type="submit" class="btn btn-primary btn-block">SIGN OUT</button>
+			</ul>
+		</div>
+	</form> -->
 </div>

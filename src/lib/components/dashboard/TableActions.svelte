@@ -3,6 +3,7 @@
 		ChevronDownIcon,
 		ChevronUpIcon,
 		EditIcon,
+		EyeIcon,
 		InfoIcon,
 		RotateCwIcon,
 		TrashIcon
@@ -10,11 +11,21 @@
 	import Confirm from './Confirm.svelte';
 
 	export let row: any;
+	export let col: any;
 	export let onAction: any;
 	export let actions: Array<any> = [];
 </script>
 
 <div class="flex justify-center text-left space-x-2">
+	{#if actions.includes('preview')}
+		<button
+			on:click|preventDefault={() => onAction({ action: 'preview', row })}
+			class="btn btn-sm btn-circle btn-ghost btn-primary"
+		>
+			<EyeIcon class="" />
+		</button>
+	{/if}
+
 	{#if actions.includes('up')}
 		<button
 			on:click|preventDefault={() => onAction({ action: 'up', row })}

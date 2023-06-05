@@ -1,18 +1,10 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import { isAdmin, isSuper, userColor } from '$lib/utils';
-	import {
-		ArchiveIcon,
-		HomeIcon,
-		LayoutIcon,
-		ListIcon,
-		LogOutIcon,
-		RadioIcon,
-		SettingsIcon,
-		UserIcon,
-		UsersIcon
-	} from 'svelte-feather-icons';
+	import { LogOutIcon, SettingsIcon, UserIcon } from 'svelte-feather-icons';
 	import NavBarButton from './NavBarButton.svelte';
+
+	export let menu: any;
 
 	const role: string = $page.data.session?.user.app_metadata.role ?? '';
 </script>
@@ -21,7 +13,6 @@
 	<div class="navbar flex flex-col h-full bg-base-100">
 		<div class="mt-1 mb-8">
 			<a class="px-3 pt-2" href="/">
-				<!-- <SmileIcon class="" /> -->
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					width="30"
@@ -40,38 +31,29 @@
 			</a>
 		</div>
 
-		<NavBarButton tooltip="Home" dest="/dashboard">
-			<span slot="icon"><HomeIcon /></span>
-		</NavBarButton>
-
-		<NavBarButton tooltip="Tables" dest="/dashboard/tables">
-			<span slot="icon"><LayoutIcon /></span>
-		</NavBarButton>
-
-		<NavBarButton tooltip="Products" dest="/dashboard/products">
-			<span slot="icon"><RadioIcon /></span>
-		</NavBarButton>
-
-		<NavBarButton tooltip="People" dest="/dashboard/people">
-			<span slot="icon"><UsersIcon /></span>
-		</NavBarButton>
+		{#each menu.user as m}
+			<NavBarButton tooltip={m.tooltip} dest={m.dest}>
+				<span slot="icon"><svelte:component this={m.icon} /></span>
+			</NavBarButton>
+		{/each}
 
 		<div class="max-md:my-0 divider" />
 
 		{#if isAdmin(role)}
-			<NavBarButton tooltip="Users" dest="/dashboard/_admin/users">
-				<span slot="icon"><UsersIcon class="stroke-warning" /></span>
-			</NavBarButton>
+			{#each menu.admin as m}
+				<NavBarButton tooltip={m.tooltip} dest={m.dest}>
+					<span slot="icon"><svelte:component this={m.icon} class="stroke-warning" /></span>
+				</NavBarButton>
+			{/each}
 			<div class="divider" />
 		{/if}
 
 		{#if isSuper(role)}
-			<NavBarButton tooltip="Organizations" dest="/dashboard/_super/orgs">
-				<span slot="icon"><ArchiveIcon class="stroke-accent" /></span>
-			</NavBarButton>
-			<NavBarButton tooltip="Events" dest="/dashboard/_super/events">
-				<span slot="icon"><ListIcon class="stroke-accent" /></span>
-			</NavBarButton>
+			{#each menu.super as m}
+				<NavBarButton tooltip={m.tooltip} dest={m.dest}>
+					<span slot="icon"><svelte:component this={m.icon} class="stroke-accent" /></span>
+				</NavBarButton>
+			{/each}
 			<div class="max-md:my-0 divider" />
 		{/if}
 

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Time from 'svelte-time/src/Time.svelte';
 	export let row: any;
+	export let col: any;
 	export let field: string;
 	export let format: string;
 </script>

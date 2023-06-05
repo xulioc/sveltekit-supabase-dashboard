@@ -1,6 +1,8 @@
 <script lang="ts">
 	import SvelteTable from 'svelte-table';
+	import TableActions from './TableActions.svelte';
 	export let files: any;
+	export let onAction: any | null = null;
 
 	const columns = [
 		{
@@ -26,6 +28,14 @@
 			title: 'size',
 			value: (v: any) => v.metadata.size,
 			sortable: true
+		},
+		{
+			key: 'actions',
+			title: '',
+			renderComponent: {
+				component: TableActions,
+				props: { actions: ['preview', 'delete'], onAction }
+			}
 		}
 	];
 </script>

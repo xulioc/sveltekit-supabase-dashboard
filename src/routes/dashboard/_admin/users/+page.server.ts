@@ -3,7 +3,7 @@ import type { Actions, PageServerLoad } from './$types';
 
 import { PUBLIC_DEMO_MODE } from '$env/static/public';
 import { supabaseAdminClient as supabaseClient } from '$lib/server/supabase';
-import { roleAdmin, roleSuper } from '$lib/utils';
+import { roleSuper } from '$lib/utils';
 import { fail } from '@sveltejs/kit';
 
 export const load: PageServerLoad = async ({ locals: { supabase, getSession } }) => {
@@ -14,21 +14,14 @@ export const load: PageServerLoad = async ({ locals: { supabase, getSession } })
 	let users: User[] = [];
 	let orgs = [];
 	// console.log(session.user)
-	if (roleAdmin(session)) {
+	if (roleSuper(session)) {
 		users = res.data.users;
-
 		const r = await supabase.from('orgs').select('id,name');
 		orgs = r.data;
-		// console.log(orgs)
-
-		// ONLY GET ORGS FROM ALREADY CREATED USERS
-		// orgs = users.map(x => x.app_metadata.org.name);
-		// // console.log(orgs)
-		// orgs = orgs.filter((x, i, a) => a.indexOf(x) == i)
-		// orgs = orgs.filter((x) => x)
-		// // console.log(orgs)
 	} else {
-		users = res.data.users.filter((user) => user.app_metadata.org.id == org.id);
+		// console.log(org);
+		// console.log(res.data.users);
+		users = res.data.users.filter((user) => user.app_metadata.org?.id == org.id);
 	}
 	return { users, orgs };
 };

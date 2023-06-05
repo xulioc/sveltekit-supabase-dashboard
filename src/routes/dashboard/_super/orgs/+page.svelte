@@ -2,6 +2,7 @@
 	import { applyAction, deserialize, enhance } from '$app/forms';
 	import { invalidateAll } from '$app/navigation';
 	import { toast } from '$lib/components/Toast';
+	import ActionButton from '$lib/components/dashboard/ActionButton.svelte';
 	import DashboardPage from '$lib/components/dashboard/DashboardPage.svelte';
 	import OrgsTable from '$lib/components/dashboard/OrgsTable.svelte';
 	import type { ActionResult } from '@sveltejs/kit';
@@ -60,15 +61,15 @@
 		<span slot="icon"><ArchiveIcon /></span>
 		<span slot="title">Organizations</span>
 		<span slot="actions">
-			<button
-				class="btn btn-primary gap-2"
-				on:click={() => {
+			<ActionButton
+				class="btn-accent"
+				text="add org"
+				onAction={() => {
 					view = 'add';
 				}}
 			>
-				<PlusIcon class="h-4 w-4" />
-				add org
-			</button>
+				<span slot="icon"><PlusIcon /></span>
+			</ActionButton>
 		</span>
 		<span slot="content" class="w-full">
 			<OrgsTable orgs={data.orgs} {onAction} />
