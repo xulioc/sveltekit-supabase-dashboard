@@ -96,16 +96,16 @@ ADMIN
 
 <div class="carousel w-full mt-5">
 	<div id="item1" class="carousel-item w-full">
-		<img alt="" src="https://placeimg.com/800/200/arch" class="w-full" />
+		<img alt="" src="https://picsum.photos/id/0/400/100" class="w-full" />
 	</div>
 	<div id="item2" class="carousel-item w-full">
-		<img alt="" src="https://placeimg.com/800/200/nature" class="w-full" />
+		<img alt="" src="https://picsum.photos/id/12/400/100" class="w-full" />
 	</div>
 	<div id="item3" class="carousel-item w-full">
-		<img alt="" src="https://placeimg.com/800/200/people" class="w-full" />
+		<img alt="" src="https://picsum.photos/id/28/400/100" class="w-full" />
 	</div>
 	<div id="item4" class="carousel-item w-full">
-		<img alt="" src="https://placeimg.com/800/200/tech" class="w-full" />
+		<img alt="" src="https://picsum.photos/id/47/400/100" class="w-full" />
 	</div>
 </div>
 <div class="flex justify-center w-full py-2 gap-2">

@@ -49,10 +49,7 @@
 						<div class="flex items-center space-x-3">
 							<div class="avatar">
 								<div class="mask mask-squircle w-12 h-12">
-									<img
-										src="https://placeimg.com/64/64/people"
-										alt="Avatar Tailwind CSS Component"
-									/>
+									<img src="https://robohash.org/avatar1.png" alt="Avatar Tailwind CSS Component" />
 								</div>
 							</div>
 							<div>
@@ -82,10 +79,7 @@
 						<div class="flex items-center space-x-3">
 							<div class="avatar">
 								<div class="mask mask-squircle w-12 h-12">
-									<img
-										src="https://placeimg.com/64/64/people"
-										alt="Avatar Tailwind CSS Component"
-									/>
+									<img src="https://robohash.org/avatar2.png" alt="Avatar Tailwind CSS Component" />
 								</div>
 							</div>
 							<div>
@@ -115,10 +109,7 @@
 						<div class="flex items-center space-x-3">
 							<div class="avatar">
 								<div class="mask mask-squircle w-12 h-12">
-									<img
-										src="https://placeimg.com/64/64/people"
-										alt="Avatar Tailwind CSS Component"
-									/>
+									<img src="https://robohash.org/avatar3.png" alt="Avatar Tailwind CSS Component" />
 								</div>
 							</div>
 							<div>
@@ -148,10 +139,7 @@
 						<div class="flex items-center space-x-3">
 							<div class="avatar">
 								<div class="mask mask-squircle w-12 h-12">
-									<img
-										src="https://placeimg.com/64/64/people"
-										alt="Avatar Tailwind CSS Component"
-									/>
+									<img src="https://robohash.org/avatar4.png" alt="Avatar Tailwind CSS Component" />
 								</div>
 							</div>
 							<div>
