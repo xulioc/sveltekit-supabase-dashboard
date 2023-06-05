@@ -45,8 +45,15 @@
 			/>
 		</div>
 
-		<div class="form-control mt-4 mb-4">
-			<button class="btn btn-primary" class:loading>Sign In</button>
+		<div class="form-control mt-4 mb-4 items-center">
+			<!-- <button class="btn btn-primary" class:loading>Sign In</button> -->
+			<button class="btn btn-primary w-full">
+				{#if loading}
+					<span class="loading loading-spinner" />
+				{:else}
+					Sign In
+				{/if}
+			</button>
 		</div>
 
 		<div class="text-sm text-secondary text-center">
