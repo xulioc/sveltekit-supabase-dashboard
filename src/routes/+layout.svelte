@@ -5,7 +5,7 @@
 
 <svelte:head>
 	<title>{$page.url.hostname}</title>
-	<link rel="icon" type="image/x-icon" href={`/${$page.url.hostname}/favicon.ico`} />
+	<link rel="icon" type="image/x-icon" href={`/${$page.url.hostname}/favicon.png`} />
 
 	<script async src="https://www.googletagmanager.com/gtag/js?id=G-J1TGFG0V29"></script>
 	<script>
