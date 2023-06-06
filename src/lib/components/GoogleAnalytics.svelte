@@ -2,13 +2,12 @@
 	// https://joyofcode.xyz/sveltekit-google-analytics
 
 	import { page } from '$app/stores';
-	import { PUBLIC_GOOGLE_ANALYTICS_MEASUREMENT_ID } from '$env/static/public';
 
-	const url = `https://www.googletagmanager.com/gtag/js?id=${PUBLIC_GOOGLE_ANALYTICS_MEASUREMENT_ID}`;
+	const url = `https://www.googletagmanager.com/gtag/js?id=${MEASUREMENT_ID}`;
 
 	$: {
 		if (typeof gtag !== 'undefined') {
-			gtag('config', PUBLIC_GOOGLE_ANALYTICS_MEASUREMENT_ID, {
+			gtag('config', MEASUREMENT_ID, {
 				page_title: document.title,
 				page_path: $page.url.pathname
 			});
@@ -27,6 +26,6 @@
 		}
 
 		gtag('js', new Date());
-		gtag('config', PUBLIC_GOOGLE_ANALYTICS_MEASUREMENT_ID);
+		gtag('config', MEASUREMENT_ID);
 	</script>
 </svelte:head>
